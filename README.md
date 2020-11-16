@@ -2,9 +2,10 @@
 
 ## Steps
 
-1. yarn build or npm build
-2. yarn start
-3. server started on localhost:4000
+1. Change DB password in ORMConfig and index.js
+2. yarn build or npm build
+3. yarn start
+4. server started on localhost:4000
 
 ## GraphQL playground
 
