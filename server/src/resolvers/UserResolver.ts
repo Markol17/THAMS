@@ -46,64 +46,64 @@ export class UserResolver {
     return '';
   }
 
-  @Mutation(() => UserResponse)
-  async changePassword(
-    @Arg('token') token: string,
-    @Arg('newPassword') newPassword: string,
-    @Ctx() { redis, req }: Context
-  ): Promise<UserResponse> {
-    if (newPassword.length <= 2) {
-      return {
-        errors: [
-          {
-            field: 'newPassword',
-            message: 'length must be greater than 2',
-          },
-        ],
-      };
-    }
+  // @Mutation(() => UserResponse)
+  // async changePassword(
+  //   @Arg('token') token: string,
+  //   @Arg('newPassword') newPassword: string,
+  //   @Ctx() { redis, req }: Context
+  // ): Promise<UserResponse> {
+  //   if (newPassword.length <= 2) {
+  //     return {
+  //       errors: [
+  //         {
+  //           field: 'newPassword',
+  //           message: 'length must be greater than 2',
+  //         },
+  //       ],
+  //     };
+  //   }
 
-    const key = FORGET_PASSWORD_PREFIX + token;
-    const userId = await redis.get(key);
-    if (!userId) {
-      return {
-        errors: [
-          {
-            field: 'token',
-            message: 'token expired',
-          },
-        ],
-      };
-    }
+  //   const key = FORGET_PASSWORD_PREFIX + token;
+  //   const userId = await redis.get(key);
+  //   if (!userId) {
+  //     return {
+  //       errors: [
+  //         {
+  //           field: 'token',
+  //           message: 'token expired',
+  //         },
+  //       ],
+  //     };
+  //   }
 
-    const userIdNum = parseInt(userId);
-    const user = await User.findOne(userIdNum);
+  //   const userIdNum = parseInt(userId);
+  //   const user = await User.findOne(userIdNum);
 
-    if (!user) {
-      return {
-        errors: [
-          {
-            field: 'token',
-            message: 'user no longer exists',
-          },
-        ],
-      };
-    }
+  //   if (!user) {
+  //     return {
+  //       errors: [
+  //         {
+  //           field: 'token',
+  //           message: 'user no longer exists',
+  //         },
+  //       ],
+  //     };
+  //   }
 
-    await User.update(
-      { id: userIdNum },
-      {
-        password: await argon2.hash(newPassword),
-      }
-    );
+  //   await User.update(
+  //     { id: userIdNum },
+  //     {
+  //       password: await argon2.hash(newPassword),
+  //     }
+  //   );
 
-    await redis.del(key);
+  //   await redis.del(key);
 
-    // log in user after change password
-    req.session.userId = user.id;
+  //   // log in user after change password
+  //   req.session.userId = user.id;
 
-    return { user };
-  }
+  //   return { user };
+  // }
 
   @Query(() => User, { nullable: true })
   me(@Ctx() { req }: Context) {
