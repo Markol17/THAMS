@@ -12,7 +12,7 @@ import {
 import { Context } from '../types';
 import { User } from '../entities/User';
 import argon2 from 'argon2';
-import { COOKIE_NAME, FORGET_PASSWORD_PREFIX } from '../constants';
+import { COOKIE_NAME} from '../constants';
 import { UsernamePasswordInput } from './InputTypes/UsernamePasswordInput';
 import { validateRegister } from '../utils/validateRegister';
 import { getConnection } from 'typeorm';
