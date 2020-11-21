@@ -6,6 +6,7 @@ export const isAuth: MiddlewareFn<Context> = ({ context }, next) => {
   if (!context.req.session.userId) {
     throw new Error('not authenticated');
   }
+  //TODO: check is medical staff member
 
   return next();
 };

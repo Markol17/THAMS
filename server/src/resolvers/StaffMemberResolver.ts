@@ -47,7 +47,7 @@ export class StaffMemberResolver {
   }
 
   @Query(() => StaffMember, { nullable: true })
-  me(@Ctx() { req }: Context) {
+  currentStaffMember(@Ctx() { req }: Context) {
     // you are not logged in
     if (!req.session.userId) {
       return null;
@@ -56,7 +56,7 @@ export class StaffMemberResolver {
     return StaffMember.findOne(req.session.userId);
   }
 
-  @Mutation(() => StaffMember)
+  @Mutation(() => StaffMemberResponse)
   async registerStaff(
     @Arg('options') options: StaffMemberInput,
     @Ctx() { req }: Context
@@ -79,7 +79,8 @@ export class StaffMemberResolver {
           email: options.email,
           password: hashedPassword,
           phone: options.phone,
-          bipperExtension: options.bipperExtension
+          bipperExtension: options.bipperExtension,
+          type: options.type
         })
         .returning('*')
         .execute();
@@ -100,7 +101,6 @@ export class StaffMemberResolver {
 
     //set a cookie on the user
     req.session.userId = staffMember.id;
-
     return { staffMember };
   }
 

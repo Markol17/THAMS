@@ -26,8 +26,9 @@ import { FieldError } from './StaffMemberResolver';
   @Resolver(Patient)
   export class PatientResolver {
   
-    @Mutation(() => PatientResponse)
+    // This wont work unless we pass the cookie to the request with the session id to be decrypted.
     @UseMiddleware(isAuth)
+    @Mutation(() => PatientResponse)
     async registerPatient(
       @Arg('options') options: PatientInput,
     ): Promise<PatientResponse> {

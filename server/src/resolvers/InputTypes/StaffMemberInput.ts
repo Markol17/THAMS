@@ -1,3 +1,4 @@
+import { Type } from "../../entities/StaffMember";
 import { InputType, Field } from "type-graphql";
 @InputType()
 export class StaffMemberInput {
@@ -11,6 +12,8 @@ export class StaffMemberInput {
   phone: number;
   @Field()
   bipperExtension: number;
+  @Field()
+  type: Type;
   @Field()
   password: string;
 }

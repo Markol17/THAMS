@@ -11,11 +11,11 @@ import {
 import { Patient } from './Patient';
 import { StaffMemberPatient } from './StaffMemberPatient';
 
-enum Type{
-    ChargeNurse,
-    Doctor,
-    Staff,
-    MedicalStaff
+export enum Type{
+    ChargeNurse, //0
+    Doctor, //1
+    Staff, //2
+    MedicalStaff //3
 }
 
 registerEnumType(Type, {
