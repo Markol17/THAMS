@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { createUserLoader } from './dataloaders/createUserLoader';
+import { createPatientLoader } from './dataloaders/createPatientLoader';
 
 export type Context = {
   req: Request & { session: Express.Session };
   res: Response;
-  userLoader: ReturnType<typeof createUserLoader>;
+  userLoader: ReturnType<typeof createPatientLoader>;
 };

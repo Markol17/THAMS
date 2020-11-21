@@ -4,13 +4,18 @@ import { __prod__, COOKIE_NAME } from './constants';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { buildSchema } from 'type-graphql';
-import { UserResolver } from './resolvers/UserResolver';
+import { StaffMemberResolver } from './resolvers/StaffMemberResolver';
 import session from 'express-session';
 import cors from 'cors';
 import { createConnection } from 'typeorm'; //getConnection
-import { User } from './entities/User';
+import { Patient } from './entities/Patient';
 import path from 'path';
-import { createUserLoader } from './dataloaders/createUserLoader';
+import { createPatientLoader } from './dataloaders/createPatientLoader';
+import { Division } from './entities/Division';
+import { Prescription } from './entities/Prescription';
+import { StaffMember } from './entities/StaffMember';
+import { PatientResolver } from './resolvers/PatientResolver';
+import { StaffMemberPatient } from './entities/StaffMemberPatient';
 
 const main = async () => {
   await createConnection({
@@ -22,7 +27,11 @@ const main = async () => {
     synchronize: true,
     migrations: [path.join(__dirname, './migrations/*')],
     entities: [
-      User,
+      Patient,
+      StaffMember,
+      Division,
+      Prescription,
+      StaffMemberPatient
     ],
   });
   // await conn.runMigrations();
@@ -52,13 +61,13 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [UserResolver],
+      resolvers: [PatientResolver, StaffMemberResolver],
       validate: false,
     }),
     context: ({ req, res }) => ({
       req,
       res,
-      userLoader: createUserLoader(),
+      userLoader: createPatientLoader(),
     }),
   });
 

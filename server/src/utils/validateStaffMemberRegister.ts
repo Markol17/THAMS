@@ -1,6 +1,6 @@
-import { UsernamePasswordInput } from '../resolvers/InputTypes/UsernamePasswordInput';
+import { StaffMemberInput } from '../resolvers/InputTypes/StaffMemberInput';
 
-export const validateRegister = (options: UsernamePasswordInput) => {
+export const validateStaffMemberRegister = (options: StaffMemberInput) => {
   let errors = [];
   if (!options.email.includes('@')) {
     errors.push({
@@ -9,17 +9,11 @@ export const validateRegister = (options: UsernamePasswordInput) => {
     });
   }
 
-  if (options.username.length <= 2) {
+  //TODO: do the validation
+  if (options.phone.toString.length <= 2) {
     errors.push({
-      field: 'username',
+      field: 'phone',
       message: 'Length must be greater than 2',
-    });
-  }
-
-  if (options.username.includes('@')) {
-    errors.push({
-      field: 'username',
-      message: 'Cannot include an @',
     });
   }
 
