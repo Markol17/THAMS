@@ -28,7 +28,7 @@ import { FieldError } from './StaffMemberResolver';
   
     @Mutation(() => PatientResponse)
     @UseMiddleware(isAuth)
-    async register(
+    async registerPatient(
       @Arg('options') options: PatientInput,
     ): Promise<PatientResponse> {
       const errors = validatePatientRegister(options);

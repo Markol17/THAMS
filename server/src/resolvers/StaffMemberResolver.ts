@@ -57,7 +57,7 @@ export class StaffMemberResolver {
   }
 
   @Mutation(() => StaffMember)
-  async register(
+  async registerStaff(
     @Arg('options') options: StaffMemberInput,
     @Ctx() { req }: Context
   ): Promise<StaffMemberResponse> {
@@ -105,7 +105,7 @@ export class StaffMemberResolver {
   }
 
   @Mutation(() => StaffMemberResponse)
-  async login(
+  async loginStaff(
     @Arg('email') email: string,
     @Arg('password') password: string,
     @Ctx() { req }: Context
@@ -146,7 +146,7 @@ export class StaffMemberResolver {
   }
 
   @Mutation(() => Boolean)
-  logout(@Ctx() { req, res }: Context) {
+  logoutStaff(@Ctx() { req, res }: Context) {
     return new Promise((resolve) =>
       req.session.destroy((err: any) => {
         res.clearCookie(COOKIE_NAME);
