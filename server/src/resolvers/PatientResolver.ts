@@ -5,6 +5,7 @@ import {
     Field,
     ObjectType,
     UseMiddleware,
+    Query,
   } from 'type-graphql';
 import { PatientInput } from './InputTypes/PatientInput';
 import { validatePatientRegister } from '../utils/validatePatientRegister';
@@ -60,6 +61,13 @@ import { FieldError } from './StaffMemberResolver';
           patient = result.raw[0];
   
       return { patient };
+
+    }
+
+    @UseMiddleware(isAuth)
+    @Query(() => Patient, { nullable: true })
+    patientInfo(@Arg('patientId') patientId: number) {
+      return Patient.findOne(patientId);
     }
   }
   
