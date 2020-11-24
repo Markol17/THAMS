@@ -61,7 +61,37 @@ import { FieldError } from './StaffMemberResolver';
           patient = result.raw[0];
   
       return { patient };
+    }
 
+    @UseMiddleware(isAuth)
+    @Mutation(() => PatientResponse)
+    async updatePatient(
+      @Arg('patientId') patientId: number,
+      @Arg('address') address: string,
+      @Arg("phoneNumber") phoneNumber:number,
+      @Arg("gender") gender: string,
+      @Arg("maritalStatus") maritalStatus:string,
+      @Arg("nextOfKin") nextOfKin:string,
+      @Arg("privateInsuranceNumber") privateInsuranceNumber:number,
+    ): Promise<PatientResponse> {
+      
+      let patient;
+        const result = await getConnection()
+          .createQueryBuilder()
+          .update(Patient)
+          .set({ 
+            address:address ,
+            phoneNumber:phoneNumber,
+            gender:gender,
+            maritalStatus:maritalStatus,
+            nextOfKin:nextOfKin,
+            privateInsuranceNumber:privateInsuranceNumber
+          })
+          .where("id = :id", { id: patientId })
+          .execute();
+          patient = result.raw[0];
+  
+      return { patient };
     }
 
     @UseMiddleware(isAuth)
