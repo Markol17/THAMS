@@ -20,9 +20,9 @@ import { StaffMemberPatient } from './entities/StaffMemberPatient';
 const main = async () => {
   await createConnection({
     type: 'postgres',
-    database: 'thams',
+    database: 'THAMS',
     username: 'postgres',
-    password: 'a',
+    password: '1234',
     logging: true,
     synchronize: true,
     migrations: [path.join(__dirname, './migrations/*')],

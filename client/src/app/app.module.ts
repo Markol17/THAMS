@@ -9,6 +9,8 @@ import { RequestpatientComponent } from './requestpatient/requestpatient.compone
 import { DivisionComponent } from './division/division.component';
 import { AdmitpatientComponent } from './admitpatient/admitpatient.component';
 import { LoginpageComponent } from './loginpage/loginpage.component';
+import { GraphQLModule } from './graphql.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { LoginpageComponent } from './loginpage/loginpage.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    GraphQLModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
