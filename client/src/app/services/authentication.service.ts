@@ -5,7 +5,7 @@ import gql from "graphql-tag";
 import {StaffMember} from "../objects/staff-member.model";
 import {Patient} from "../objects/patient.model";
 import {registerStaff} from "../gql/mutation";
-import {registerPatient} from "../gql/mutation";
+import {registerPatient, loginStaff, logoutStaff} from "../gql/mutation";
 
 
 @Injectable({
@@ -32,14 +32,34 @@ export class AuthenticationService {
     this.apollo.mutate({
         mutation: registerPatient,
         variables:{
-          staff: patient
+          patient: patient
         }
       }).subscribe(
         (error) => {
-          console.log('there was an registering this patient', error);}
+          console.log('there was an error registering this patient', error);}
       );
 }
-loginStaff(): void{};
-logoutStaff(): void{};
+
+  loginStaff(email:String, password:String): void{
+    this.apollo.mutate({
+      mutation: loginStaff,
+      variables:{
+        username: email,
+        password: password
+      }
+    }).subscribe(
+      (error) => {
+        console.log('There was an error login as a staff', error);}
+    );
+  };
+
+logoutStaff(): void{
+  this.apollo.mutate({
+    mutation: logoutStaff
+  }).subscribe(
+    (error) => {
+      console.log('There was an error logout as a staff', error);}
+  );
+};
 
 }
