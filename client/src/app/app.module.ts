@@ -11,6 +11,8 @@ import { AdmitpatientComponent } from './admitpatient/admitpatient.component';
 import { LoginpageComponent } from './loginpage/loginpage.component';
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
+import { HeaderComponent } from './header/header.component';
+import { RegisterpatientComponent } from './registerpatient/registerpatient.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { HttpClientModule } from '@angular/common/http';
     RequestpatientComponent,
     DivisionComponent,
     AdmitpatientComponent,
-    LoginpageComponent
+    LoginpageComponent,
+    HeaderComponent,
+    RegisterpatientComponent
   ],
   imports: [
     BrowserModule,
