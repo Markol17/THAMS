@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PatientService } from '../services/patient.service';
+import {Patient} from '../objects/patient.model'
 
 @Component({
   selector: 'app-consultpatient',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConsultpatientComponent implements OnInit {
 
-  constructor() { }
+  id:number;
+  patient: Patient;
 
+
+  constructor(private patientserice: PatientService) {
+    this.patient=null;
+  }
   ngOnInit() {
   }
+
+  findPatient(): void{
+    this.patientserice.patientInfo(this.id).subscribe(
+      (data) => this.patient=data,
+     (error) => console.log("could not find patient"+error)
+    )
+  }
+
+
 
 }

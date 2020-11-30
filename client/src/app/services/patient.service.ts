@@ -9,6 +9,7 @@ import { Variable } from '@angular/compiler/src/render3/r3_ast';
   providedIn: 'root'
 })
 export class PatientService {
+  Patient: any;
 
   constructor(private apollo: Apollo) { }
 
@@ -24,13 +25,17 @@ export class PatientService {
       );
 }
 
-patientInfo(id:number): void{
-  this.apollo.watchQuery({
+patientInfo(id:number): any{
+  
+  this.apollo.watchQuery<any>({
     query: patientInfo,
     variables:{
       id:id
     }
-  })
+  }).valueChanges.subscribe(({ data }) => {
+    this.Patient = data.Patient;
+  });
+  return this.Patient;
 }
 
 }
