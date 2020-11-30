@@ -7,7 +7,7 @@ export class Patient {
     dateOfBirth:string;
     gender:string;
     martialStatus:string;
-    externalDoctor:string;
-    nextOfKin:string;
-    privateInsuranceNumber:number;
+    externalDoctor?:string;
+    nextOfKin?:string;
+    privateInsuranceNumber?:number;
 }

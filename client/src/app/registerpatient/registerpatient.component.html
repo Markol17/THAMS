@@ -1,1 +1,134 @@
-<p>registerpatient works!</p>
+<div class="container">
+    <div [hidden]="submitted">
+      <h1>Patient Form</h1>
+      <form #Registerpatient="ngForm" (ngSubmit)="onSubmit()" >
+        <div class="form-group">
+          <label for="firstName">Name</label>
+          <input type="text" class="form-control" id="firstName"
+                 required
+                 [(ngModel)]="model.firstName" name="firstName"
+                 >
+          <!--<div [hidden]="firstName.valid || firstName.pristine"
+               class="alert alert-danger">
+            First Name is required
+          </div> -->
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Last Name*</label>
+            <input type="text" class="form-control" id="lastName"
+                    required
+                    [(ngModel)]="model.lastName" name="lastName"
+                    >
+            <!--<div [hidden]="firstName.valid || firstName.pristine"
+                    class="alert alert-danger">
+                First Name is required
+            </div> -->
+        </div>
+
+        <div class="form-group">
+            <label for="insuranceNumber">Insurance*<Address></Address></label>
+            <input type="number" class="form-control" id="insuranceNumber"
+                    required
+                    [(ngModel)]="model.insuranceNumber" name="insuranceNumber"
+                    >
+            <!--<div [hidden]="firstName.valid || firstName.pristine"
+                    class="alert alert-danger">
+                First Name is required
+            </div> -->
+        </div>
+
+        <div class="form-group">
+            <label for="address">Address*</label>
+            <input type="text" class="form-control" id="address"
+                    required
+                    [(ngModel)]="model.address" name="address"
+                    >
+            <!--<div [hidden]="firstName.valid || firstName.pristine"
+                    class="alert alert-danger">
+                First Name is required
+            </div> -->
+        </div>
+
+        <div class="form-group">
+            <label for="phoneNumber">Phone Number*</label>
+            <input type=text class="form-control" id="phoneNumber"
+                    required
+                    [(ngModel)]="model.phoneNumber" name="phoneNumber"
+                    >
+            <!--<div [hidden]="firstName.valid || firstName.pristine"
+                    class="alert alert-danger">
+                First Name is required
+            </div> -->
+        </div>
+
+        <div class="form-group">
+            <label for="dateOfBirth">Date of Birth (dd/mm/yyyy)*</label>
+            <input type="text" class="form-control" id="dateOfBirth"
+                    required
+                    [(ngModel)]="model.dateOfBirth" name="dateOfBirth"
+                    >
+            <!--<div [hidden]="firstName.valid || firstName.pristine"
+                    class="alert alert-danger">
+                First Name is required
+            </div> -->
+        </div>
+
+        <div class="form-group">
+            <label for="gender">Gender*</label>
+            <select type="text" class="form-control" id="gender"
+                    required
+                    [(ngModel)]="model.gender" name="gender"
+                    #gender="ngModel">
+            <option *ngFor="let gen of genders" [value]="gen">{{gen}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="martialStatus">Martial Status*</label>
+            <select type="text" class="form-control" id="martialStatus"
+                    required
+                    [(ngModel)]="model.martialStatus" name="martialStatus"
+                    #gender="ngModel">
+            <option *ngFor="let mar of martialStatus" [value]="mar">{{mar}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="externalDoctor">External Doctor Name</label>
+            <input type="text" class="form-control" id="externalDoctor"
+                    [(ngModel)]="model.externalDoctor" name="externalDoctor"
+                    >
+            <!--<div [hidden]="firstName.valid || firstName.pristine"
+                    class="alert alert-danger">
+                First Name is required
+            </div> -->
+        </div>
+
+        <div class="form-group">
+            <label for="nextOfKin">??Next of KIN??</label>
+            <input type="text" class="form-control" id="nextOfKin"
+                    [(ngModel)]="model.nextOfKin" name="nextOfKin"
+                    >
+            <!--<div [hidden]="firstName.valid || firstName.pristine"
+                    class="alert alert-danger">
+                First Name is required
+            </div> -->
+        </div>
+
+        <div class="form-group">
+            <label for="privateInsuranceNumber">Private Insurance Number</label>
+            <input type="text" class="form-control" id="privateInsuranceNumber"
+                    [(ngModel)]="model.privateInsuranceNumber" name="privateInsuranceNumber"
+                    >
+            <!--<div [hidden]="firstName.valid || firstName.pristine"
+                    class="alert alert-danger">
+                First Name is required
+            </div> -->
+        </div>
+  
+        <button type="submit" class="btn btn-success" >Submit</button>
+      </form>
+    </div>
+</div>
+  

@@ -9,7 +9,8 @@ export class RequestpatientComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }
+

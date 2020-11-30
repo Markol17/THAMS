@@ -13,6 +13,8 @@ import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { RegisterpatientComponent } from './registerpatient/registerpatient.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { RegisterpatientComponent } from './registerpatient/registerpatient.comp
     RegisterpatientComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     GraphQLModule,
