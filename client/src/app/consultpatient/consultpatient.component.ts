@@ -17,14 +17,14 @@ export class ConsultpatientComponent implements OnInit {
     this.patient=null;
   }
   ngOnInit() {
-  }
+  }/*
 
   findPatient(): void{
     this.patientserice.patientInfo(this.id).subscribe(
       (data) => this.patient=data,
      (error) => console.log("could not find patient"+error)
     )
-  }
+  }*/
 
 
 
