@@ -1,7 +1,5 @@
-<form class="form-inline waves-light" mdbWavesEffect>
-    <div class="md-form mt-0">
-    Enter a patient ID:
-      <input class="form-control mr-sm-2" [(ngModel)]="id" type="number" placeholder="id">
-      <button type="button" class="btn btn-primary" >Submit</button>
-    </div>
-  </form>
+<form class="form-inline md-form mr-auto mb-4" (submit)="findPatient()">
+  Enter a patient id:
+  <input class="form-control mr-sm-2"  [(ngModel)]="id" name="id" type="number" placeholder="Search" aria-label="Search">
+  <button class="btn btn-primary" type="submit">Search</button>
+</form>

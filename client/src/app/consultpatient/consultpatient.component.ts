@@ -7,25 +7,26 @@ import {Patient} from '../objects/patient.model'
   templateUrl: './consultpatient.component.html',
   styleUrls: ['./consultpatient.component.css']
 })
-export class ConsultpatientComponent implements OnInit {
 
+export class ConsultpatientComponent implements OnInit {
   id:number;
   patient: Patient;
-
 
   constructor(private patientserice: PatientService) {
     this.patient=null;
   }
   ngOnInit() {
-  }/*
+  }
 
   findPatient(): void{
-    this.patientserice.patientInfo(this.id).subscribe(
+    console.log(this.id);
+    this.patientserice.patientInfo(this.id)
+    
+    /* .subscribe(
       (data) => this.patient=data,
-     (error) => console.log("could not find patient"+error)
-    )
-  }*/
-
+     (error) => console.log("could not find patient")
+    )*/
+  }
 
 
 }
