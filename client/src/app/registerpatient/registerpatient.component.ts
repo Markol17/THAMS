@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Patient } from '../objects/patient.model';
 import { FormControl, FormGroup } from '@angular/forms';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-registerpatient',
@@ -17,10 +18,12 @@ export class RegisterpatientComponent implements OnInit {
 
   submitted = false;
 
-  constructor() { }
+  constructor(private auth: AuthenticationService) { }
 
   ngOnInit() {
   }
   
-  onSubmit() { this.submitted = true; }
+  onSubmit() { 
+    this.auth.registerPatient(this.model);
+    this.submitted = true; }
 }

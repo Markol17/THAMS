@@ -15,7 +15,7 @@ import { HeaderComponent } from './header/header.component';
 import { RegisterpatientComponent } from './registerpatient/registerpatient.component';
 import { FormsModule } from '@angular/forms';
 
-
+import {InputMaskModule} from 'primeng/inputmask';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +29,7 @@ import { FormsModule } from '@angular/forms';
     RegisterpatientComponent
   ],
   imports: [
+    InputMaskModule,
     FormsModule,
     BrowserModule,
     AppRoutingModule,

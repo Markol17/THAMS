@@ -27,10 +27,10 @@ export const loginStaff=gql`
       }
     }`;
 
-export const logoutStaff=gql`
+/*export const logoutStaff=gql`
   mutation logoutStaff() {
     logoutStaff() {}
-  }`;
+  }`;*/
 
 export const registerPatient=gql`
 mutation registerPatient($patient: PatientInput!) {
@@ -52,7 +52,7 @@ mutation registerPatient($patient: PatientInput!) {
   }`;
 
 
-  export const updatePatient=gql`
+  /*export const updatePatient=gql`
   mutation registerPatient(
     $privateInsuranceNumber: Float!
     $nextOfKin: String!
@@ -83,6 +83,6 @@ mutation registerPatient($patient: PatientInput!) {
           privateInsuranceNumber
         }
       }
-    }`;
+    }`;*/
 
  
