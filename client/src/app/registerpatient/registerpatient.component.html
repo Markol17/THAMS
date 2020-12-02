@@ -2,76 +2,140 @@
     <div [hidden]="submitted">
       <h1>Patient Form</h1>
       <form #Registerpatient="ngForm" (ngSubmit)="onSubmit()" >
+          
         <div class="form-group">
           <label for="firstName">Name*</label>
           <input type="text" class="form-control" id="firstName"
+                #firstName="ngModel"
+                pattern="[a-zA-z ]+"
                  required
                  [(ngModel)]="model.firstName" name="firstName"
                  >
-          <!--<div [hidden]="firstName.valid || firstName.pristine"
-               class="alert alert-danger">
-            First Name is required
-          </div> -->
+
+            <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
+                    class="alert alert-danger">
+
+                <div *ngIf="firstName.errors.required">
+                    Name is required.
+                </div>
+
+                <div *ngIf="firstName.errors.pattern">
+                    Name only has letter.
+                </div>
+                
+            </div>
         </div>
 
         <div class="form-group">
             <label for="lastName">Last Name*</label>
             <input type="text" class="form-control" id="lastName"
+                    #lastName="ngModel"
+                    pattern="[a-zA-z ]+"
                     required
                     [(ngModel)]="model.lastName" name="lastName"
                     >
-            <!--<div [hidden]="firstName.valid || firstName.pristine"
-                    class="alert alert-danger">
-                First Name is required
-            </div> -->
+
+            <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
+            class="alert alert-danger">
+
+                <div *ngIf="lastName.errors.required">
+                    Last Name is required.
+                </div>
+
+                <div *ngIf="lastName.errors.pattern">
+                    Last Name only has letter.
+                </div>
+                
+            </div>
         </div>
 
         <div class="form-group">
             <label for="insuranceNumber">Insurance*<Address></Address></label>
             <input type="number" class="form-control" id="insuranceNumber"
+                    #insuranceNumber="ngModel"
+                    pattern="[0-9]+"
                     required
                     [(ngModel)]="model.insuranceNumber" name="insuranceNumber"
                     >
-            <!--<div [hidden]="firstName.valid || firstName.pristine"
-                    class="alert alert-danger">
-                First Name is required
-            </div> -->
+
+            <div *ngIf="insuranceNumber.invalid && (insuranceNumber.dirty || insuranceNumber.touched)"
+                class="alert alert-danger">
+
+                <div *ngIf="insuranceNumber.errors.required">
+                    Insurance Number is required.
+                </div>
+
+                <div *ngIf="insuranceNumber.errors.pattern">
+                    Name only has numbers.
+                </div>
+                
+            </div>
         </div>
 
         <div class="form-group">
             <label for="address">Address*</label>
             <input type="text" class="form-control" id="address"
+                    #address="ngModel"
+                    pattern="[a-zA-z 0-9.]+"
                     required
                     [(ngModel)]="model.address" name="address"
                     >
-            <!--<div [hidden]="firstName.valid || firstName.pristine"
-                    class="alert alert-danger">
-                First Name is required
-            </div> -->
+
+            <div *ngIf="insuranceNumber.invalid && (insuranceNumber.dirty || insuranceNumber.touched)"
+                class="alert alert-danger">
+
+                <div *ngIf="insuranceNumber.errors.required">
+                    Address is required.
+                </div>
+                <div *ngIf="insuranceNumber.errors.pattern">
+                    Address badly Formated.
+                </div>
+                
+            </div>
         </div>
 
         <div class="form-group">
-            <label for="phoneNumber">Phone Number*</label>
+            <label for="phoneNumber">Phone Number* (XXX XXX-XXXX)</label>
             <input type=text class="form-control" id="phoneNumber"
+                    #phoneNumber="ngModel"
+                    pattern="[0-9]{3}[ ]{1}[0-9]{3}[-]{1}[0-9]{4}"
                     required
                     [(ngModel)]="model.phoneNumber" name="phoneNumber"
                     >
-            <!--<div [hidden]="firstName.valid || firstName.pristine"
-                    class="alert alert-danger">
-                First Name is required
-            </div> -->
+
+            <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)"
+                class="alert alert-danger">
+
+                <div *ngIf="phoneNumber.errors.required">
+                    Phone Number is required.
+                </div>
+                <div *ngIf="phoneNumber.errors.pattern">
+                    Phone Number badly formated.
+                </div>
+                
+            </div>
         </div>
 
         <div class="form-group">
             <label for="dateOfBirth">Date of Birth (dd/mm/yyyy)*</label>
             <input type="text" class="form-control" id="dateOfBirth"
+                    #dateOfBirth="ngModel"
+                    pattern="[0-3]{1}[0-9]{1}[/]{1}[0-1]{1}[0-9]{1}[/]{1}[1-2]{1}[0-9]{1}[0-9]{1}[0-9]{1}"
                     required
                     [(ngModel)]="model.dateOfBirth" name="dateOfBirth"
                     >
-            <!--<div [hidden]="firstName.valid || firstName.pristine"
-                    class="alert alert-danger">
-                First Name is required
-            </div> -->
+            <div *ngIf="dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched)"
+                class="alert alert-danger">
+
+                <div *ngIf="dateOfBirth.errors.required">
+                    Date of birth is required.
+                </div>
+                <div *ngIf="dateOfBirth.errors.pattern">
+                    Date of birth badly formated.
+                </div>
+                
+            </div>
+
         </div>
 
         <div class="form-group">
@@ -88,8 +152,8 @@
             <label for="martialStatus">Martial Status*</label>
             <select type="text" class="form-control" id="martialStatus"
                     required
-                    [(ngModel)]="model.martialStatus" name="martialStatus"
-                    #gender="ngModel">
+                    [(ngModel)]="model.maritalStatus" name="martialStatus"
+                    #martialStatus="ngModel">
             <option *ngFor="let mar of martialStatus" [value]="mar">{{mar}}</option>
             </select>
         </div>
@@ -98,11 +162,18 @@
             <label for="externalDoctor">External Doctor Name</label>
             <input type="text" class="form-control" id="externalDoctor"
                     [(ngModel)]="model.externalDoctor" name="externalDoctor"
+                    #externalDoctor="ngModel"
+                    pattern="[a-zA-z ]+"
                     >
-            <!--<div [hidden]="firstName.valid || firstName.pristine"
+                    <div *ngIf="externalDoctor.invalid && (externalDoctor.dirty || externalDoctor.touched)"
                     class="alert alert-danger">
-                First Name is required
-            </div> -->
+
+
+                <div *ngIf="externalDoctor.errors.pattern">
+                    Name only has letter.
+                </div>
+                
+            </div>
         </div>
 
         <div class="form-group">
@@ -110,10 +181,6 @@
             <input type="text" class="form-control" id="nextOfKin"
                     [(ngModel)]="model.nextOfKin" name="nextOfKin"
                     >
-            <!--<div [hidden]="firstName.valid || firstName.pristine"
-                    class="alert alert-danger">
-                First Name is required
-            </div> -->
         </div>
 
         <div class="form-group">
@@ -121,10 +188,6 @@
             <input type="text" class="form-control" id="privateInsuranceNumber"
                     [(ngModel)]="model.privateInsuranceNumber" name="privateInsuranceNumber"
                     >
-            <!--<div [hidden]="firstName.valid || firstName.pristine"
-                    class="alert alert-danger">
-                First Name is required
-            </div> -->
         </div>
   
         <button type="submit" class="btn btn-success" >Submit</button>

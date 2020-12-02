@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Patient } from '../objects/patient.model';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, PatternValidator } from '@angular/forms';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
@@ -24,6 +24,6 @@ export class RegisterpatientComponent implements OnInit {
   }
   
   onSubmit() { 
-    this.auth.registerPatient(this.model);
-    this.submitted = true; }
+    console.log(this.model);
+  }
 }
