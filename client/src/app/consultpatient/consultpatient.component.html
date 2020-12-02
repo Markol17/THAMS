@@ -1,5 +1,6 @@
-<form class="form-inline md-form mr-auto mb-4" (submit)="findPatient()">
-  Enter a patient id:
-  <input class="form-control mr-sm-2"  [(ngModel)]="id" name="id" type="number" placeholder="Search" aria-label="Search">
-  <button class="btn btn-primary" type="submit">Search</button>
-</form>
+<div class="p-col-12 p-md-4">
+  <div class="p-inputgroup">
+      Enter a Patient id:
+      <input type="text" [(ngModel)]="id" pInputText class="p-inputtext-sm"  placeholder="id">
+      <button pButton type="button" pRipple label="Search" (click)="findPatient()"class="p-button-success"></button>         
+  </div>

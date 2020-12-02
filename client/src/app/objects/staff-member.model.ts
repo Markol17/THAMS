@@ -1,9 +1,9 @@
 export class StaffMember {
+    bipperExtension:number;
     email: string;
     firstName: string;
     lastName: string;
-    phone: number;
-    bipperExtension:number;
-    type:number;
+    type:string;
+    phone?: number;
     password:string;
 }

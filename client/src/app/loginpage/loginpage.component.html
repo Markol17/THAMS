@@ -1,1 +1,48 @@
-<p>loginpage works!</p>
+<div class="login" *ngIf="register==false">
+    <div class="loginElems">
+        <h1>Login</h1>
+    </div>
+    <div class="p-col-12 p-md-4">
+        <div class="p-inputgroup loginElems">
+            <span class="p-inputgroup-addon ">Enter your username:</span>
+            <input type="email" pInputText [(ngModel)]="email" class="p-inputtext-lg" placeholder="username">
+        </div>
+    </div>
+    <div class="p-col-12 p-md-4">
+        <div class="p-inputgroup loginElems">
+            <span class="p-inputgroup-addon p-inputtext-lg">Enter your password:</span>
+            <input type="password" pPassword [(ngModel)]="password" placeholder="password">
+        </div>
+    </div>
+    <div class="loginElems">
+        <button pButton type="button" label="Submit" class="p-button-info button" (click)="onSubmit()"></button>
+        <button pButton type="button" label="Register" class="p-button-secondary button"
+            (click)="register=true"></button>
+    </div>
+</div>
+<div *ngIf="register==true">
+
+</div>
+
+<div class="login" *ngIf="register==true">
+    <div class="loginElems">
+        <h1>Register</h1>
+    </div>
+    <form [formGroup]="staffMember" (ngSubmit)="onSubmit()">
+        <input type="text" pInputText formControlName="email" required>
+        <input type="text" pInputText formControlName="firstName" required>
+        <input type="text" pInputText formControlName="lastName" required>
+        <input type="text" pInputText  formControlName="bipperExtension" required>
+        <input type="text" pInputText formControlName="type" required>
+        <input type="text" pInputText formControlName="phone" required>
+
+        <p>
+            <button type="submit" [disabled]="!staffMember.valid">Submit</button>
+        </p>
+    </form>
+    <div class="loginElems">
+        <button pButton type="button" label="Submit" class="p-button-info button" (click)="onSubmit()"></button>
+        <button pButton type="button" label="Cancel" class="p-button-secondary button" (click)="register=false"></button>
+    </div>
+
+</div>

@@ -3,16 +3,25 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdmitpatientComponent } from './admitpatient/admitpatient.component';
 import {ConsultpatientComponent } from './consultpatient/consultpatient.component'
 import { DivisionComponent } from './division/division.component';
+import { LoginpageComponent } from './loginpage/loginpage.component';
 import { RegisterpatientComponent } from './registerpatient/registerpatient.component';
 import { RequestpatientComponent } from './requestpatient/requestpatient.component';
-
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
-  { path: 'app-consultpatient', component: ConsultpatientComponent },
-  { path: 'app-registerpatient', component: RegisterpatientComponent },
-  { path: 'app-requestpatient', component: RequestpatientComponent },
-  { path: 'app-admitpatient', component: AdmitpatientComponent },
-  { path: 'app-division', component: DivisionComponent },
+  { path: 'app-consultpatient', component: ConsultpatientComponent,canActivate:[AuthGuard]},
+  { path: 'app-registerpatient', component: RegisterpatientComponent,canActivate:[AuthGuard]},
+  { path: 'app-requestpatient', component: RequestpatientComponent,canActivate:[AuthGuard],data:{
+    role:'ChargeNurse'
+  }   },
+  { path: 'app-admitpatient', component: AdmitpatientComponent,canActivate:[AuthGuard],data:{
+    role:'ChargeNurse'
+  }   },
+  { path: 'app-division', component: DivisionComponent,canActivate:[AuthGuard],data:{
+    role:'ChargeNurse'
+  }  },
+  { path: '', redirectTo: 'app-loginpage', pathMatch: 'full'},
+  {path: 'app-loginpage',   component: LoginpageComponent},
 ];
 
 @NgModule({
