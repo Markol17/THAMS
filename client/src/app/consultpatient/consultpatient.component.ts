@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PatientService } from '../services/patient.service';
 import {Patient} from '../objects/patient.model'
 
+
 @Component({
   selector: 'app-consultpatient',
   templateUrl: './consultpatient.component.html',

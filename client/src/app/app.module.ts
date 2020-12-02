@@ -16,6 +16,14 @@ import { RegisterpatientComponent } from './registerpatient/registerpatient.comp
 import { FormsModule } from '@angular/forms';
 
 import {InputMaskModule} from 'primeng/inputmask';
+
+
+import {InputTextModule} from 'primeng/inputtext';
+import {ButtonModule} from 'primeng/button';
+import {RippleModule} from 'primeng/ripple';
+import {PasswordModule} from 'primeng/password';
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +42,12 @@ import {InputMaskModule} from 'primeng/inputmask';
     BrowserModule,
     AppRoutingModule,
     GraphQLModule,
-    HttpClientModule
+    HttpClientModule,
+    InputTextModule,
+    RippleModule,
+    PasswordModule,
+    ReactiveFormsModule,
+    ButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
