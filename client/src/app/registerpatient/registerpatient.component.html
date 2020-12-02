@@ -152,7 +152,7 @@
             <label for="martialStatus">Martial Status*</label>
             <select type="text" class="form-control" id="martialStatus"
                     required
-                    [(ngModel)]="model.maritalStatus" name="martialStatus"
+                    [(ngModel)]="model.martialStatus" name="martialStatus"
                     #martialStatus="ngModel">
             <option *ngFor="let mar of martialStatus" [value]="mar">{{mar}}</option>
             </select>
