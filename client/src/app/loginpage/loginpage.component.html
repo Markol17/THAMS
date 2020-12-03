@@ -4,14 +4,14 @@
     </div>
     <div class="p-col-12 p-md-4">
         <div class="p-inputgroup loginElems">
-            <span class="p-inputgroup-addon ">Enter your username:</span>
+            <span class="p-inputgroup-addon ">Username:</span>
             <input type="email" pInputText [(ngModel)]="email" class="p-inputtext-lg" placeholder="username">
         </div>
     </div>
     <div class="p-col-12 p-md-4">
         <div class="p-inputgroup loginElems">
-            <span class="p-inputgroup-addon p-inputtext-lg">Enter your password:</span>
-            <input type="password" pPassword [(ngModel)]="password" placeholder="password">
+            <span class="p-inputgroup-addon p-inputtext-lg">Password:</span>
+            <input type="password" pPassword [(ngModel)]="password" [feedback]="false" placeholder="password">
         </div>
     </div>
     <div class="loginElems">
@@ -24,25 +24,52 @@
 
 </div>
 
-<div class="login" *ngIf="register==true">
-    <div class="loginElems">
+<div class="register" *ngIf="register==true">
+    <div class="registerElems">
         <h1>Register</h1>
     </div>
-    <form [formGroup]="staffMember" (ngSubmit)="onSubmit()">
-        <input type="text" pInputText formControlName="email" required>
-        <input type="text" pInputText formControlName="firstName" required>
-        <input type="text" pInputText formControlName="lastName" required>
-        <input type="text" pInputText  formControlName="bipperExtension" required>
-        <input type="text" pInputText formControlName="type" required>
-        <input type="text" pInputText formControlName="phone" required>
+    <form [formGroup]="staffMember" class="registerElems" (ngSubmit)="registerStaff()">
+        <div class="p-fluid">
+            <div class="p-field">
+                <label for="email">Email</label>
+                <input type="email" pInputText formControlName="email" required>
+            </div>
+            <div class="p-field">
+                <label for="firstName">First Name</label>
+                <input type="text" pInputText formControlName="firstName" required>
+            </div>
+            <div class="p-field">
+                <label for="lastName">Last Name</label>
+                <input type="text" pInputText formControlName="lastName" required>
+            </div>
+            <div class="p-field">
+                <label for="type">Type of user</label>
+                <p-dropdown [options]="types"  optionValue="value" optionLabel="label" placeholder="Select a Type"  formControlName="type" required></p-dropdown>
+            </div>
+            <div class="p-field">
+                <label for="phone">Phone</label>
+                <input type="number" pInputText formControlName="phone" required>
+               <!--- <p-inputMask mask="(999) 999-9999" formControlName="phone" required></p-inputMask>-->
+            </div>
+            <div class="p-field">
+                <label for="bipperExtension">Bipper Extension</label>
+                <input type="number" pInputText formControlName="bipperExtension" required>
+            </div>
+            <div class="p-field">
+                <label for="password">Password</label>
+                <input type="password" pPassword formControlName="password" required/>
+            </div>
+        </div>
+        <div class="registerElems">
+            <button pButton label="Submit" class="p-button-info button" type="submit"
+                [disabled]="!staffMember.valid"></button>
 
-        <p>
-            <button type="submit" [disabled]="!staffMember.valid">Submit</button>
-        </p>
+            <button pButton type="button" label="Cancel" class="p-button-secondary button"
+                (click)="cancel()"></button>
+        </div>
+
     </form>
-    <div class="loginElems">
-        <button pButton type="button" label="Submit" class="p-button-info button" (click)="onSubmit()"></button>
-        <button pButton type="button" label="Cancel" class="p-button-secondary button" (click)="register=false"></button>
-    </div>
+
+
 
 </div>

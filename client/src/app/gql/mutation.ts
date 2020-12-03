@@ -27,10 +27,10 @@ export const loginStaff=gql`
       }
     }`;
 
-/*export const logoutStaff=gql`
-  mutation logoutStaff() {
-    logoutStaff() {}
-  }`;*/
+export const logoutStaff=gql`
+mutation Logout {
+  logout
+}`
 
 export const registerPatient=gql`
 mutation registerPatient($patient: PatientInput!) {

@@ -1,13 +1,16 @@
 .login{
     margin-top: 2vw;
-    padding:2vw;
+    padding-top:2vw;
+    padding-right: 20vw;
+    padding-left: 20vw;
+    min-width: 250px;
+    zoom:1.2;
 }
 
 .loginElems{
     padding:5px;
-    width:25%;
-    margin-left: auto;
-    margin-right: auto;
+    width:100%;
+    height:auto;
 
 }
 
@@ -19,5 +22,21 @@
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: large;
 
+
+}
+
+.register{
+    margin-top: 2vw;
+    padding-top:2vw;
+    padding-right: 25vw;
+    padding-left: 25vw;
+    min-width: 250px;
+    zoom:1.2;
+}
+
+.registerElems{
+    padding:5px;
+    width:100%;
+    height:auto;
 
 }

@@ -4,7 +4,7 @@ import { Apollo } from "apollo-angular";
 import gql from "graphql-tag";
 import { StaffMember } from "../objects/staff-member.model";
 import { Patient } from "../objects/patient.model";
-import { registerStaff, registerPatient, loginStaff } from "../gql/mutation";
+import { registerStaff, registerPatient, loginStaff, logoutStaff } from "../gql/mutation";
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Router } from '@angular/router';
 
@@ -14,31 +14,38 @@ import { Router } from '@angular/router';
 })
 export class AuthenticationService {
 
-  constructor(private apollo: Apollo,private router: Router) { }
+  constructor(private apollo: Apollo, private router: Router) { }
 
   private currentUser: StaffMember;
-  isLoggedIn:boolean=false;
-  role:string;
+  isLoggedIn: boolean = false;
+  role: string;
 
-  logStatus():boolean{
+  logStatus(): boolean {
     return this.isLoggedIn;
   }
 
-  getRole():string{
+  getRole(): string {
     return this.currentUser.type;
   }
-  
-  registerStaff(staffmember: StaffMember): void {
+
+  registerStaff(staff: StaffMember): void {
     this.apollo.mutate({
       mutation: registerStaff,
       variables: {
-        staff: staffmember
+        staff: staff
       }
-    }).subscribe(
-      (error) => {
-        console.log('there was an registering this staffMember', error);
-      }
-    );
+    }).subscribe({
+      next: data => {
+        console.log(data);
+      },
+      error: err => console.error('Error Registering: ' + err),
+      complete: () => {
+        console.log("done");
+      },
+
+
+    });
+
 
   }
   registerPatient(patient: Patient): void {
@@ -70,14 +77,14 @@ export class AuthenticationService {
         console.log(this.currentUser)
       },
       error: err => console.error('Error logging in: ' + err),
-      complete: () =>{
-        if(this.currentUser){
+      complete: () => {
+        if (this.currentUser) {
           console.log("Login complete");
-          this.isLoggedIn=true;
+          this.isLoggedIn = true;
           this.router.navigate(['app-consultpatient']);
-  
+
         }
-        else{
+        else {
           console.log("Login failed");
 
         }
@@ -91,14 +98,21 @@ export class AuthenticationService {
   };
 
 
-  /*
+  
   logoutStaff(): void{
     this.apollo.mutate({
       mutation: logoutStaff
-    }).subscribe(
-      (error) => {
-        console.log('There was an error logout as a staff', error);}
-    );
-  };*/
+    }).subscribe({
+      next: data => {
+        console.log(data);
+      },
+      error: err => console.error('Error Logging out: ' + err),
+      complete: () => {
+        console.log("Logout completed");
+        this.apollo.client.resetStore();
+      },
+
+    });
+  };
 
 }
