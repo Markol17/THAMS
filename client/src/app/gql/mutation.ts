@@ -27,8 +27,8 @@ export const loginStaff=gql`
       }
     }`;
 
-export const logoutStaff=gql`
-mutation Logout {
+export const logout=gql`
+mutation logout {
   logout
 }`
 

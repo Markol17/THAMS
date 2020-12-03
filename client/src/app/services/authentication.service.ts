@@ -4,7 +4,7 @@ import { Apollo } from "apollo-angular";
 import gql from "graphql-tag";
 import { StaffMember } from "../objects/staff-member.model";
 import { Patient } from "../objects/patient.model";
-import { registerStaff, registerPatient, loginStaff, logoutStaff } from "../gql/mutation";
+import { registerStaff, registerPatient, loginStaff, logout } from "../gql/mutation";
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Router } from '@angular/router';
 
@@ -81,7 +81,7 @@ export class AuthenticationService {
         if (this.currentUser) {
           console.log("Login complete");
           this.isLoggedIn = true;
-          this.router.navigate(['app-consultpatient']);
+          this.router.navigate(['home']);
 
         }
         else {
@@ -98,10 +98,10 @@ export class AuthenticationService {
   };
 
 
-  
-  logoutStaff(): void{
+
+  logout(): void {
     this.apollo.mutate({
-      mutation: logoutStaff
+      mutation: logout
     }).subscribe({
       next: data => {
         console.log(data);
