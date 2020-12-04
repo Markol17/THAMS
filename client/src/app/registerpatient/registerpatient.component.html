@@ -81,13 +81,13 @@
                     [(ngModel)]="model.address" name="address"
                     >
 
-            <div *ngIf="insuranceNumber.invalid && (insuranceNumber.dirty || insuranceNumber.touched)"
+            <div *ngIf="address.invalid && (address.dirty || address.touched)"
                 class="alert alert-danger">
 
-                <div *ngIf="insuranceNumber.errors.required">
+                <div *ngIf="address.errors.required">
                     Address is required.
                 </div>
-                <div *ngIf="insuranceNumber.errors.pattern">
+                <div *ngIf="address.errors.pattern">
                     Address badly Formated.
                 </div>
                 
@@ -154,7 +154,7 @@
                     required
                     [(ngModel)]="model.martialStatus" name="martialStatus"
                     #martialStatus="ngModel">
-            <option *ngFor="let mar of martialStatus" [value]="mar">{{mar}}</option>
+            <option *ngFor="let mar of martialsStatus" [value]="mar">{{mar}}</option>
             </select>
         </div>
 

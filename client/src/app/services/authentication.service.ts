@@ -54,11 +54,15 @@ export class AuthenticationService {
       variables: {
         patient: patient
       }
-    }).subscribe(
-      (error) => {
-        console.log('there was an error registering this patient', error);
-      }
-    );
+    }).subscribe({
+      next: data => {
+        console.log(data);
+      },
+      error: err => console.error('Error Registering Patient: ' + err),
+      complete: () => {
+        console.log("done");
+      },
+    });
   }
 
   loginStaff(email: String, password: String): void {

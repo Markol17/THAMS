@@ -12,7 +12,7 @@ export class RegisterpatientComponent implements OnInit {
 
   genders = ["male" , "Female", "I would rater say"];
 
-  martialStatus = ["single","married","widowed","divorced","separated","registered partnership"];
+  martialsStatus = ["single","married","widowed","divorced","separated","registered partnership"];
 
   model = new Patient();
 
@@ -25,5 +25,6 @@ export class RegisterpatientComponent implements OnInit {
   
   onSubmit() { 
     console.log(this.model);
+    this.auth.registerPatient(this.model);
   }
 }

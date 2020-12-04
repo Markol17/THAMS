@@ -43,7 +43,7 @@ mutation registerPatient($patient: PatientInput!) {
         phoneNumber
         dateOfBirth
         gender
-        martialStatus
+        maritalStatus
         externalDoctor
         nextOfKin
         privateInsuranceNumber
