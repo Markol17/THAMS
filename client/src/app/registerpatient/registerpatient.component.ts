@@ -12,7 +12,7 @@ export class RegisterpatientComponent implements OnInit {
 
   genders = ["male" , "Female", "I would rater say"];
 
-  martialsStatus = ["single","married","widowed","divorced","separated","registered partnership"];
+  maritalsStatus = ["single","married","widowed","divorced","separated","registered partnership"];
 
   model = new Patient();
 

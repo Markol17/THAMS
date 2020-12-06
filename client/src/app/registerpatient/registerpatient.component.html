@@ -12,7 +12,7 @@
                  [(ngModel)]="model.firstName" name="firstName"
                  >
 
-            <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
+            <div *ngIf="firstName.invalid && (firstName.dirty)"
                     class="alert alert-danger">
 
                 <div *ngIf="firstName.errors.required">
@@ -35,7 +35,7 @@
                     [(ngModel)]="model.lastName" name="lastName"
                     >
 
-            <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
+            <div *ngIf="lastName.invalid && (lastName.dirty)"
             class="alert alert-danger">
 
                 <div *ngIf="lastName.errors.required">
@@ -58,7 +58,7 @@
                     [(ngModel)]="model.insuranceNumber" name="insuranceNumber"
                     >
 
-            <div *ngIf="insuranceNumber.invalid && (insuranceNumber.dirty || insuranceNumber.touched)"
+            <div *ngIf="insuranceNumber.invalid && (insuranceNumber.dirty)"
                 class="alert alert-danger">
 
                 <div *ngIf="insuranceNumber.errors.required">
@@ -81,7 +81,7 @@
                     [(ngModel)]="model.address" name="address"
                     >
 
-            <div *ngIf="address.invalid && (address.dirty || address.touched)"
+            <div *ngIf="address.invalid && (address.dirty)"
                 class="alert alert-danger">
 
                 <div *ngIf="address.errors.required">
@@ -95,15 +95,15 @@
         </div>
 
         <div class="form-group">
-            <label for="phoneNumber">Phone Number* (XXX XXX-XXXX)</label>
-            <input type=text class="form-control" id="phoneNumber"
+            <label for="phoneNumber">Phone Number* (XXXXXXXXXX)</label>
+            <input type=number class="form-control" id="phoneNumber"
                     #phoneNumber="ngModel"
-                    pattern="[0-9]{3}[ ]{1}[0-9]{3}[-]{1}[0-9]{4}"
+                    pattern="[0-9]{10}"
                     required
                     [(ngModel)]="model.phoneNumber" name="phoneNumber"
                     >
 
-            <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)"
+            <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty)"
                 class="alert alert-danger">
 
                 <div *ngIf="phoneNumber.errors.required">
@@ -124,7 +124,7 @@
                     required
                     [(ngModel)]="model.dateOfBirth" name="dateOfBirth"
                     >
-            <div *ngIf="dateOfBirth.invalid && (dateOfBirth.dirty || dateOfBirth.touched)"
+            <div *ngIf="dateOfBirth.invalid && (dateOfBirth.dirty)"
                 class="alert alert-danger">
 
                 <div *ngIf="dateOfBirth.errors.required">
@@ -149,12 +149,12 @@
         </div>
 
         <div class="form-group">
-            <label for="martialStatus">Martial Status*</label>
-            <select type="text" class="form-control" id="martialStatus"
+            <label for="maritalStatus">Marital Status*</label>
+            <select type="text" class="form-control" id="maritalStatus"
                     required
-                    [(ngModel)]="model.martialStatus" name="martialStatus"
-                    #martialStatus="ngModel">
-            <option *ngFor="let mar of martialsStatus" [value]="mar">{{mar}}</option>
+                    [(ngModel)]="model.maritalStatus" name="maritalStatus"
+                    #maritalStatus="ngModel">
+            <option *ngFor="let mar of maritalsStatus" [value]="mar">{{mar}}</option>
             </select>
         </div>
 
@@ -165,8 +165,9 @@
                     #externalDoctor="ngModel"
                     pattern="[a-zA-z ]+"
                     >
-                    <div *ngIf="externalDoctor.invalid && (externalDoctor.dirty || externalDoctor.touched)"
-                    class="alert alert-danger">
+            
+            <div *ngIf="externalDoctor.invalid && (externalDoctor.dirty )"
+                class="alert alert-danger">
 
 
                 <div *ngIf="externalDoctor.errors.pattern">
@@ -185,7 +186,7 @@
 
         <div class="form-group">
             <label for="privateInsuranceNumber">Private Insurance Number</label>
-            <input type="text" class="form-control" id="privateInsuranceNumber"
+            <input type="number" class="form-control" id="privateInsuranceNumber"
                     [(ngModel)]="model.privateInsuranceNumber" name="privateInsuranceNumber"
                     >
         </div>
