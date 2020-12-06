@@ -36,6 +36,7 @@ export const registerPatient=gql`
 mutation registerPatient($patient: PatientInput!) {
     registerPatient(options: $patient) {
       patient{
+        id
         firstName
         lastName
         insuranceNumber
