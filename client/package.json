@@ -28,6 +28,7 @@
     "apollo-link-context": "^1.0.20",
     "bootstrap": "^4.5.3",
     "cookie-parser": "^1.4.5",
+    "get-graphql-schema": "^2.1.2",
     "graphql": "^15.0.0",
     "primeicons": "^4.1.0",
     "primeng": "^11.0.0-rc.2",

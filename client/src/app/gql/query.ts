@@ -2,9 +2,8 @@ import { Apollo } from "apollo-angular";
 import gql from "graphql-tag";
 
 export const patientInfo=gql
-`query patientInfo($patientId:Float!) {
+`query patientInfo($patientId:Int!) {
     patientInfo(patientId:$patientId){
-      Patient{
           id
           insuranceNumber
           firstName
@@ -13,16 +12,10 @@ export const patientInfo=gql
           phoneNumber
           dateOfBirth
           gender
-          martialStatus
+          maritalStatus
           externalDoctor
           nextOfKin
           privateInsuranceNumber
-          roomNumber
-          bedNumber
-          createdAt
-          updatedAt
-          localDoctor
-      }
     }
 }`;
   

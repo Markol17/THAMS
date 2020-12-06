@@ -14,14 +14,17 @@ export class PatientService {
   constructor(private apollo: Apollo) { }
 
 patientInfo(patientid:number): any{
+
+
   
   this.apollo.watchQuery<any>({
     query: patientInfo,
     variables:{
-      patientid:patientid
+      patientid:1
     }
   }).valueChanges.subscribe(({ data }) => {
-    this.Patient = data.Patient;
+    console.log(data);
+
   });
   return this.Patient;
 }

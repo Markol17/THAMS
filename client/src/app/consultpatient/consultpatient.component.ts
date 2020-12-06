@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { PatientService } from '../services/patient.service';
 import {Patient} from '../objects/patient.model'
 
-
 @Component({
   selector: 'app-consultpatient',
   templateUrl: './consultpatient.component.html',
@@ -10,10 +9,10 @@ import {Patient} from '../objects/patient.model'
 })
 
 export class ConsultpatientComponent implements OnInit {
+  patient: Patient ;
   id:number;
-  patient: Patient;
 
-  constructor(private patientserice: PatientService) {
+  constructor(private patientserice: PatientService, ) {
     this.patient=null;
   }
   ngOnInit() {
