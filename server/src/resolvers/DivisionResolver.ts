@@ -4,11 +4,25 @@ import {
     Arg,
     UseMiddleware,
     Query,
+    Field,
+    ObjectType,
   } from 'type-graphql';
 import { AdmitPatientInput } from './InputTypes/PatientInput';
 import { Patient } from '../entities/Patient';
 import { isAuth } from '../middleware/isAuth';
 import { Division } from '../entities/Division';
+import { FieldError } from './StaffMemberResolver';
+import { DivisionInput } from './InputTypes/DivisionInput';
+import { getConnection } from 'typeorm';
+
+@ObjectType()
+export class DivisionResponse {
+  @Field(() => [FieldError], { nullable: true })
+  errors?: FieldError[];
+
+  @Field(() => Division, { nullable: true })
+  division?: Division;
+}
 
   @Resolver(Division)
   export class DivisionResolver {
@@ -25,6 +39,36 @@ import { Division } from '../entities/Division';
       @Arg('divisionId') divisionId: number,
     ) { return await Division.find({where: { divisionId: divisionId, isAdmitted: false} }); }
   
+    @Mutation(() => DivisionResponse)
+    async createDivision(
+      @Arg('options') options: DivisionInput,
+    ): Promise<DivisionResponse> {
+        // const errors = validateDivisionRegister(options);
+        // if (errors) {
+        //   return { errors };
+        // }
+    
+        let division;
+          const result = await getConnection()
+            .createQueryBuilder()
+            .insert()
+            .into(Division)
+            .values({
+              name: options.name,
+              description: options.description,
+              chargeNurseId: options.chargeNurseId,
+              location: options.location,
+              numBeds: options.numBeds,
+              phoneNumber: options.phoneNumber,
+              isComplete: false
+            })
+            .returning('*')
+            .execute();
+            division = result.raw[0];
+    
+        return { division };
+    }
+
     @UseMiddleware(isAuth)
     @Mutation(() => Boolean)
     async admitPatient(

@@ -29,8 +29,10 @@ export class Division extends BaseEntity {
   description: string;
 
   @Field(() => StaffMember)
+  @Column()
+  chargeNurseId: number
   @OneToOne(() => StaffMember)
-  @JoinColumn()
+  @JoinColumn({name: "chargeNurseId"})
   chargeNurse: StaffMember;
 
   @Field()
