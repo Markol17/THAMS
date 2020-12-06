@@ -16,6 +16,7 @@ import { Prescription } from './entities/Prescription';
 import { StaffMember } from './entities/StaffMember';
 import { PatientResolver } from './resolvers/PatientResolver';
 import { StaffMemberPatient } from './entities/StaffMemberPatient';
+import { DivisionResolver } from './resolvers/DivisionResolver';
 
 const main = async () => {
   await createConnection({
@@ -60,7 +61,7 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [PatientResolver, StaffMemberResolver],
+      resolvers: [PatientResolver, StaffMemberResolver, DivisionResolver],
       validate: false,
     }),
     context: ({ req, res }) => ({

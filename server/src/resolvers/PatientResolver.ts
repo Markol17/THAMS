@@ -5,6 +5,7 @@ import {
     Field,
     ObjectType,
     UseMiddleware,
+    Query,
   } from 'type-graphql';
 import { PatientInput } from './InputTypes/PatientInput';
 import { validatePatientRegister } from '../utils/validatePatientRegister';
@@ -15,7 +16,7 @@ import { FieldError } from './StaffMemberResolver';
   
   
   @ObjectType()
-  class PatientResponse {
+  export class PatientResponse {
     @Field(() => [FieldError], { nullable: true })
     errors?: FieldError[];
   
@@ -26,7 +27,6 @@ import { FieldError } from './StaffMemberResolver';
   @Resolver(Patient)
   export class PatientResolver {
   
-    // This wont work unless we pass the cookie to the request with the session id to be decrypted.
     @UseMiddleware(isAuth)
     @Mutation(() => PatientResponse)
     async registerPatient(
@@ -60,6 +60,12 @@ import { FieldError } from './StaffMemberResolver';
           patient = result.raw[0];
   
       return { patient };
+    }
+
+    @UseMiddleware(isAuth)
+    @Query(() => Patient, { nullable: true })
+    async patientInfo(@Arg('patientId') patientId: number) {
+      return await Patient.findOne({id: patientId});
     }
   }
   
