@@ -24,3 +24,11 @@ export class PatientInput {
   @Field()
   privateInsuranceNumber: number;
 }
+
+@InputType()
+export class AdmitPatientInput {
+  @Field()
+  patientId: number;
+  @Field()
+  divisionId: number;
+}

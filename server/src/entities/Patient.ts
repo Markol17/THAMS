@@ -8,6 +8,7 @@ import {
   BaseEntity,
   OneToMany,
   ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 import { Division } from './Division';
 import { Prescription } from './Prescription';
@@ -72,6 +73,10 @@ export class Patient extends BaseEntity {
   @Field()
   @Column({ nullable: true })
   bedNumber: number;
+  
+  @Field()
+  @Column({default: false})
+  isAdmitted: boolean;
 
   @Field(() => String)
   @CreateDateColumn()
@@ -90,6 +95,9 @@ export class Patient extends BaseEntity {
   @OneToMany(() => Prescription, prescription => prescription.patient)
   prescriptions: Prescription[];
 
+  @Column({nullable: true})
+  divisionId: number;
   @ManyToOne(() => Division, division => division.patients)
+  @JoinColumn({name: "divisionId"})
   division: Division;
 }
