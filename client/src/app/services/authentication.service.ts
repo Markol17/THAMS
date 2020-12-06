@@ -7,6 +7,7 @@ import { Patient } from "../objects/patient.model";
 import { registerStaff, registerPatient, loginStaff, logout } from "../gql/mutation";
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Router } from '@angular/router';
+import { CustomMessageService } from './message.service';
 
 
 @Injectable({
@@ -14,7 +15,7 @@ import { Router } from '@angular/router';
 })
 export class AuthenticationService {
 
-  constructor(private apollo: Apollo, private router: Router) { }
+  constructor(private apollo: Apollo, private router: Router, private customMessageService:CustomMessageService) { }
 
   private currentUser: StaffMember;
   isLoggedIn: boolean = false;
@@ -61,6 +62,7 @@ export class AuthenticationService {
       error: err => console.error('Error Registering Patient: ' + err),
       complete: () => {
         console.log("done");
+
       },
     });
   }
@@ -73,6 +75,7 @@ export class AuthenticationService {
         username: email,
         password: password
       }
+      
     }).subscribe({
       next: data => {
         const x = data.data['loginStaff'];
@@ -80,15 +83,19 @@ export class AuthenticationService {
         this.currentUser = <StaffMember>jsonObj;
         console.log(this.currentUser)
       },
-      error: err => console.error('Error logging in: ' + err),
+      error: err => { console.error('Error logging in: ' + err);
+     this.customMessageService.setError("There was an error logging in")
+    },
       complete: () => {
         if (this.currentUser) {
           console.log("Login complete");
+          this.customMessageService.setSuccess("Hello "+this.currentUser.firstName)
           this.isLoggedIn = true;
           this.router.navigate(['home']);
 
         }
         else {
+        this.customMessageService.setError("There was and error logging in");
           console.log("Login failed");
 
         }
@@ -114,8 +121,8 @@ export class AuthenticationService {
       complete: () => {
         console.log("Logout completed");
         this.apollo.client.resetStore();
-        this.isLoggedIn=false;
-        this.role=null;
+        this.isLoggedIn = false;
+        this.role = null;
       },
 
     });

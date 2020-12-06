@@ -25,6 +25,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {DropdownModule} from 'primeng/dropdown';
 import { FooterComponent } from './footer/footer.component';
+import { MessagesComponent } from './messages/messages.component';
+import {ToastModule} from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +39,8 @@ import { FooterComponent } from './footer/footer.component';
     LoginpageComponent,
     HeaderComponent,
     RegisterpatientComponent,
-    FooterComponent
+    FooterComponent,
+    MessagesComponent
   ],
   imports: [
     InputMaskModule,
@@ -52,9 +56,10 @@ import { FooterComponent } from './footer/footer.component';
     ButtonModule,
     InputNumberModule,
     DropdownModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ToastModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
