@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RequestpatientComponent implements OnInit {
 
+  patientId:number;
+  divisionId:number;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  addToRequestList(){
+
   }
 
 }
