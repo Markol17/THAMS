@@ -9,7 +9,25 @@ import { RequestpatientComponent } from './requestpatient/requestpatient.compone
 import { DivisionComponent } from './division/division.component';
 import { AdmitpatientComponent } from './admitpatient/admitpatient.component';
 import { LoginpageComponent } from './loginpage/loginpage.component';
+import { GraphQLModule } from './graphql.module';
+import { HttpClientModule } from '@angular/common/http';
+import { HeaderComponent } from './header/header.component';
+import { RegisterpatientComponent } from './registerpatient/registerpatient.component';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import {InputMaskModule} from 'primeng/inputmask';
+import {InputTextModule} from 'primeng/inputtext';
+import {ButtonModule} from 'primeng/button';
+import {RippleModule} from 'primeng/ripple';
+import {PasswordModule} from 'primeng/password';
+import { ReactiveFormsModule } from '@angular/forms';
+import {InputNumberModule} from 'primeng/inputnumber';
+import {DropdownModule} from 'primeng/dropdown';
+import { FooterComponent } from './footer/footer.component';
+import { MessagesComponent } from './messages/messages.component';
+import {ToastModule} from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,13 +36,30 @@ import { LoginpageComponent } from './loginpage/loginpage.component';
     RequestpatientComponent,
     DivisionComponent,
     AdmitpatientComponent,
-    LoginpageComponent
+    LoginpageComponent,
+    HeaderComponent,
+    RegisterpatientComponent,
+    FooterComponent,
+    MessagesComponent
   ],
   imports: [
+    InputMaskModule,
+    FormsModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    GraphQLModule,
+    HttpClientModule,
+    InputTextModule,
+    RippleModule,
+    PasswordModule,
+    ReactiveFormsModule,
+    ButtonModule,
+    InputNumberModule,
+    DropdownModule,
+    BrowserAnimationsModule,
+    ToastModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

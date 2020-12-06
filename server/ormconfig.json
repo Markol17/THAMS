@@ -3,8 +3,8 @@
   "host": "localhost",
   "port": 5432,
   "username": "postgres",
-  "password": "Markol17",
-  "database": "THAMS",
+  "password": "a",
+  "database": "thams",
   "entities": ["dist/entities/*.js"],
   "migrations": ["dist/migrations/*.js"],
   "cli": {
