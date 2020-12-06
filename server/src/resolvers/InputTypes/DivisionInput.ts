@@ -15,3 +15,9 @@ export class DivisionInput {
   @Field()
   phoneNumber: number;
 }
+
+@InputType()
+export class DivisionIdInput {
+  @Field()
+  divisionId: number;
+}

@@ -26,9 +26,33 @@ export class PatientInput {
 }
 
 @InputType()
-export class AdmitPatientInput {
+export class PatientIdDivisionIdInput {
   @Field()
   patientId: number;
   @Field()
   divisionId: number;
+}
+
+@InputType()
+export class PatientIdInput {
+  @Field()
+  patientId: number;
+}
+
+@InputType()
+export class UpdatePatientInput {
+  @Field()
+  patientId: number;
+  @Field()
+  address: string;
+  @Field()
+  phoneNumber:number;
+  @Field()
+  gender: string;
+  @Field()
+  maritalStatus:string;
+  @Field()
+  nextOfKin:string;
+  @Field()
+  privateInsuranceNumber:number;
 }

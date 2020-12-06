@@ -7,7 +7,7 @@ import {
     UseMiddleware,
     Query,
   } from 'type-graphql';
-import { PatientInput } from './InputTypes/PatientInput';
+import { PatientIdInput, PatientInput, UpdatePatientInput } from './InputTypes/PatientInput';
 import { validatePatientRegister } from '../utils/validatePatientRegister';
 import { getConnection } from 'typeorm';
 import { Patient } from '../entities/Patient';
@@ -26,6 +26,10 @@ import { FieldError } from './StaffMemberResolver';
   
   @Resolver(Patient)
   export class PatientResolver {
+
+    @UseMiddleware(isAuth)
+    @Query(() => [Patient], {nullable: true})
+    async patients() { return await Patient.find(); }
   
     @UseMiddleware(isAuth)
     @Mutation(() => PatientResponse)
@@ -65,13 +69,7 @@ import { FieldError } from './StaffMemberResolver';
     @UseMiddleware(isAuth)
     @Mutation(() => PatientResponse)
     async updatePatient(
-      @Arg('patientId') patientId: number,
-      @Arg('address') address: string,
-      @Arg("phoneNumber") phoneNumber:number,
-      @Arg("gender") gender: string,
-      @Arg("maritalStatus") maritalStatus:string,
-      @Arg("nextOfKin") nextOfKin:string,
-      @Arg("privateInsuranceNumber") privateInsuranceNumber:number,
+      @Arg('options') options: UpdatePatientInput,
     ): Promise<PatientResponse> {
       
       let patient;
@@ -79,14 +77,14 @@ import { FieldError } from './StaffMemberResolver';
           .createQueryBuilder()
           .update(Patient)
           .set({ 
-            address:address ,
-            phoneNumber:phoneNumber,
-            gender:gender,
-            maritalStatus:maritalStatus,
-            nextOfKin:nextOfKin,
-            privateInsuranceNumber:privateInsuranceNumber
+            address: options.address ,
+            phoneNumber: options.phoneNumber,
+            gender: options.gender,
+            maritalStatus: options.maritalStatus,
+            nextOfKin: options.nextOfKin,
+            privateInsuranceNumber: options.privateInsuranceNumber
           })
-          .where("id = :id", { id: patientId })
+          .where("id = :id", { id: options.patientId })
           .execute();
           patient = result.raw[0];
   
@@ -95,8 +93,8 @@ import { FieldError } from './StaffMemberResolver';
 
     @UseMiddleware(isAuth)
     @Query(() => Patient, { nullable: true })
-    patientInfo(@Arg('patientId') patientId: number) {
-      return Patient.findOne(patientId);
+    patientInfo( @Arg('options') options: PatientIdInput) {
+      return Patient.findOne(options.patientId);
     }
   }
   

@@ -7,13 +7,13 @@ import {
     Field,
     ObjectType,
   } from 'type-graphql';
-import { AdmitPatientInput } from './InputTypes/PatientInput';
 import { Patient } from '../entities/Patient';
 import { isAuth } from '../middleware/isAuth';
 import { Division } from '../entities/Division';
 import { FieldError } from './StaffMemberResolver';
-import { DivisionInput } from './InputTypes/DivisionInput';
+import { DivisionIdInput, DivisionInput } from './InputTypes/DivisionInput';
 import { getConnection } from 'typeorm';
+import { PatientIdDivisionIdInput, PatientIdInput } from './InputTypes/PatientInput';
 
 @ObjectType()
 export class DivisionResponse {
@@ -30,14 +30,14 @@ export class DivisionResponse {
     @UseMiddleware(isAuth)
     @Query(() => Division, {nullable: true})
     async divisionInfo(
-      @Arg('divisionId') divisionId: number,
-    ){ return await Division.findOne({id: divisionId}); }
+      @Arg('options') options: DivisionIdInput,
+    ){ return await Division.findOne({id: options.divisionId}); }
 
     @UseMiddleware(isAuth)
     @Query(() => [Patient], {nullable: true})
     async requestList(
-      @Arg('divisionId') divisionId: number,
-    ) { return await Division.find({where: { divisionId: divisionId, isAdmitted: false} }); }
+      @Arg('options') options: DivisionIdInput,
+    ) { return await Patient.find({where: { divisionId: options.divisionId, isAdmitted: false} }); }
   
     @Mutation(() => DivisionResponse)
     async createDivision(
@@ -72,7 +72,7 @@ export class DivisionResponse {
     @UseMiddleware(isAuth)
     @Mutation(() => Boolean)
     async admitPatient(
-      @Arg('ids') ids: AdmitPatientInput,
+      @Arg('ids') ids: PatientIdDivisionIdInput,
     ): Promise<Boolean> {
         const { divisionId, patientId } = ids;
         await Patient.update({id: patientId}, {divisionId: divisionId, isAdmitted: true});
@@ -82,7 +82,7 @@ export class DivisionResponse {
     @UseMiddleware(isAuth)
     @Mutation(() => Boolean)
     async requestPatientAdmission(
-      @Arg('ids') ids: AdmitPatientInput,
+      @Arg('ids') ids: PatientIdDivisionIdInput,
     ): Promise<Boolean> {
     //     const { divisionId, patientId } = ids;
     //     const result = await Patient.update({id: patientId}, {divisionId: divisionId, isAdmitted: true});
@@ -96,9 +96,9 @@ export class DivisionResponse {
     @UseMiddleware(isAuth)
     @Mutation(() => Boolean)
     async dischargePatient(
-      @Arg('patientId') patientId: number,
+      @Arg('options') options: PatientIdInput,
     ): Promise<Boolean> {
-        await Patient.update({id: patientId}, {divisionId: -1, isAdmitted: false});
+        await Patient.update({id: options.patientId}, {divisionId: -1, isAdmitted: false});
         return true;
     }
   }
