@@ -17,6 +17,7 @@ export class AuthenticationService {
 
   constructor(private apollo: Apollo, private router: Router, private customMessageService:CustomMessageService) { }
 
+  private currentPatient: Patient;
   private currentUser: StaffMember;
   isLoggedIn: boolean = false;
   role: string;
@@ -58,10 +59,26 @@ export class AuthenticationService {
     }).subscribe({
       next: data => {
         console.log(data);
+        this.currentPatient = null;
+        const x = data.data['registerPatient'];
+        let jsonObj: any = JSON.parse(JSON.stringify(x['patient']))
+        this.currentPatient = <Patient>jsonObj;
+        console.log(this.currentPatient)
       },
-      error: err => console.error('Error Registering Patient: ' + err),
+      error: err => {
+        console.error('Error Registering Patient: ' + err);
+        this.customMessageService.setError(err);
+      },
       complete: () => {
-        console.log("done");
+        if (this.currentPatient) {
+          console.log("Register patient complete");
+          this.customMessageService.setSuccess(this.currentPatient.firstName+ " " +this.currentPatient.lastName + " has been register "+ " with id :"+ this.currentPatient.id);
+          this.router.navigate(['app-consultpatient']);
+        }
+        else {
+          this.customMessageService.setError("Register patient failed");
+          console.log("Register patient failed");
+        }
 
       },
     });
@@ -84,12 +101,12 @@ export class AuthenticationService {
         console.log(this.currentUser)
       },
       error: err => { console.error('Error logging in: ' + err);
-     this.customMessageService.setError("There was an error logging in")
+     this.customMessageService.setError("There was an error logging in");
     },
       complete: () => {
         if (this.currentUser) {
           console.log("Login complete");
-          this.customMessageService.setSuccess("Hello "+this.currentUser.firstName)
+          this.customMessageService.setSuccess("Hello "+this.currentUser.firstName);
           this.isLoggedIn = true;
           this.router.navigate(['home']);
 

@@ -10,4 +10,5 @@ export class Patient {
     externalDoctor?:string;
     nextOfKin?:string;
     privateInsuranceNumber?:number;
+    id?:number;
 }
