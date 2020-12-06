@@ -114,6 +114,8 @@ export class AuthenticationService {
       complete: () => {
         console.log("Logout completed");
         this.apollo.client.resetStore();
+        this.isLoggedIn=false;
+        this.role=null;
       },
 
     });

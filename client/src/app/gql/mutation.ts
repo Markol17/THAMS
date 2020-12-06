@@ -28,8 +28,8 @@ export const loginStaff=gql`
     }`;
 
 export const logout=gql`
-mutation logout {
-  logout
+mutation logoutStaff {
+  logoutStaff
 }`
 
 export const registerPatient=gql`
