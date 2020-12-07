@@ -10,7 +10,7 @@ export class PatientInput {
   @Field()
   address: string;
   @Field()
-  phoneNumber: number;
+  phoneNumber: string;
   @Field()
   dateOfBirth: Date;
   @Field()
@@ -46,7 +46,7 @@ export class UpdatePatientInput {
   @Field()
   address: string;
   @Field()
-  phoneNumber:number;
+  phoneNumber: string;
   @Field()
   gender: string;
   @Field()

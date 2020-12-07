@@ -40,12 +40,12 @@ export class Division extends BaseEntity {
   location: string;
 
   @Field()
-  @UpdateDateColumn()
+  @Column()
   numBeds: number;
 
   @Field()
   @Column()
-  phoneNumber: number;
+  phoneNumber: string;
 
   @Field()
   @Column({default: false})

@@ -9,7 +9,7 @@ export class StaffMemberInput {
   @Field()
   lastName: string;
   @Field()
-  phone: number;
+  phoneNumber: string;
   @Field()
   bipperExtension: number;
   @Field()

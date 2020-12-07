@@ -44,7 +44,7 @@ export class StaffMember extends BaseEntity {
 
   @Field()
   @Column()
-  phone: number;
+  phoneNumber: string;
 
   @Field()
   @Column()

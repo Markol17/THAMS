@@ -13,7 +13,7 @@ export class DivisionInput {
   @Field()
   numBeds: number;
   @Field()
-  phoneNumber: number;
+  phoneNumber: string;
 }
 
 @InputType()

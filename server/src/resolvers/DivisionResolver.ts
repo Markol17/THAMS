@@ -13,7 +13,7 @@ import { Division } from '../entities/Division';
 import { FieldError } from './StaffMemberResolver';
 import { DivisionIdInput, DivisionInput } from './InputTypes/DivisionInput';
 import { getConnection } from 'typeorm';
-import { PatientIdDivisionIdInput, PatientIdInput } from './InputTypes/PatientInput';
+import { PatientIdDivisionIdInput } from './InputTypes/PatientInput';
 
 @ObjectType()
 export class DivisionResponse {
@@ -91,15 +91,6 @@ export class DivisionResponse {
     const { divisionId, patientId } = ids;
     await Patient.update({id: patientId}, {divisionId: divisionId, isAdmitted: false});
     return true;
-    }
-
-    @UseMiddleware(isAuth)
-    @Mutation(() => Boolean)
-    async dischargePatient(
-      @Arg('options') options: PatientIdInput,
-    ): Promise<Boolean> {
-        await Patient.update({id: options.patientId}, {divisionId: -1, isAdmitted: false});
-        return true;
     }
   }
   

@@ -8,6 +8,7 @@ import {
   Query,
   FieldResolver,
   Root,
+  UseMiddleware,
 } from 'type-graphql';
 import { Context } from '../types';
 import { StaffMember } from '../entities/StaffMember';
@@ -16,6 +17,9 @@ import { COOKIE_NAME } from '../constants';
 import { StaffMemberInput } from './InputTypes/StaffMemberInput';
 import { validateStaffMemberRegister } from '../utils/validateStaffMemberRegister';
 import { getConnection } from 'typeorm';
+import { PatientIdInput } from './InputTypes/PatientInput';
+import { Patient } from '../entities/Patient';
+import { isAuth } from '../middleware/isAuth';
 
 @ObjectType()
 export class FieldError {
@@ -78,7 +82,7 @@ export class StaffMemberResolver {
           lastName: options.lastName,
           email: options.email,
           password: hashedPassword,
-          phone: options.phone,
+          phoneNumber: options.phoneNumber,
           bipperExtension: options.bipperExtension,
           type: options.type
         })
@@ -158,5 +162,14 @@ export class StaffMemberResolver {
         resolve(true);
       })
     );
+  }
+
+  @UseMiddleware(isAuth)
+  @Mutation(() => Boolean)
+  async dischargePatient(
+    @Arg('options') options: PatientIdInput,
+  ): Promise<Boolean> {
+      await Patient.update({id: options.patientId}, {divisionId: -1, isAdmitted: false});
+      return true;
   }
 }

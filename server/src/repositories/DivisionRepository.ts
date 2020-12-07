@@ -2,7 +2,7 @@ import {EntityRepository, EntityManager} from "typeorm";
 import {StaffMember} from "../entities/StaffMember";
 
 @EntityRepository()
-export class StaffMemberRepository {
+export class DivisionRepository {
 
     constructor(private manager: EntityManager) {
     }

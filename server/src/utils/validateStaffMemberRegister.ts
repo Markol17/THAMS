@@ -10,7 +10,7 @@ export const validateStaffMemberRegister = (options: StaffMemberInput) => {
   }
 
   //TODO: do the validation
-  if (options.phone.toString.length == 2) {
+  if (options.phoneNumber.length == 2) {
     errors.push({
       field: 'phone',
       message: 'Length must be greater than 2',

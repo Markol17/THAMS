@@ -40,7 +40,7 @@ export class Patient extends BaseEntity {
 
   @Field()
   @Column()
-  phoneNumber: number;
+  phoneNumber: string;
   
   @Field(() => String)
   @Column()

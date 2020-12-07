@@ -7,6 +7,7 @@ import {
   Column,
   BaseEntity,
   ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 import { Patient } from './Patient';
 
@@ -23,7 +24,7 @@ export class Prescription extends BaseEntity {
   
     @Field()
     @Column()
-    unitsPerDay: string;
+    unitsPerDay: number;
   
     @Field()
     @Column()
@@ -49,6 +50,10 @@ export class Prescription extends BaseEntity {
     @UpdateDateColumn()
     updatedAt: Date;
 
+    @Field()
+    @Column()
+    patientId: number;
     @ManyToOne(() => Patient, patient => patient.prescriptions)
+    @JoinColumn({name: "patientId"})
     patient: Patient;
 }

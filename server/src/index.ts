@@ -14,9 +14,10 @@ import { createPatientLoader } from './dataloaders/createPatientLoader';
 import { Division } from './entities/Division';
 import { Prescription } from './entities/Prescription';
 import { StaffMember } from './entities/StaffMember';
-import { PatientResolver } from './resolvers/PatientResolver';
 import { StaffMemberPatient } from './entities/StaffMemberPatient';
+import { PatientResolver } from './resolvers/PatientResolver';
 import { DivisionResolver } from './resolvers/DivisionResolver';
+import { PrescriptionResolver } from './resolvers/PrescriptionResolver';
 
 const main = async () => {
   await createConnection({
@@ -61,7 +62,7 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [PatientResolver, StaffMemberResolver, DivisionResolver],
+      resolvers: [PatientResolver, StaffMemberResolver, DivisionResolver, PrescriptionResolver],
       validate: false,
     }),
     context: ({ req, res }) => ({
