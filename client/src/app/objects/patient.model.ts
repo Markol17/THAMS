@@ -11,4 +11,10 @@ export class Patient {
     nextOfKin?:string;
     privateInsuranceNumber?:number;
     id?:number;
+    roomNumber:number;
+    bedNumber:number;
+    isAdmitted:boolean;
+    createdAt:string;
+    updatedAt:string;
+    divisionId:number;
 }

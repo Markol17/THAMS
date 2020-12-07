@@ -2,8 +2,8 @@ import { Apollo } from "apollo-angular";
 import gql from "graphql-tag";
 
 export const patientInfo=gql
-`query patientInfo($patientId:Int!) {
-    patientInfo(patientId:$patientId){
+`query patientInfo($patient:PatientIdInput!) {
+    patientInfo(options:$patient){
           id
           insuranceNumber
           firstName
