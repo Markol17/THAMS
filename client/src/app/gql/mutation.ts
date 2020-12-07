@@ -52,6 +52,16 @@ mutation registerPatient($patient: PatientInput!) {
     }
   }`;
 
+  export const admitPatient=gql`
+  mutation admitPatient($patientDivision: PatientIdDivisionIdInput!) {
+    admitPatient(ids: $patientDivision) 
+  }`;
+
+  export const requestPatientAdmission=gql`
+  mutation requestPatientAdmission($patientDivision: PatientIdDivisionIdInput!) {
+    requestPatientAdmission(ids: $patientDivision) 
+  }`;
+
 
   /*export const updatePatient=gql`
   mutation registerPatient(

@@ -5,25 +5,28 @@ import gql from "graphql-tag";
 import {registerPatient} from "../gql/mutation";
 import {patientInfo} from "../gql/query";
 import { Variable } from '@angular/compiler/src/render3/r3_ast';
+import { PatientIdInput } from '../objects/patient-id-input.model';
+import { CustomMessageService } from './message.service';
 @Injectable({
   providedIn: 'root'
 })
 export class PatientService {
-  Patient: any;
+  patient: Patient;
+  pId: PatientIdInput;
+  viewPatient:boolean;
+  constructor(private apollo: Apollo, private customMessageService: CustomMessageService) { }
 
-  constructor(private apollo: Apollo) { }
+patientInfo(id:number): any{
+  this.pId = new PatientIdInput;
+  this.pId.patientId= id;
 
-patientInfo(patientid:number): any{
-  
-  this.apollo.watchQuery<any>({
+  return this.apollo.watchQuery<any>({
     query: patientInfo,
     variables:{
-      patientid:patientid
+      patient: this.pId
     }
-  }).valueChanges.subscribe(({ data }) => {
-    this.Patient = data.Patient;
-  });
-  return this.Patient;
+  })
+ 
 }
 
 }

@@ -14,7 +14,7 @@ export class AppComponent {
   constructor(private router: Router, private auth:AuthenticationService){
       router.events.forEach((event)=>{
         if(event instanceof NavigationStart){
-          if(event['url']=='/app-loginpage' || !this.auth.logStatus()){
+          if(event['url']=='/loginpage' || !this.auth.logStatus()){
             this.header=false;
           }
           else{

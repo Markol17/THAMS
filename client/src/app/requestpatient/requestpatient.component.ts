@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AdmissionserviceService } from '../services/admissionservice.service';
 
 @Component({
   selector: 'app-requestpatient',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RequestpatientComponent implements OnInit {
 
-  constructor() { }
+  patientId:number;
+  divisionId:number;
+
+  constructor(private admission: AdmissionserviceService) { }
 
   ngOnInit(): void {
+  }
+
+  addToRequestList(){
+    const isFull = this.admission.divisionInfo(this.divisionId);
+    if(!isFull){
+      this.admission.admitPatient(this.patientId,this.divisionId);
+    }
+    else{
+      this.admission.requestPatientAdmission(this.patientId,this.divisionId);
+    }
   }
 
 }

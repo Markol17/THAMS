@@ -6,7 +6,7 @@ import { StaffMember } from '../objects/staff-member.model';
 import { AbstractControl } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
 @Component({
-  selector: 'app-loginpage',
+  selector: 'loginpage',
   templateUrl: './loginpage.component.html',
   styleUrls: ['./loginpage.component.css']
 })

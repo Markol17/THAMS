@@ -38,18 +38,31 @@ export class AuthenticationService {
       }
     }).subscribe({
       next: data => {
-        console.log(data);
+        const x = data.data['registerStaff'];
+        let jsonObj: any = JSON.parse(JSON.stringify(x['staffMember']))
+        this.currentUser = <StaffMember>jsonObj;
+        console.log(this.currentUser)
       },
-      error: err => console.error('Error Registering: ' + err),
+      error: err => {console.error('Error Registering: ' + err);
+      this.customMessageService.setError("There was an error registering");},
       complete: () => {
-        console.log("done");
+        if (this.currentUser) {
+          console.log("Register complete");
+          this.customMessageService.setSuccess("Hello "+this.currentUser.firstName);
+          this.isLoggedIn = true;
+          this.router.navigate(['home']);
+
+        }
+        else {
+        this.customMessageService.setError("There was and error registering");
+
+        }
       },
 
 
     });
-
-
   }
+  
   registerPatient(patient: Patient): void {
     this.apollo.mutate({
       mutation: registerPatient,
@@ -134,9 +147,11 @@ export class AuthenticationService {
       next: data => {
         console.log(data);
       },
-      error: err => console.error('Error Logging out: ' + err),
+      error: err => {console.error('Error Logging out: ' + err);
+      this.customMessageService.setError("There was an error logging out");},
       complete: () => {
         console.log("Logout completed");
+  
         this.apollo.client.resetStore();
         this.isLoggedIn = false;
         this.role = null;

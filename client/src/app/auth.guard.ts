@@ -25,6 +25,7 @@ export class AuthGuard implements CanActivate {
     if(this.authService.logStatus()){
       const role = this.authService.getRole();
       if(route.data.role && route.data.role.indexOf(role)===-1){
+        this.router.navigate(['home'])
         return false;
         
       }
@@ -32,7 +33,7 @@ export class AuthGuard implements CanActivate {
         return true;
       }
     }
-    this.router.navigate(['app-loginpage'])
+    this.router.navigate(['loginpage'])
     return false;
   }
 }

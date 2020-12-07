@@ -22,9 +22,9 @@ const routes: Routes = [
   { path: 'app-division', component: DivisionComponent,canActivate:[AuthGuard],data:{
     role:'ChargeNurse'
   }  },
-  {path: '**', redirectTo: 'app-loginpage'},
-  { path: '', redirectTo: 'app-loginpage', pathMatch: 'full'},
-  {path: 'app-loginpage',   component: LoginpageComponent},
+  {path: '**', redirectTo: 'loginpage'},
+  { path: '', redirectTo: 'loginpage', pathMatch: 'full'},
+  {path: 'loginpage',   component: LoginpageComponent},
 ];
 
 @NgModule({
