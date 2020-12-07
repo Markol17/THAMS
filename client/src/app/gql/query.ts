@@ -18,4 +18,17 @@ export const patientInfo=gql
           privateInsuranceNumber
     }
 }`;
+
+export const divisioinInfo=gql
+`query divisionInfo($div: DivisionIdInput!) {
+  divisionInfo(options: $div) {
+      id
+      name
+      description
+      location
+      numBeds
+      phoneNumber
+      isComplete
+}
+}`;
   
