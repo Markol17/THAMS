@@ -27,7 +27,7 @@ import { PatientService } from '../services/PatientService';
     @Query(() => [Patient], {nullable: true})
     async patients(): Promise<Patient[]> {
       const patientService = new PatientService(); 
-      return patientService.getPatients(); 
+      return await patientService.getPatients(); 
     }
   
     @Mutation(() => PatientResponse)
@@ -35,7 +35,7 @@ import { PatientService } from '../services/PatientService';
       @Arg('options') options: PatientInput,
     ): Promise<PatientResponse> {
       const patientService = new PatientService(); 
-      return patientService.registerPatient(options);
+      return await patientService.registerPatient(options); ;
     }
 
     @Mutation(() => PatientResponse)
@@ -43,13 +43,13 @@ import { PatientService } from '../services/PatientService';
       @Arg('options') options: UpdatePatientInput,
     ): Promise<PatientResponse> {
       const patientService = new PatientService(); 
-      return patientService.updatePatient(options);
+      return await patientService.updatePatient(options);
     }
 
-    @Query(() => Patient, { nullable: true })
-    async patientInfo( @Arg('options') options: PatientIdInput): Promise<PatientResponse> {
+    @Query(() => PatientResponse, { nullable: true })
+    async patientInfo( @Arg('options') options: PatientIdInput): Promise<PatientResponse | undefined> {
       const patientService = new PatientService(); 
-      return patientService.getPatient(options);
+      return await patientService.getPatient(options);
     }
   }
   

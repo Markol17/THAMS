@@ -4,6 +4,7 @@ import gql from "graphql-tag";
 export const patientInfo=gql
 `query patientInfo($patient:PatientIdInput!) {
     patientInfo(options:$patient){
+        patient{
           id
           insuranceNumber
           firstName
@@ -16,6 +17,7 @@ export const patientInfo=gql
           externalDoctor
           nextOfKin
           privateInsuranceNumber
+        }
     }
 }`;
 

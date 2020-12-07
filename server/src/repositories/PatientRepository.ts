@@ -47,6 +47,6 @@ export class PatientRepository  extends Repository<Patient>{
     }
 
     async get(id: number): Promise<Patient | undefined>{
-        return this.findOne(id)
+        return this.findOne(id);
     }
 }

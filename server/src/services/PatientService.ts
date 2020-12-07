@@ -50,6 +50,6 @@ export class PatientService{
             })
             return { errors } ;
         }
-        return { patient }; // I dont know how to fix this typescript issue 
+        return { patient };
     }
 }
