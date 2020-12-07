@@ -25,6 +25,7 @@ export class ConsultpatientComponent implements OnInit {
   findPatient(): void{
    this.patientserice.patientInfo(this.id).valueChanges.subscribe({
       next: data => {
+        console.log(data);
         const x = data.data['patientInfo'];
         let jsonObj: any = JSON.parse(JSON.stringify(x));
         this.patient = <Patient>jsonObj;

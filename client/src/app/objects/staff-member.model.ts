@@ -8,6 +8,6 @@ export class StaffMember {
     firstName: string;
     lastName: string;
     type:string;
-    phone?: number;
+    phoneNumber?: string;
     password:string;
 }
