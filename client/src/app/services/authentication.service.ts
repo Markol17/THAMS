@@ -151,7 +151,7 @@ export class AuthenticationService {
       this.customMessageService.setError("There was an error logging out");},
       complete: () => {
         console.log("Logout completed");
-        this.customMessageService.setSuccess("You logged out");
+  
         this.apollo.client.resetStore();
         this.isLoggedIn = false;
         this.role = null;
