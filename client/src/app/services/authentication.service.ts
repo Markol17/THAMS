@@ -30,6 +30,10 @@ export class AuthenticationService {
     return this.currentUser.type;
   }
 
+  getName(): string {
+    return this.currentUser.firstName;
+  }
+
   registerStaff(staff: StaffMember): void {
     this.apollo.mutate({
       mutation: registerStaff,

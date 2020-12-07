@@ -3,7 +3,7 @@ import {Patient} from "../objects/patient.model";
 import { Apollo } from "apollo-angular";
 import gql from "graphql-tag";
 import {registerPatient} from "../gql/mutation";
-import {patientInfo} from "../gql/query";
+import {patientInfo, patients} from "../gql/query";
 import { Variable } from '@angular/compiler/src/render3/r3_ast';
 import { PatientIdInput } from '../objects/patient-id-input.model';
 import { CustomMessageService } from './message.service';
@@ -27,6 +27,13 @@ patientInfo(id:number): any{
     }
   })
  
+}
+
+getPatients(): any{
+  return this.apollo.watchQuery<any>({
+    query:patients,
+  })
+
 }
 
 }

@@ -33,4 +33,22 @@ export const divisioinInfo=gql
       isComplete
 }
 }`;
+
+export const patients=gql
+`query patientInfo($patient:PatientIdInput!) {
+    patientInfo(options:$patient){
+          id
+          insuranceNumber
+          firstName
+          lastName
+          address
+          phoneNumber
+          dateOfBirth
+          gender
+          maritalStatus
+          externalDoctor
+          nextOfKin
+          privateInsuranceNumber
+    }
+}`;
   
