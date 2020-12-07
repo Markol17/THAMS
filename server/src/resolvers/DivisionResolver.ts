@@ -26,6 +26,7 @@ export class DivisionResponse {
 
   @Resolver(Division)
   export class DivisionResolver {
+    static PrescriptionResolver: string | Function;
 
     @UseMiddleware(isAuth)
     @Query(() => Division, {nullable: true})

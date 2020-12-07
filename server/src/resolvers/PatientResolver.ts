@@ -47,7 +47,7 @@ import { PatientService } from '../services/PatientService';
     }
 
     @Query(() => Patient, { nullable: true })
-    patientInfo( @Arg('options') options: PatientIdInput): Promise<PatientResponse | undefined> {
+    async patientInfo( @Arg('options') options: PatientIdInput): Promise<PatientResponse> {
       const patientService = new PatientService(); 
       return patientService.getPatient(options);
     }
