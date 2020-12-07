@@ -96,7 +96,7 @@
 
         <div class="form-group">
             <label for="phoneNumber">Phone Number* (XXXXXXXXXX)</label>
-            <input type=number class="form-control" id="phoneNumber"
+            <input type="text" class="form-control" id="phoneNumber"
                     #phoneNumber="ngModel"
                     pattern="[0-9]{10}"
                     required
@@ -117,10 +117,9 @@
         </div>
 
         <div class="form-group">
-            <label for="dateOfBirth">Date of Birth (dd/mm/yyyy)*</label>
-            <input type="text" class="form-control" id="dateOfBirth"
+            <label for="dateOfBirth">Date of Birth *</label>
+            <input type="date" class="form-control" id="dateOfBirth"
                     #dateOfBirth="ngModel"
-                    pattern="[0-3]{1}[0-9]{1}[/]{1}[0-1]{1}[0-9]{1}[/]{1}[1-2]{1}[0-9]{1}[0-9]{1}[0-9]{1}"
                     required
                     [(ngModel)]="model.dateOfBirth" name="dateOfBirth"
                     >
@@ -130,10 +129,7 @@
                 <div *ngIf="dateOfBirth.errors.required">
                     Date of birth is required.
                 </div>
-                <div *ngIf="dateOfBirth.errors.pattern">
-                    Date of birth badly formated.
-                </div>
-                
+               
             </div>
 
         </div>

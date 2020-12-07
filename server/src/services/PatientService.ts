@@ -41,7 +41,7 @@ export class PatientService{
 
     @UseMiddleware(isAuth)
     async getPatient(patientId: PatientIdInput): Promise<PatientResponse | undefined>{
-        const patient = this.patientRepository.get(patientId.patientId);
+        const patient = await this.patientRepository.get(patientId.patientId);
         if(patient === undefined || patient === null){
             let errors: string | any[] = [];
             errors.push({

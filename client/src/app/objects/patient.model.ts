@@ -3,8 +3,8 @@ export class Patient {
     lastName:string;
     insuranceNumber:number;
     address:string;
-    phoneNumber:number;
-    dateOfBirth:string;
+    phoneNumber:string;
+    dateOfBirth:Date;
     gender:string;
     maritalStatus:string;
     externalDoctor?:string;

@@ -49,9 +49,8 @@
                 <p-dropdown [options]="types"  optionValue="value" optionLabel="label" placeholder="Select a Type"  formControlName="type" required></p-dropdown>
             </div>
             <div class="p-field">
-                <label for="phone">Phone</label>
-                <input type="number" pInputText formControlName="phone" required>
-               <!--- <p-inputMask mask="(999) 999-9999" formControlName="phone" required></p-inputMask>-->
+                <label for="phoneNumber">Phone</label>
+               <p-inputMask mask="(999) 999-9999" formControlName="phoneNumber" required></p-inputMask>
             </div>
             <div class="p-field">
                 <label for="bipperExtension">Bipper Extension</label>

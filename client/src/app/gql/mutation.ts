@@ -69,7 +69,7 @@ mutation registerPatient($patient: PatientInput!) {
     $nextOfKin: String!
     $maritalStatus: String!
     $gender: String!
-    $phoneNumber: Float!
+    $phoneNumber: String!
     $address: String!
     $patientId: Float!) {
       registerPatient(
