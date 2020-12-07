@@ -61,9 +61,8 @@ export class AuthenticationService {
 
 
     });
-
-
   }
+  
   registerPatient(patient: Patient): void {
     this.apollo.mutate({
       mutation: registerPatient,
