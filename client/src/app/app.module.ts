@@ -27,6 +27,8 @@ import {DropdownModule} from 'primeng/dropdown';
 import { FooterComponent } from './footer/footer.component';
 import { MessagesComponent } from './messages/messages.component';
 import {ToastModule} from 'primeng/toast';
+import {CardModule} from 'primeng/card';
+
 import { MessageService } from 'primeng/api';
 @NgModule({
   declarations: [
@@ -57,7 +59,8 @@ import { MessageService } from 'primeng/api';
     InputNumberModule,
     DropdownModule,
     BrowserAnimationsModule,
-    ToastModule
+    ToastModule,
+    CardModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

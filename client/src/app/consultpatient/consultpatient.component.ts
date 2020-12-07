@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PatientService } from '../services/patient.service';
 import {Patient} from '../objects/patient.model'
+import { CustomMessageService } from '../services/message.service';
+import { timeStamp } from 'console';
+
 
 @Component({
   selector: 'app-consultpatient',
@@ -11,21 +14,38 @@ import {Patient} from '../objects/patient.model'
 export class ConsultpatientComponent implements OnInit {
   patient: Patient ;
   id:number;
+  submitted:boolean;
 
-  constructor(private patientserice: PatientService, ) {
-    this.patient=null;
+  constructor(private patientserice: PatientService,private customMessageService: CustomMessageService ) {
+
   }
   ngOnInit() {
   }
 
   findPatient(): void{
-    console.log(this.id);
-    this.patientserice.patientInfo(this.id)
-    
-    /* .subscribe(
-      (data) => this.patient=data,
-     (error) => console.log("could not find patient")
-    )*/
+   this.patientserice.patientInfo(this.id).valueChanges.subscribe({
+      next: data => {
+        const x = data.data['patientInfo'];
+        let jsonObj: any = JSON.parse(JSON.stringify(x));
+        this.patient = <Patient>jsonObj;
+        if (this.patient!=null) {
+          this.customMessageService.setSuccess("Here is the file of  "+this.patient.firstName);  
+          this.submitted=true; 
+          
+        }
+        else {
+          this.customMessageService.setError("Coulnd't find this patient");
+          this.submitted=false;
+         
+        }
+      },
+      error: err => { console.error('Patient search error:' + err);
+     this.customMessageService.setError("Coulnd't find this patient");
+     this.submitted=false;
+   
+
+    }
+    });;
   }
 
 

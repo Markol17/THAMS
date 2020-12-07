@@ -1,7 +1,69 @@
+<div class="p-inputgroup consult">
+  <span class="p-inputgroup-addon ">Enter an ID:</span>
+  <input type="number" [(ngModel)]="id" pInputText class="p-inputtext-sm" placeholder="id">
+  <button pButton type="button" pRipple label="Search" (click)="findPatient()" class="p-button-success"></button>
+</div>
 
-
-  <div class="p-inputgroup consult">
-      <span class="p-inputgroup-addon ">Enter an ID:</span>
-      <input type="number" [(ngModel)]="id" pInputText class="p-inputtext-sm"  placeholder="id">
-      <button pButton type="button" pRipple label="Search" (click)="findPatient()"class="p-button-success"></button>         
-  </div>
+<div *ngIf="submitted==true" class="consult">
+  <p-card styleClass="p-card-shadow ">
+    <p-header>
+      <label class="title">File of patient {{patient.firstName}}</label>
+    </p-header>
+    <div class="p-fluid" >
+      <div class="p-field" *ngIf="patient.firstName!=null">
+        <label class="lab">First Name: {{patient.firstName}}</label>
+      </div>
+      <div class="p-field" *ngIf="patient.lastName!=null">
+        <label class="lab">Last Name: {{patient.lastName}}</label>
+      </div>
+      <div class="p-field" *ngIf="patient.insuranceNumber!=null">
+        <label class="lab">Insurance number: {{patient.insuranceNumber}}</label>
+      </div>
+      <div class="p-field" *ngIf="patient.address!=null">
+        <label class="lab">Address {{patient.address}}</label>
+      </div>
+      <div class="p-field" *ngIf="patient.dateOfBirth!=null">
+        <label class="lab">Date of Birth: {{patient.dateOfBirth}}</label>
+      </div>
+      <div class="p-field" *ngIf="patient.gender!=null">
+        <label class="lab">Gender: {{patient.gender}}</label>
+      </div>
+      <div class="p-field" *ngIf="patient.maritalStatus!=null">
+        <label class="lab">Marital Status: {{patient.maritalStatus}}</label>
+      </div>
+      <div class="p-field" *ngIf="patient.externalDoctor!=null">
+        <label class="lab">External Doctor: {{patient.externalDoctor}}</label>
+      </div>
+      <div class="p-field" *ngIf="patient.nextOfKin!=null">
+        <label class="lab">Next of Kin: {{patient.nextOfKin}}</label>
+      </div>
+      <div class="p-field" *ngIf="patient.privateInsuranceNumber!=null">
+        <label class="lab">Private Insurance Number: {{patient.privateInsuranceNumber}}</label>
+      </div>
+      <div class="p-field" *ngIf="patient.roomNumber!=null">
+        <label class="lab">Room Number: {{patient.roomNumber}}</label>
+      </div>
+      <div class="p-field" *ngIf="patient.bedNumber!=null">
+        <label class="lab">Bed Number: {{patient.bedNumber}}</label>
+      </div>
+      <div class="p-field" *ngIf="patient.isAdmitted!=null">
+        <label class="lab" *ngIf="patient.isAdmitted==true">Is this patient admitted: yes</label>
+        <label class="lab" *ngIf="patient.isAdmitted==false">Is this patient admitted: no</label>
+      </div>
+      <div class="p-field" *ngIf="patient.divisionId!=null">
+        <label class="lab">Division Id: {{patient.divisionId}}</label>
+      </div>
+      <div class="p-field" *ngIf="patient.createdAt!=null">
+        <label class="lab">Account created on: {{patient.createdAt}}</label>
+      </div>
+      <div class="p-field" *ngIf="patient.updatedAt!=null">
+        <label class="lab">Account updated on: {{patient.updatedAt}}</label>
+      </div>
+    </div>
+    <ng-template pTemplate="footer">
+      <p-button label="Update File" icon="pi pi-user-edit"></p-button>
+      <p-button class="right-button" label="Prescribe" icon="pi pi-heart" styleClass="p-button-secondary" ></p-button>
+      <p-button class="right-button" label="Discharge" icon="pi pi-sign-out" styleClass="p-button-help" ></p-button>
+    </ng-template>
+  </p-card>
+</div>
