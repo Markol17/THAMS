@@ -40,7 +40,7 @@ export class Division extends BaseEntity {
   location: string;
 
   @Field()
-  @UpdateDateColumn()
+  @Column()
   numBeds: number;
 
   @Field()
