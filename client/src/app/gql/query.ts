@@ -10,6 +10,7 @@ export const patientInfo = gql`
         firstName
         lastName
         address
+        divisionId
         phoneNumber
         dateOfBirth
         gender
@@ -17,6 +18,7 @@ export const patientInfo = gql`
         externalDoctor
         nextOfKin
         privateInsuranceNumber
+        isAdmitted
       }
     }
   }
@@ -71,6 +73,8 @@ export const patients = gql`
         externalDoctor
         nextOfKin
         privateInsuranceNumber
+        divisionId
+        isAdmitted
       }
     }
   }

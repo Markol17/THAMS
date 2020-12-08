@@ -4,7 +4,8 @@
         <ng-template let-p pTemplate="item">
             <div class="product-item">
                 <div class="product-list-detail">
-                    <h5 class="p-mb-2">{{p.firstName}} {{p.lastName}}</h5>
+                    <h5 class="p-mb-2">{{p.firstName}} {{p.lastName}} </h5>
+                    <h6  class="p-mb-2" *ngIf="p.divsionId!=null && p.isAdmitted!=null">divsion : {{p.divsionId}} Admitted : {{p.isAdmitted}}</h6>
                     <i class="pi pi-tag product-category-icon"></i>
                     <span class="product-category">{{p.id}}</span>
                 </div>
