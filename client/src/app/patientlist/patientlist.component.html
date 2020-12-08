@@ -1,0 +1,14 @@
+<div class="table">
+    <p-orderList  [value]="patients" header="List of Patients" filterBy="firstName"
+        filterPlaceholder="Filter by name">
+        <ng-template let-p pTemplate="item">
+            <div class="product-item">
+                <div class="product-list-detail">
+                    <h5 class="p-mb-2">{{p.firstName}} {{p.lastName}}</h5>
+                    <i class="pi pi-tag product-category-icon"></i>
+                    <span class="product-category">{{p.id}}</span>
+                </div>
+            </div>
+        </ng-template>
+    </p-orderList>
+</div>

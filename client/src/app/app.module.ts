@@ -31,6 +31,7 @@ import {CardModule} from 'primeng/card';
 
 import { MessageService } from 'primeng/api';
 import {OrderListModule} from 'primeng/orderlist';
+import { PatientlistComponent } from './patientlist/patientlist.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +44,8 @@ import {OrderListModule} from 'primeng/orderlist';
     HeaderComponent,
     RegisterpatientComponent,
     FooterComponent,
-    MessagesComponent
+    MessagesComponent,
+    PatientlistComponent,
   ],
   imports: [
     InputMaskModule,

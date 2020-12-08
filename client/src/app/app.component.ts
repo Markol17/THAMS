@@ -11,6 +11,7 @@ export class AppComponent {
   title = 'thams';
 
   header:boolean=false;
+  patients: boolean=false;
   constructor(private router: Router, private auth:AuthenticationService){
       router.events.forEach((event)=>{
         if(event instanceof NavigationStart){
@@ -20,7 +21,14 @@ export class AppComponent {
           else{
             this.header=true;
           }
+          if(event['url']=='/app-consultpatient' || event['url']=='/app-requestpatient'){
+            this.patients=true;
+          }
+          else{
+            this.patients=false;
+          }
         }
+        
       })
   }
 }

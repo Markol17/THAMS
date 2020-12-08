@@ -4,7 +4,7 @@ import gql from "graphql-tag";
 export const patientInfo=gql
 `query patientInfo($patient:PatientIdInput!) {
     patientInfo(options:$patient){
-        patient{
+      patient{
           id
           insuranceNumber
           firstName
@@ -17,7 +17,8 @@ export const patientInfo=gql
           externalDoctor
           nextOfKin
           privateInsuranceNumber
-        }
+      }
+        
     }
 }`;
 
@@ -35,8 +36,8 @@ export const divisioinInfo=gql
 }`;
 
 export const patients=gql
-`query patientInfo($patient:PatientIdInput!) {
-    patientInfo(options:$patient){
+`query patients {
+    patients{
           id
           insuranceNumber
           firstName
