@@ -34,11 +34,11 @@ export class Prescription extends BaseEntity {
 	@Column()
 	methodOfAdministration: string;
 
-	@Field(() => String)
+	@Field()
 	@Column()
 	startDate: Date;
 
-	@Field(() => String)
+	@Field()
 	@Column()
 	endDate: Date;
 

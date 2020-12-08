@@ -57,11 +57,11 @@ export class StaffMember extends BaseEntity {
 	@Column()
 	type: Type;
 
-	@Field(() => String)
+	@Field()
 	@CreateDateColumn()
 	createdAt: Date;
 
-	@Field(() => String)
+	@Field()
 	@UpdateDateColumn()
 	updatedAt: Date;
 
