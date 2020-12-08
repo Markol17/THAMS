@@ -1,21 +1,22 @@
-import {EntityRepository, EntityManager} from "typeorm";
-import {StaffMember} from "../entities/StaffMember";
+import { Division } from '../entities/Division';
+import { DivisionInput } from '../resolvers/inputTypes/DivisionInput';
+import { EntityRepository, Repository } from 'typeorm';
 
-@EntityRepository()
-export class DivisionRepository {
+@EntityRepository(Division)
+export class DivisionRepository extends Repository<Division> {
+	async getById(divisionId: number): Promise<Division | undefined> {
+		return await this.findOne(divisionId);
+	}
 
-    constructor(private manager: EntityManager) {
-    }
-
-    createAndSaveStaffMember(email: string, firstName: string, lastName: string, phoneNumber: string, bipperExtension: number, hashedPassword: string): Promise<StaffMember>{
-        const staffMember = new StaffMember();
-        staffMember.email = email;
-        staffMember.firstName = firstName;
-        staffMember.lastName = lastName;
-        staffMember.phoneNumber = phoneNumber;
-        staffMember.bipperExtension = bipperExtension;
-        staffMember.password = hashedPassword;
-        return this.manager.save(staffMember);
-    }
-
+	async createAndSaveDivision(attributes: DivisionInput): Promise<Division> {
+		const { name, description, chargeNurseId, location, numBeds, phoneNumber } = attributes;
+		const division = new Division();
+		division.name = name;
+		division.description = description;
+		division.chargeNurseId = chargeNurseId;
+		division.location = location;
+		division.numBeds = numBeds;
+		division.phoneNumber = phoneNumber;
+		return await this.save(division);
+	}
 }

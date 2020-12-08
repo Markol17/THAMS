@@ -30,6 +30,8 @@ import {ToastModule} from 'primeng/toast';
 import {CardModule} from 'primeng/card';
 
 import { MessageService } from 'primeng/api';
+import {OrderListModule} from 'primeng/orderlist';
+import { PatientlistComponent } from './patientlist/patientlist.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +44,8 @@ import { MessageService } from 'primeng/api';
     HeaderComponent,
     RegisterpatientComponent,
     FooterComponent,
-    MessagesComponent
+    MessagesComponent,
+    PatientlistComponent,
   ],
   imports: [
     InputMaskModule,
@@ -60,7 +63,8 @@ import { MessageService } from 'primeng/api';
     DropdownModule,
     BrowserAnimationsModule,
     ToastModule,
-    CardModule
+    CardModule,
+    OrderListModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

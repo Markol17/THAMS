@@ -1,21 +1,33 @@
-import {EntityRepository, EntityManager} from "typeorm";
-import {StaffMember} from "../entities/StaffMember";
+import { StaffMemberInput } from '../resolvers/inputTypes/StaffMemberInput';
+import { EntityRepository, Repository } from 'typeorm';
+import { StaffMember } from '../entities/StaffMember';
 
-@EntityRepository()
-export class StaffMemberRepository {
+@EntityRepository(StaffMember)
+export class StaffMemberRepository extends Repository<StaffMember> {
+	async getByStaffMemberId(id: number): Promise<StaffMember | undefined> {
+		return await this.findOne(id);
+	}
 
-    constructor(private manager: EntityManager) {
-    }
+	async createAndSaveStaffMember(attributes: StaffMemberInput): Promise<StaffMember | void> {
+		const { email, firstName, lastName, phoneNumber, bipperExtension, type, password } = attributes;
+		const staffMember = new StaffMember();
+		staffMember.email = email;
+		staffMember.firstName = firstName;
+		staffMember.lastName = lastName;
+		staffMember.phoneNumber = phoneNumber;
+		staffMember.bipperExtension = bipperExtension;
+		staffMember.password = password;
+		staffMember.type = type;
+		try {
+			return await this.save(staffMember);
+		} catch (err) {
+			if (err.code === '23505') {
+				return;
+			}
+		}
+	}
 
-    createAndSaveStaffMember(email: string, firstName: string, lastName: string, phoneNumber: string, bipperExtension: number, hashedPassword: string): Promise<StaffMember>{
-        const staffMember = new StaffMember();
-        staffMember.email = email;
-        staffMember.firstName = firstName;
-        staffMember.lastName = lastName;
-        staffMember.phoneNumber = phoneNumber;
-        staffMember.bipperExtension = bipperExtension;
-        staffMember.password = hashedPassword;
-        return this.manager.save(staffMember);
-    }
-
+	async getByStaffMemberEmail(email: string): Promise<StaffMember | undefined> {
+		return await this.findOne({ where: { email: email } });
+	}
 }

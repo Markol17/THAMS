@@ -13,6 +13,8 @@
     font-weight: 400;
 }
 
+
+
 .title{
     font-size: 30px;
     margin-left: 20px;
@@ -23,3 +25,31 @@
 .right-button{
     margin-left: 5px;;
 }
+
+
+.product-item {
+    display: flex;
+    align-items: center;
+    padding: .5rem;
+    width: 100%;
+}
+
+    .product-list-detail {
+        flex: 1 1 0;
+    }
+
+    .product-list-action {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    .product-category-icon {
+        vertical-align: middle;
+        margin-right: .5rem;
+    }
+
+    .product-category {
+        vertical-align: middle;
+        line-height: 1;
+    }
