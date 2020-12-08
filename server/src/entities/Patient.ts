@@ -1,14 +1,14 @@
 import { ObjectType, Field } from 'type-graphql';
 import {
-  Entity,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
-  Column,
-  BaseEntity,
-  OneToMany,
-  ManyToOne,
-  JoinColumn,
+	Entity,
+	PrimaryGeneratedColumn,
+	CreateDateColumn,
+	UpdateDateColumn,
+	Column,
+	BaseEntity,
+	OneToMany,
+	ManyToOne,
+	JoinColumn,
 } from 'typeorm';
 import { Division } from './Division';
 import { Prescription } from './Prescription';
@@ -18,87 +18,87 @@ import { StaffMemberPatient } from './StaffMemberPatient';
 @ObjectType()
 @Entity()
 export class Patient extends BaseEntity {
-  @Field()
-  @PrimaryGeneratedColumn()
-  id: number;
+	@Field()
+	@PrimaryGeneratedColumn()
+	id: number;
 
-  @Field()
-  @Column()
-  insuranceNumber: number;
+	@Field()
+	@Column()
+	insuranceNumber: number;
 
-  @Field()
-  @Column()
-  firstName: string;
+	@Field()
+	@Column()
+	firstName: string;
 
-  @Field()
-  @Column()
-  lastName: string;
+	@Field()
+	@Column()
+	lastName: string;
 
-  @Field()
-  @Column()
-  address: string;
+	@Field()
+	@Column()
+	address: string;
 
-  @Field()
-  @Column()
-  phoneNumber: string;
-  
-  @Field(() => String)
-  @Column()
-  dateOfBirth: Date;
+	@Field()
+	@Column()
+	phoneNumber: string;
 
-  @Field()
-  @Column()
-  gender: string;
+	@Field(() => String)
+	@Column()
+	dateOfBirth: Date;
 
-  @Field()
-  @Column()
-  maritalStatus: string;
+	@Field()
+	@Column()
+	gender: string;
 
-  @Field()
-  @Column({ nullable: true })
-  externalDoctor: string;
+	@Field()
+	@Column()
+	maritalStatus: string;
 
-  @Field()
-  @Column()
-  nextOfKin: string;
+	@Field()
+	@Column({ nullable: true })
+	externalDoctor: string;
 
-  @Field()
-  @Column({ nullable: true })
-  privateInsuranceNumber: number;
+	@Field()
+	@Column()
+	nextOfKin: string;
 
-  @Field()
-  @Column({ nullable: true })
-  roomNumber: number;
+	@Field()
+	@Column({ nullable: true })
+	privateInsuranceNumber: number;
 
-  @Field()
-  @Column({ nullable: true })
-  bedNumber: number;
-  
-  @Field()
-  @Column({default: false})
-  isAdmitted: boolean;
+	@Field()
+	@Column({ nullable: true })
+	roomNumber: number;
 
-  @Field(() => String)
-  @CreateDateColumn()
-  createdAt: Date;
+	@Field()
+	@Column({ nullable: true })
+	bedNumber: number;
 
-  @Field(() => String)
-  @UpdateDateColumn()
-  updatedAt: Date;
+	@Field()
+	@Column({ default: false })
+	isAdmitted: boolean;
 
-  @Field(() => StaffMember)
-  localDoctor: StaffMember;
+	@Field(() => String)
+	@CreateDateColumn()
+	createdAt: Date;
 
-  @OneToMany(() => StaffMemberPatient, (smp) => smp.staffMember)
-  staffMemberConnection: Promise<StaffMemberPatient[]>;
+	@Field(() => String)
+	@UpdateDateColumn()
+	updatedAt: Date;
 
-  @OneToMany(() => Prescription, prescription => prescription.patient)
-  prescriptions: Prescription[];
+	@Field(() => StaffMember)
+	localDoctor: StaffMember;
 
-  @Field()
-  @Column({nullable: true})
-  divisionId: number;
-  @ManyToOne(() => Division, division => division.patients)
-  @JoinColumn({name: "divisionId"})
-  division: Division;
+	@OneToMany(() => StaffMemberPatient, (smp) => smp.staffMember)
+	staffMemberConnection: Promise<StaffMemberPatient[]>;
+
+	@OneToMany(() => Prescription, (prescription) => prescription.patient)
+	prescriptions: Prescription[];
+
+	@Field()
+	@Column({ nullable: true })
+	divisionId: number;
+	@ManyToOne(() => Division, (division) => division.patients)
+	@JoinColumn({ name: 'divisionId' })
+	division: Division;
 }
