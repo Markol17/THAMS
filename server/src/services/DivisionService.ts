@@ -54,7 +54,7 @@ export class DivisionService {
 				errors: [
 					{
 						field: 'division',
-						message: 'Division does not exists',
+						message: 'Division does not exist',
 					},
 				],
 			};
