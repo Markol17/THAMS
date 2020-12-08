@@ -37,22 +37,20 @@ export const divisioinInfo = gql`
 `;
 
 export const patients = gql`
-  query patientInfo($patient: PatientIdInput!) {
-    patientInfo(options: $patient) {
-      patient {
-        id
-        insuranceNumber
-        firstName
-        lastName
-        address
-        phoneNumber
-        dateOfBirth
-        gender
-        maritalStatus
-        externalDoctor
-        nextOfKin
-        privateInsuranceNumber
-      }
+  query patients {
+    patients {
+      id
+      insuranceNumber
+      firstName
+      lastName
+      address
+      phoneNumber
+      dateOfBirth
+      gender
+      maritalStatus
+      externalDoctor
+      nextOfKin
+      privateInsuranceNumber
     }
   }
 `;

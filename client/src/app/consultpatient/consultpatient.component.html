@@ -3,24 +3,7 @@
   <input type="number" [(ngModel)]="id" pInputText class="p-inputtext-sm" placeholder="id">
   <button pButton type="button" pRipple label="Search" (click)="findPatient()" class="p-button-success"></button>
 </div>
-<!---
-<p-orderList [value]="patients" [listStyle]="{'height':'auto'}" header="List of Patients" filterBy="firstName" filterPlaceholder="Filter by name" dragdrop="true">
-  <ng-template let-p pTemplate="item">
-      <div class="product-item">
-          <div class="product-list-detail">
-              <h5 class="p-mb-2">{{p.firstName}} {{p.lastName}}</h5>
-              <i class="pi pi-tag product-category-icon"></i>
-              <span class="product-category">{{p.id}}</span>
-          </div>
-          <div class="product-list-action">
-              <h6 class="p-mb-2">{{p.isAdmitted}}</h6>
-              <span>Test</span>
-          </div>
-      </div>
-  </ng-template>
-</p-orderList>-->
-
-<div *ngIf="submitted==true" class="consult">
+<div *ngIf="submitted==true && edit==false" class="consult">
   <p-card styleClass="p-card-shadow ">
     <p-header>
       <label class="title">File of patient {{patient.firstName}}</label>
@@ -37,6 +20,9 @@
       </div>
       <div class="p-field" *ngIf="patient.address!=null">
         <label class="lab">Address {{patient.address}}</label>
+      </div>
+      <div class="p-field" *ngIf="patient.phoneNumber!=null">
+        <label class="lab">Address {{patient.phoneNumber}}</label>
       </div>
       <div class="p-field" *ngIf="patient.dateOfBirth!=null">
         <label class="lab">Date of Birth: {{patient.dateOfBirth}}</label>
@@ -77,9 +63,81 @@
       </div>
     </div>
     <ng-template pTemplate="footer">
-      <p-button label="Update File" icon="pi pi-user-edit"></p-button>
-      <p-button class="right-button" label="Prescribe" icon="pi pi-heart" styleClass="p-button-secondary" ></p-button>
-      <p-button class="right-button" label="Discharge" icon="pi pi-sign-out" styleClass="p-button-help" ></p-button>
+      <p-button label="Update File" icon="pi pi-user-edit" (click)="edit=true"></p-button>
+     <span *ngIf="isDoctor()"><p-button class="right-button" label="Prescribe"  icon="pi pi-heart" styleClass="p-button-secondary" ></p-button></span> 
+     <span *ngIf="isNurseAndAdmitted()"><p-button class="right-button" label="Discharge"  icon="pi pi-sign-out" styleClass="p-button-help" ></p-button></span>
+    </ng-template>
+  </p-card>
+</div>
+
+
+<div *ngIf="submitted==true && edit==true" class="consult">
+  <p-card styleClass="p-card-shadow ">
+    <p-header>
+      <label class="title">File of patient {{patient.firstName}}</label>
+    </p-header>
+    <div class="p-fluid" >
+      <div class="p-inputgroup" *ngIf="patient.firstName!=null">
+        <label class="lab">First Name: {{patient.firstName}} </label>
+      </div>
+      <div class="p-inputgroup"  *ngIf="patient.lastName!=null">
+        <label class="lab">Last Name: {{patient.lastName}} </label>
+      </div>
+      <div class="p-inputgroup"  *ngIf="patient.insuranceNumber!=null">
+        <label class="lab">Insurance number: {{patient.insuranceNumber}}  </label>
+      </div>
+      <div class="p-inputgroup"  *ngIf="patient.address!=null">
+        <label class="lab">Address </label>
+        <input type="text" pInputText [(ngModel)]="updatePatient.address"/>
+      </div>
+      <div class="p-field" *ngIf="patient.phoneNumber!=null">
+        <label class="lab">Phone: {{updatePatient.phoneNumber}}</label>
+      </div>
+      <div class="p-inputgroup" *ngIf="patient.dateOfBirth!=null">
+        <label class="lab">Date of Birth: {{patient.dateOfBirth}}  </label>
+      </div>
+      <div class="p-inputgroup"  *ngIf="patient.gender!=null">
+        <label class="lab">Gender: </label>
+        <p-dropdown [options]="genders"  optionValue="value" [(ngModel)]="updatePatient.gender" optionLabel="label" placeholder=patient.gender></p-dropdown>
+      </div>
+      <div class="p-inputgroup"  *ngIf="patient.maritalStatus!=null">
+        <label class="lab">Marital Status: </label>
+        <p-dropdown [options]="maritals"  optionValue="value" [(ngModel)]="updatePatient.maritalStatus"  placeholder=patient.maritalStatus optionLabel="label"></p-dropdown>
+      </div>
+      <div class="p-inputgroup"  *ngIf="patient.externalDoctor!=null"> 
+        <label class="lab">External Doctor:  {{patient.externalDoctor}}  </label>
+      </div>
+      <div class="p-inputgroup"  *ngIf="patient.nextOfKin!=null">
+        <label class="lab">Next of Kin: </label>
+        <input type="text" pInputText [(ngModel)]="updatePatient.nextOfKin"/>
+      </div>
+      <div class="p-inputgroup"  *ngIf="patient.privateInsuranceNumber!=null">
+        <label class="lab">Private Insurance Number: </label>
+        <input type="number" pInputText [(ngModel)]="updatePatient.privateInsuranceNumber"/>
+      </div>
+      <div class="p-inputgroup" *ngIf="patient.roomNumber!=null">
+        <label class="lab">Room Number: {{patient.roomNumber}}</label>
+      </div>
+      <div class="p-inputgroup"  *ngIf="patient.bedNumber!=null">
+        <label class="lab">Bed Number: {{patient.bedNumber}}</label>
+      </div>
+      <div class="p-inputgroup"  *ngIf="patient.isAdmitted!=null">
+        <label class="lab" *ngIf="patient.isAdmitted==true">Is this patient admitted: yes</label>
+        <label class="lab" *ngIf="patient.isAdmitted==false">Is this patient admitted: no</label>
+      </div>
+      <div class="p-inputgroup"  *ngIf="patient.divisionId!=null">
+        <label class="lab">Division Id: {{patient.divisionId}}</label>
+      </div>
+      <div class="p-inputgroup" *ngIf="patient.createdAt!=null">
+        <label class="lab">Account created on: {{patient.createdAt}}</label>
+      </div>
+      <div class="p-inputgroup"  *ngIf="patient.updatedAt!=null">
+        <label class="lab">Account updated on: {{patient.updatedAt}}</label>
+      </div>
+    </div>
+    <ng-template pTemplate="footer">
+      <p-button label="Submit Update" icon="pi pi-check" styleClass="p-button-success" (click)="updatePatientInfo()"></p-button>
+      <p-button label="Cancel" (click)="edit=false" icon="pi pi-times" class="right-button" styleClass="p-button-secondary" ></p-button>
     </ng-template>
   </p-card>
 </div>

@@ -4,6 +4,9 @@ import {Patient} from '../objects/patient.model'
 import { CustomMessageService } from '../services/message.service';
 import { timeStamp } from 'console';
 import { patients } from '../gql/query';
+import { AuthenticationService } from '../services/authentication.service';
+import { SelectItem } from 'primeng/api';
+import { UpdatePatient } from '../objects/update-patient.model';
 
 
 @Component({
@@ -14,26 +17,45 @@ import { patients } from '../gql/query';
 
 export class ConsultpatientComponent implements OnInit {
   patient: Patient ;
-  patients: Patient[];
+  updatePatient: UpdatePatient;
   id:number;
   submitted:boolean;
+  edit:boolean=false;
+  role: string;
+  maritals: SelectItem[];
+  genders: SelectItem[];
+  
+  constructor(private patientserice: PatientService,private customMessageService: CustomMessageService, private authservice: AuthenticationService ) {
+   this.updatePatient = new UpdatePatient;
+    this.genders = [
+      { label: "male", value: "Male" },
+      { label: "female", value: "Female" },
+      { label: "I would rather not say", value: "I would rather not say" }
+    ];
 
-  constructor(private patientserice: PatientService,private customMessageService: CustomMessageService ) {
+    this.maritals = [
+      { label: "single", value: "single" },
+      { label: "married", value: "married" },
+      { label: "widowed", value: "widowed" },
+      { label: "divorced", value: "divorced"},
+      { label: "separated", value: "separated"},
+      { label: "registered partnership", value: "registered partnership"}
 
+    ]
   }
   ngOnInit() {
-    this.patientserice.getPatients().valueChanges.subscribe({
-      next: data => {
-        const x = data.data['patients'];
-        let jsonObj: any = JSON.parse(JSON.stringify(x));
-        this.patients = <Patient[]>jsonObj;
-        console.log(this.patients);
-  
-      },
-      error: err => { console.error('Patient list error:' + err);
-     this.customMessageService.setError("Patient list could not load");
+    this.role = this.authservice.getRole();
+  }
+
+  isNurseAndAdmitted():boolean{
+    if(this.role == "ChargeNurse" && this.patient.isAdmitted){
+      return true;
     }
-    })
+    return false;
+  }
+
+  isDoctor():boolean{
+    return this.role=="Doctor";
   }
 
   findPatient(): void{
@@ -41,10 +63,17 @@ export class ConsultpatientComponent implements OnInit {
       next: data => {
         console.log(data);
         const x = data.data['patientInfo'];
-        let jsonObj: any = JSON.parse(JSON.stringify(x));
+        let jsonObj: any = JSON.parse(JSON.stringify(x['patient']));
         this.patient = <Patient>jsonObj;
         if (this.patient!=null) {
-          this.customMessageService.setSuccess("Here is the file of  "+this.patient.firstName);  
+          this.customMessageService.setSuccess("Here is the file of  "+this.patient.firstName);
+          this.updatePatient.patientId = this.patient.id; 
+          this.updatePatient.address = this.patient.address;
+          this.updatePatient.phoneNumber = this.patient.phoneNumber;
+          this.updatePatient.maritalStatus = this.patient.maritalStatus;
+          this.updatePatient.gender = this.patient.gender;
+          this.updatePatient.nextOfKin = this.patient.nextOfKin;
+          this.updatePatient.privateInsuranceNumber = this.patient.privateInsuranceNumber;
           this.submitted=true; 
           
         }
@@ -61,6 +90,11 @@ export class ConsultpatientComponent implements OnInit {
 
     }
     });;
+  }
+
+  updatePatientInfo(): void{
+    this.patientserice.updatePatient(this.updatePatient);
+    
   }
 
 

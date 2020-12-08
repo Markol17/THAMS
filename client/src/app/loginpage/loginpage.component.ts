@@ -52,7 +52,6 @@ export class LoginpageComponent implements OnInit {
 
 
   registerStaff() {
-    console.log(this.staffMember.get('type').value);
     this.registeredStaff = new StaffMember(this.staffMember.value)
     this.authService.registerStaff(this.registeredStaff);
   }

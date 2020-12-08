@@ -8,6 +8,7 @@ import { registerStaff, registerPatient, loginStaff, logout } from "../gql/mutat
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Router } from '@angular/router';
 import { CustomMessageService } from './message.service';
+import { PatientService } from './patient.service';
 
 
 @Injectable({
@@ -15,7 +16,7 @@ import { CustomMessageService } from './message.service';
 })
 export class AuthenticationService {
 
-  constructor(private apollo: Apollo, private router: Router, private customMessageService:CustomMessageService) { }
+  constructor(private patientservice: PatientService,private apollo: Apollo, private router: Router, private customMessageService:CustomMessageService) { }
 
   private currentPatient: Patient;
   private currentUser: StaffMember;
@@ -45,17 +46,16 @@ export class AuthenticationService {
         const x = data.data['registerStaff'];
         let jsonObj: any = JSON.parse(JSON.stringify(x['staffMember']))
         this.currentUser = <StaffMember>jsonObj;
-        console.log(this.currentUser)
+   
       },
       error: err => {console.error('Error Registering: ' + err);
       this.customMessageService.setError("There was an error registering");},
       complete: () => {
         if (this.currentUser) {
-          console.log("Register complete");
           this.customMessageService.setSuccess("Hello "+this.currentUser.firstName);
           this.isLoggedIn = true;
+          this.patientservice.reload();
           this.router.navigate(['home']);
-
         }
         else {
         this.customMessageService.setError("There was and error registering");
@@ -75,12 +75,12 @@ export class AuthenticationService {
       }
     }).subscribe({
       next: data => {
-        console.log(data);
+   
         this.currentPatient = null;
         const x = data.data['registerPatient'];
         let jsonObj: any = JSON.parse(JSON.stringify(x['patient']))
         this.currentPatient = <Patient>jsonObj;
-        console.log(this.currentPatient)
+ 
       },
       error: err => {
         console.error('Error Registering Patient: ' + err);
@@ -88,13 +88,13 @@ export class AuthenticationService {
       },
       complete: () => {
         if (this.currentPatient) {
-          console.log("Register patient complete");
+  
           this.customMessageService.setSuccess(this.currentPatient.firstName+ " " +this.currentPatient.lastName + " has been register "+ " with id :"+ this.currentPatient.id);
           this.router.navigate(['app-consultpatient']);
         }
         else {
           this.customMessageService.setError("Register patient failed");
-          console.log("Register patient failed");
+
         }
 
       },
@@ -115,14 +115,14 @@ export class AuthenticationService {
         const x = data.data['loginStaff'];
         let jsonObj: any = JSON.parse(JSON.stringify(x['staffMember']))
         this.currentUser = <StaffMember>jsonObj;
-        console.log(this.currentUser)
+
       },
       error: err => { console.error('Error logging in: ' + err);
      this.customMessageService.setError("There was an error logging in");
     },
       complete: () => {
         if (this.currentUser) {
-          console.log("Login complete");
+   
           this.customMessageService.setSuccess("Hello "+this.currentUser.firstName);
           this.isLoggedIn = true;
           this.router.navigate(['home']);
@@ -130,7 +130,7 @@ export class AuthenticationService {
         }
         else {
         this.customMessageService.setError("There was and error logging in");
-          console.log("Login failed");
+  
 
         }
 
@@ -154,8 +154,7 @@ export class AuthenticationService {
       error: err => {console.error('Error Logging out: ' + err);
       this.customMessageService.setError("There was an error logging out");},
       complete: () => {
-        console.log("Logout completed");
-  
+        console.log("Logged out");
         this.apollo.client.resetStore();
         this.isLoggedIn = false;
         this.role = null;
