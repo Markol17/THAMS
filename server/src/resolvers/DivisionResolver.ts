@@ -1,5 +1,4 @@
-import { Resolver, Mutation, Arg, UseMiddleware, Query, FieldResolver, Root } from 'type-graphql';
-import { isAuth } from '../middleware/isAuth';
+import { Resolver, Mutation, Arg, Query, FieldResolver, Root } from 'type-graphql';
 import { Division } from '../entities/Division';
 import { DivisionIdInput, DivisionInput } from './inputTypes/DivisionInput';
 import { PatientIdDivisionIdInput } from './inputTypes/PatientInput';
@@ -20,7 +19,6 @@ export class DivisionResolver {
 		return await divisionService.getDivision(options);
 	}
 
-	@UseMiddleware(isAuth)
 	@Query(() => PatientResponse)
 	async requestList(@Arg('options') options: DivisionIdInput): Promise<PatientResponse> {
 		const divisionService = new DivisionService();
@@ -33,14 +31,12 @@ export class DivisionResolver {
 		return await divisionService.addDivision(options);
 	}
 
-	@UseMiddleware(isAuth)
 	@Mutation(() => PatientResponse)
 	async admitPatient(@Arg('options') options: PatientIdDivisionIdInput): Promise<PatientResponse> {
 		const divisionService = new DivisionService();
 		return await divisionService.admitPatient(options);
 	}
 
-	@UseMiddleware(isAuth)
 	@Mutation(() => PatientResponse)
 	async requestPatientAdmission(@Arg('options') options: PatientIdDivisionIdInput): Promise<PatientResponse> {
 		const divisionService = new DivisionService();

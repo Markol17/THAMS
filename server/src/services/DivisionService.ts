@@ -44,16 +44,19 @@ export class DivisionService {
 		return { division };
 	}
 
+	@UseMiddleware(isAuth)
 	async getRequestList(attributes: DivisionIdInput): Promise<PatientResponse> {
 		const patient = await this.patientRepository.getAllByDivisionId(attributes.divisionId);
 		return { patient };
 	}
 
+	@UseMiddleware(isAuth)
 	async admitPatient(attributes: PatientIdDivisionIdInput): Promise<PatientResponse> {
 		const patient = await this.patientRepository.updateAndSaveAdmission(attributes);
 		return { patient };
 	}
 
+	@UseMiddleware(isAuth)
 	async requestPatientAdmission(attributes: PatientIdDivisionIdInput): Promise<PatientResponse> {
 		const patient = await this.patientRepository.updateAndSaveAdmissionRequest(attributes);
 		return { patient };
