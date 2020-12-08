@@ -1,5 +1,3 @@
-import { isAuth } from '../middleware/isAuth';
-import { UseMiddleware } from 'type-graphql';
 import { getCustomRepository } from 'typeorm';
 import argon2 from 'argon2';
 import { COOKIE_NAME } from '../constants';
@@ -20,7 +18,6 @@ export class StaffMemberService {
 		this.patientRepository = getCustomRepository(PatientRepository);
 	}
 
-	@UseMiddleware(isAuth)
 	async getCurrentStaffMember(context: Context): Promise<StaffMemberResponse> {
 		const { userId } = context.req.session.userId;
 		if (!userId) {
@@ -97,7 +94,6 @@ export class StaffMemberService {
 		};
 	}
 
-	@UseMiddleware(isAuth)
 	async dischargePatient(ids: PatientIdInput): Promise<PatientResponse> {
 		const patient = await this.patientRepository.dischargePatient(ids);
 		// TODO: validation
@@ -108,7 +104,6 @@ export class StaffMemberService {
 		return { patient };
 	}
 
-	@UseMiddleware(isAuth)
 	async logoutStaff(context: Context): Promise<boolean> {
 		return await new Promise((resolve) =>
 			context.req.session.destroy((err: any) => {

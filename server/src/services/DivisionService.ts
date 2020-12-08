@@ -1,5 +1,3 @@
-import { isAuth } from '../middleware/isAuth';
-import { UseMiddleware } from 'type-graphql';
 import { DivisionIdInput, DivisionInput } from '../resolvers/inputTypes/DivisionInput';
 import { getCustomRepository } from 'typeorm';
 import { DivisionRepository } from '../repositories/DivisionRepository';
@@ -17,7 +15,6 @@ export class DivisionService {
 		this.patientRepository = getCustomRepository(PatientRepository);
 	}
 
-	@UseMiddleware(isAuth)
 	async getDivision(divisionId: number): Promise<DivisionResponse> {
 		const division = await this.divisionRepository.getById(divisionId);
 		if (division === undefined || division === null) {
@@ -44,13 +41,11 @@ export class DivisionService {
 		return { division };
 	}
 
-	@UseMiddleware(isAuth)
 	async getRequestList(attributes: DivisionIdInput): Promise<PatientsResponse> {
 		const patients = await this.patientRepository.getAllByDivisionId(attributes.divisionId);
 		return { patients };
 	}
 
-	@UseMiddleware(isAuth)
 	async admitPatient(attributes: PatientIdDivisionIdInput): Promise<PatientResponse> {
 		const divisionResponse = await this.getDivision(attributes.divisionId);
 		const division = divisionResponse.division;
@@ -79,7 +74,6 @@ export class DivisionService {
 		return { patient };
 	}
 
-	@UseMiddleware(isAuth)
 	async requestPatientAdmission(attributes: PatientIdDivisionIdInput): Promise<PatientResponse> {
 		const patient = await this.patientRepository.updateAndSaveAdmissionRequest(attributes);
 		return { patient };
