@@ -119,4 +119,8 @@ export class PatientRepository extends Repository<Patient> {
 		patient = result.raw[0];
 		return patient;
 	}
+
+	async getNumOfAdmittedPatients(divisionId: number): Promise<number> {
+		return await (await this.find({ where: { divisionId: divisionId, isAdmitted: true } })).length;
+	}
 }

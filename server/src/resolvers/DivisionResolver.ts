@@ -1,4 +1,4 @@
-import { Resolver, Mutation, Arg, UseMiddleware, Query } from 'type-graphql';
+import { Resolver, Mutation, Arg, UseMiddleware, Query, FieldResolver, Root } from 'type-graphql';
 import { isAuth } from '../middleware/isAuth';
 import { Division } from '../entities/Division';
 import { DivisionIdInput, DivisionInput } from './inputTypes/DivisionInput';
@@ -8,6 +8,12 @@ import { DivisionService } from '../services/DivisionService';
 
 @Resolver(Division)
 export class DivisionResolver {
+	@FieldResolver(() => Boolean)
+	async isComplete(@Root() division: Division): Promise<Boolean> {
+		const divisionService = new DivisionService();
+		return await divisionService.getDivisionIsComplete(division);
+	}
+
 	@Query(() => DivisionResponse)
 	async divisionInfo(@Arg('options') options: DivisionIdInput): Promise<DivisionResponse> {
 		const divisionService = new DivisionService();

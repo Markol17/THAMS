@@ -6,6 +6,7 @@ import { DivisionRepository } from '../repositories/DivisionRepository';
 import { DivisionResponse, PatientResponse } from '../resolvers/inputTypes/Response';
 import { PatientRepository } from '../repositories/PatientRepository';
 import { PatientIdDivisionIdInput } from '../resolvers/inputTypes/PatientInput';
+import { Division } from '../entities/Division';
 
 export class DivisionService {
 	divisionRepository: DivisionRepository;
@@ -56,5 +57,10 @@ export class DivisionService {
 	async requestPatientAdmission(attributes: PatientIdDivisionIdInput): Promise<PatientResponse> {
 		const patient = await this.patientRepository.updateAndSaveAdmissionRequest(attributes);
 		return { patient };
+	}
+
+	async getDivisionIsComplete(division: Division): Promise<Boolean> {
+		const numBedsTaken = await this.patientRepository.getNumOfAdmittedPatients(division.id);
+		return division.numBeds === numBedsTaken ? true : false;
 	}
 }
