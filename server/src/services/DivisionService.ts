@@ -59,7 +59,7 @@ export class DivisionService {
 				],
 			};
 		}
-		const isDivisionFull = this.getDivisionIsComplete(division!);
+		const isDivisionFull = await this.getDivisionIsComplete(division);
 		if (isDivisionFull) {
 			return {
 				errors: [
