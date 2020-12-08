@@ -7,12 +7,16 @@ import { AuthenticationService } from '../services/authentication.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor(private auth: AuthenticationService) { }
   type:string = null;
+  name:string = null;
+  constructor(private auth: AuthenticationService) { 
+    this.type = this.auth.getRole();
+    this.name = this.auth.getName();
+  }
+
 
   ngOnInit(): void {
-    this.type = this.auth.getRole();
+
   }
 
   isChargeNurse(){

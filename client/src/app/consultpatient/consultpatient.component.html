@@ -3,6 +3,22 @@
   <input type="number" [(ngModel)]="id" pInputText class="p-inputtext-sm" placeholder="id">
   <button pButton type="button" pRipple label="Search" (click)="findPatient()" class="p-button-success"></button>
 </div>
+<!---
+<p-orderList [value]="patients" [listStyle]="{'height':'auto'}" header="List of Patients" filterBy="firstName" filterPlaceholder="Filter by name" dragdrop="true">
+  <ng-template let-p pTemplate="item">
+      <div class="product-item">
+          <div class="product-list-detail">
+              <h5 class="p-mb-2">{{p.firstName}} {{p.lastName}}</h5>
+              <i class="pi pi-tag product-category-icon"></i>
+              <span class="product-category">{{p.id}}</span>
+          </div>
+          <div class="product-list-action">
+              <h6 class="p-mb-2">{{p.isAdmitted}}</h6>
+              <span>Test</span>
+          </div>
+      </div>
+  </ng-template>
+</p-orderList>-->
 
 <div *ngIf="submitted==true" class="consult">
   <p-card styleClass="p-card-shadow ">

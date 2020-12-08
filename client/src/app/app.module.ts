@@ -30,6 +30,7 @@ import {ToastModule} from 'primeng/toast';
 import {CardModule} from 'primeng/card';
 
 import { MessageService } from 'primeng/api';
+import {OrderListModule} from 'primeng/orderlist';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +61,8 @@ import { MessageService } from 'primeng/api';
     DropdownModule,
     BrowserAnimationsModule,
     ToastModule,
-    CardModule
+    CardModule,
+    OrderListModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]

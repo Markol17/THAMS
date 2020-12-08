@@ -3,6 +3,7 @@ import { PatientService } from '../services/patient.service';
 import {Patient} from '../objects/patient.model'
 import { CustomMessageService } from '../services/message.service';
 import { timeStamp } from 'console';
+import { patients } from '../gql/query';
 
 
 @Component({
@@ -13,6 +14,7 @@ import { timeStamp } from 'console';
 
 export class ConsultpatientComponent implements OnInit {
   patient: Patient ;
+  patients: Patient[];
   id:number;
   submitted:boolean;
 
@@ -20,6 +22,18 @@ export class ConsultpatientComponent implements OnInit {
 
   }
   ngOnInit() {
+    this.patientserice.getPatients().valueChanges.subscribe({
+      next: data => {
+        const x = data.data['patients'];
+        let jsonObj: any = JSON.parse(JSON.stringify(x));
+        this.patients = <Patient[]>jsonObj;
+        console.log(this.patients);
+  
+      },
+      error: err => { console.error('Patient list error:' + err);
+     this.customMessageService.setError("Patient list could not load");
+    }
+    })
   }
 
   findPatient(): void{

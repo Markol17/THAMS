@@ -5,7 +5,7 @@
     
     <div class="p-col-12 p-md-4">
         <div class="p-inputgroup loginElems">
-            <span class="p-inputgroup-addon ">Username:</span>
+            <span class="p-inputgroup-addon ">Email:</span>
             <input type="email" pInputText [(ngModel)]="email" class="p-inputtext-lg" placeholder="username">
         </div>
     </div>
@@ -21,9 +21,6 @@
         <button pButton type="button" label="Register" class="p-button-secondary button"
             (click)="register=true"></button>
     </div>
-</div>
-<div *ngIf="register==true">
-
 </div>
 
 <div class="register" *ngIf="register==true">
