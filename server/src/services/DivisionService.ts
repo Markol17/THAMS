@@ -61,6 +61,7 @@ export class DivisionService {
 		}
 		const isDivisionFull = await this.getDivisionIsComplete(division);
 		if (isDivisionFull) {
+			// could call requestPatientAdmission but no need because it is being called in the frontend
 			return {
 				errors: [
 					{

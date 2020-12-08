@@ -48,7 +48,6 @@ export class Division extends BaseEntity {
 	phoneNumber: string;
 
 	@Field()
-	@Column({ default: false })
 	isComplete: boolean; //status
 
 	@Field(() => String)

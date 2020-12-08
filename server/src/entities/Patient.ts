@@ -42,7 +42,7 @@ export class Patient extends BaseEntity {
 	@Column()
 	phoneNumber: string;
 
-	@Field(() => String)
+	@Field()
 	@Column()
 	dateOfBirth: Date;
 
@@ -78,11 +78,11 @@ export class Patient extends BaseEntity {
 	@Column({ default: false })
 	isAdmitted: boolean;
 
-	@Field(() => String)
+	@Field()
 	@CreateDateColumn()
 	createdAt: Date;
 
-	@Field(() => String)
+	@Field()
 	@UpdateDateColumn()
 	updatedAt: Date;
 
@@ -95,7 +95,7 @@ export class Patient extends BaseEntity {
 	@OneToMany(() => Prescription, (prescription) => prescription.patient)
 	prescriptions: Prescription[];
 
-	@Field()
+	@Field({ nullable: true })
 	@Column({ nullable: true })
 	divisionId: number;
 	@ManyToOne(() => Division, (division) => division.patients)

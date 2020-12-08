@@ -25,13 +25,13 @@ export class PatientInput {
 	@Field()
 	maritalStatus: string;
 
-	@Field()
+	@Field({ nullable: true })
 	externalDoctor: string;
 
 	@Field()
 	nextOfKin: string;
 
-	@Field()
+	@Field({ nullable: true })
 	privateInsuranceNumber: number;
 }
 
