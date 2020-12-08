@@ -25,51 +25,53 @@ export const patientInfo = gql`
 export const divisioinInfo = gql`
   query divisionInfo($div: DivisionIdInput!) {
     divisionInfo(options: $div) {
-        division{
-            id
-            name
-            description
-            location
-            numBeds
-            phoneNumber
-            isComplete
-        }
+      division {
+        id
+        name
+        description
+        location
+        numBeds
+        phoneNumber
+        isComplete
+      }
     }
-}`;
+  }
+`;
 
-export const requestList=gql
-`query requestList($id: DivisionIdInput!) {
+export const requestList = gql`
+  query requestList($id: DivisionIdInput!) {
     requestList(options: $id) {
-        patient{
-            id
-            insuranceNumber
-            firstName
-            lastName
-            address
-            phoneNumber
-            dateOfBirth
-            gender 
-
-        }    
+      patient {
+        id
+        insuranceNumber
+        firstName
+        lastName
+        address
+        phoneNumber
+        dateOfBirth
+        gender
+      }
     }
-  }`;  
-
+  }
+`;
 
 export const patients = gql`
   query patients {
     patients {
-      id
-      insuranceNumber
-      firstName
-      lastName
-      address
-      phoneNumber
-      dateOfBirth
-      gender
-      maritalStatus
-      externalDoctor
-      nextOfKin
-      privateInsuranceNumber
+      patients {
+        id
+        insuranceNumber
+        firstName
+        lastName
+        address
+        phoneNumber
+        dateOfBirth
+        gender
+        maritalStatus
+        externalDoctor
+        nextOfKin
+        privateInsuranceNumber
+      }
     }
   }
 `;
