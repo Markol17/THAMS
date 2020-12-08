@@ -1,97 +1,43 @@
-import {
-    Resolver,
-    Mutation,
-    Arg,
-    UseMiddleware,
-    Query,
-    Field,
-    ObjectType,
-  } from 'type-graphql';
-import { Patient } from '../entities/Patient';
+import { Resolver, Mutation, Arg, UseMiddleware, Query } from 'type-graphql';
 import { isAuth } from '../middleware/isAuth';
 import { Division } from '../entities/Division';
-import { FieldError } from './StaffMemberResolver';
-import { DivisionIdInput, DivisionInput } from './InputTypes/DivisionInput';
-import { getConnection } from 'typeorm';
-import { PatientIdDivisionIdInput } from './InputTypes/PatientInput';
+import { DivisionIdInput, DivisionInput } from './inputTypes/DivisionInput';
+import { PatientIdDivisionIdInput } from './inputTypes/PatientInput';
+import { DivisionResponse, PatientResponse } from './inputTypes/Response';
+import { DivisionService } from '../services/DivisionService';
 
-@ObjectType()
-export class DivisionResponse {
-  @Field(() => [FieldError], { nullable: true })
-  errors?: FieldError[];
+@Resolver(Division)
+export class DivisionResolver {
+	@Query(() => DivisionResponse)
+	async divisionInfo(@Arg('options') options: DivisionIdInput): Promise<DivisionResponse> {
+		const divisionService = new DivisionService();
+		return await divisionService.getDivision(options);
+	}
 
-  @Field(() => Division, { nullable: true })
-  division?: Division;
+	@UseMiddleware(isAuth)
+	@Query(() => PatientResponse)
+	async requestList(@Arg('options') options: DivisionIdInput): Promise<PatientResponse> {
+		const divisionService = new DivisionService();
+		return await divisionService.getRequestList(options);
+	}
+
+	@Mutation(() => DivisionResponse)
+	async createDivision(@Arg('options') options: DivisionInput): Promise<DivisionResponse> {
+		const divisionService = new DivisionService();
+		return await divisionService.addDivision(options);
+	}
+
+	@UseMiddleware(isAuth)
+	@Mutation(() => PatientResponse)
+	async admitPatient(@Arg('options') options: PatientIdDivisionIdInput): Promise<PatientResponse> {
+		const divisionService = new DivisionService();
+		return await divisionService.admitPatient(options);
+	}
+
+	@UseMiddleware(isAuth)
+	@Mutation(() => PatientResponse)
+	async requestPatientAdmission(@Arg('options') options: PatientIdDivisionIdInput): Promise<PatientResponse> {
+		const divisionService = new DivisionService();
+		return await divisionService.requestPatientAdmission(options);
+	}
 }
-
-  @Resolver(Division)
-  export class DivisionResolver {
-    static PrescriptionResolver: string | Function;
-
-    @UseMiddleware(isAuth)
-    @Query(() => Division, {nullable: true})
-    async divisionInfo(
-      @Arg('options') options: DivisionIdInput,
-    ){ return await Division.findOne({id: options.divisionId}); }
-
-    @UseMiddleware(isAuth)
-    @Query(() => [Patient], {nullable: true})
-    async requestList(
-      @Arg('options') options: DivisionIdInput,
-    ) { return await Patient.find({where: { divisionId: options.divisionId, isAdmitted: false} }); }
-  
-    @Mutation(() => DivisionResponse)
-    async createDivision(
-      @Arg('options') options: DivisionInput,
-    ): Promise<DivisionResponse> {
-        // const errors = validateDivisionRegister(options);
-        // if (errors) {
-        //   return { errors };
-        // }
-    
-        let division;
-          const result = await getConnection()
-            .createQueryBuilder()
-            .insert()
-            .into(Division)
-            .values({
-              name: options.name,
-              description: options.description,
-              chargeNurseId: options.chargeNurseId,
-              location: options.location,
-              numBeds: options.numBeds,
-              phoneNumber: options.phoneNumber,
-              isComplete: false
-            })
-            .returning('*')
-            .execute();
-            division = result.raw[0];
-    
-        return { division };
-    }
-
-    @UseMiddleware(isAuth)
-    @Mutation(() => Boolean)
-    async admitPatient(
-      @Arg('ids') ids: PatientIdDivisionIdInput,
-    ): Promise<Boolean> {
-        const { divisionId, patientId } = ids;
-        await Patient.update({id: patientId}, {divisionId: divisionId, isAdmitted: true});
-        return true;
-    }
-
-    @UseMiddleware(isAuth)
-    @Mutation(() => Boolean)
-    async requestPatientAdmission(
-      @Arg('ids') ids: PatientIdDivisionIdInput,
-    ): Promise<Boolean> {
-    //     const { divisionId, patientId } = ids;
-    //     const result = await Patient.update({id: patientId}, {divisionId: divisionId, isAdmitted: true});
-    //     const patient = result.raw[0];
-    //     return { patient };
-    const { divisionId, patientId } = ids;
-    await Patient.update({id: patientId}, {divisionId: divisionId, isAdmitted: false});
-    return true;
-    }
-  }
-  

@@ -1,67 +1,21 @@
-import {
-    Resolver,
-    Mutation,
-    Arg,
-    UseMiddleware,
-    Query,
-    Field,
-    ObjectType,
-  } from 'type-graphql';
-import { isAuth } from '../middleware/isAuth';
-import { Division } from '../entities/Division';
-import { FieldError } from './StaffMemberResolver';
-import { getConnection } from 'typeorm';
-import { PatientIdInput } from './InputTypes/PatientInput';
+import { Resolver, Mutation, Arg, Query } from 'type-graphql';
+import { PatientIdInput } from './inputTypes/PatientInput';
 import { Prescription } from '../entities/Prescription';
-import { addPrescriptionInput } from './InputTypes/PrescriptionInput';
+import { addPrescriptionInput } from './inputTypes/PrescriptionInput';
+import { PrescriptionService } from '../services/PrescriptionService';
+import { PrescriptionResponse } from './inputTypes/Response';
 
-@ObjectType()
-export class PrescriptionResponse {
-  @Field(() => [FieldError], { nullable: true })
-  errors?: FieldError[];
+@Resolver(Prescription)
+export class PrescriptionResolver {
+	@Query(() => PrescriptionResponse)
+	async patientPrescriptions(@Arg('options') options: PatientIdInput): Promise<PrescriptionResponse> {
+		const prescriptionService = new PrescriptionService();
+		return await prescriptionService.getPrescritions(options);
+	}
 
-  @Field(() => Division, { nullable: true })
-  prescription?: Prescription;
+	@Mutation(() => PrescriptionResponse)
+	async addPrescription(@Arg('options') options: addPrescriptionInput): Promise<PrescriptionResponse> {
+		const prescriptionService = new PrescriptionService();
+		return await prescriptionService.addPrescription(options);
+	}
 }
-
-  @Resolver(Prescription)
-  export class PrescriptionResolver {
-    @UseMiddleware(isAuth)
-    @Query(() => [Prescription], {nullable: true})
-    async patientPrescription(
-      @Arg('options') options: PatientIdInput,
-    ) { return await Prescription.find({where: { patientId: options.patientId} }); }
-  
-    @Mutation(() => PrescriptionResponse)
-    async addPrescription(
-      @Arg('options') options: addPrescriptionInput,
-    ): Promise<PrescriptionResponse> {
-        // need to do validation
-        // const errors = validateDivisionRegister(options);
-        // if (errors) {
-        //   return { errors };
-        // }
-
-    
-        let prescription;
-          const result = await getConnection()
-            .createQueryBuilder()
-            .insert()
-            .into(Prescription)
-            .values({
-              name: options.name,
-              unitsPerDay: options.unitsPerDay,
-              numAdministrationsPerDay: options.numAdministrationsPerDay,
-              methodOfAdministration: options.methodOfAdministration,
-              startDate: options.startDate,
-              endDate: options.endDate,
-              patientId: options.patientId
-            })
-            .returning('*')
-            .execute();
-            prescription = result.raw[0];
-    
-        return { prescription };
-    }
-  }
-  
