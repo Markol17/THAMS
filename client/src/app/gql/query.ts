@@ -41,7 +41,7 @@ export const divisioinInfo = gql`
 export const requestList = gql`
   query requestList($id: DivisionIdInput!) {
     requestList(options: $id) {
-      patient {
+      patients {
         id
         insuranceNumber
         firstName
