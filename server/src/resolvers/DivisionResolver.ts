@@ -21,7 +21,7 @@ export class DivisionResolver {
 		return await divisionService.getDivision(options.divisionId);
 	}
 
-	// @UseMiddleware(isAuth)
+	@UseMiddleware(isAuth)
 	@Query(() => PatientsResponse)
 	async requestList(@Arg('options') options: DivisionIdInput): Promise<PatientsResponse> {
 		const divisionService = new DivisionService();
