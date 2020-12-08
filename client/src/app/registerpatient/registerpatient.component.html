@@ -7,7 +7,7 @@
           <label for="firstName">Name*</label>
           <input type="text" class="form-control" id="firstName"
                 #firstName="ngModel"
-                pattern="[a-zA-z ]+"
+                pattern="[a-zA-z -]+"
                  required
                  [(ngModel)]="model.firstName" name="firstName"
                  >
@@ -159,7 +159,7 @@
             <input type="text" class="form-control" id="externalDoctor"
                     [(ngModel)]="model.externalDoctor" name="externalDoctor"
                     #externalDoctor="ngModel"
-                    pattern="[a-zA-z ]+"
+                    pattern="[a-zA-z -]+"
                     >
             
             <div *ngIf="externalDoctor.invalid && (externalDoctor.dirty )"

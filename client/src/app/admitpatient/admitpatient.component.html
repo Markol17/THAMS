@@ -1,1 +1,42 @@
-<p>admitpatient works!</p>
+<div class="p-inputgroup consult">
+
+    <span class="p-inputgroup-addon ">Enter a division ID:</span>
+    <input type="number" [(ngModel)]="divisionId" pInputText class="p-inputtext-sm"  placeholder="Division ID">
+
+    <button pButton type="button" pRipple label="Get request list" (click)="getRequestList()"class="p-button-success"></button>         
+</div>
+<div>
+    <div *ngFor="let patient of patientList" class="consult">
+        <p-card styleClass="p-card-shadow ">
+          <p-header>
+            <label class="title">File of patient id {{patient.id}}</label>
+          </p-header>
+          <div class="p-fluid" >
+            <div class="p-field" *ngIf="patient.firstName!=null">
+              <label class="lab">First Name: {{patient.firstName}}</label>
+            </div>
+            <div class="p-field" *ngIf="patient.lastName!=null">
+              <label class="lab">Last Name: {{patient.lastName}}</label>
+            </div>
+            <div class="p-field" *ngIf="patient.insuranceNumber!=null">
+              <label class="lab">Insurance number: {{patient.insuranceNumber}}</label>
+            </div>
+            <div class="p-field" *ngIf="patient.address!=null">
+              <label class="lab">Address: {{patient.address}}</label>
+            </div>
+            <div class="p-field" *ngIf="patient.dateOfBirth!=null">
+              <label class="lab">Date of Birth: {{patient.dateOfBirth}}</label>
+            </div>
+            <div class="p-field" *ngIf="patient.gender!=null">
+              <label class="lab">Gender: {{patient.gender}}</label>
+            </div>
+            <div class="p-field" *ngIf="patient.phoneNumber!=null">
+                <label class="lab">Phone number: {{patient.phoneNumber}}</label>
+            </div>
+          </div>
+          <ng-template pTemplate="footer">
+            <p-button label="Admit Patient" (click)="admit(patient.id)" icon="pi pi-user-edit"></p-button>
+          </ng-template>
+        </p-card>
+      </div>
+</div>

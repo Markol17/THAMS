@@ -10,7 +10,7 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class RegisterpatientComponent implements OnInit {
 
-  genders = ["male" , "Female", "I would rater say"];
+  genders = ["male" , "Female", "I would rater not say"];
 
   maritalsStatus = ["single","married","widowed","divorced","separated","registered partnership"];
 

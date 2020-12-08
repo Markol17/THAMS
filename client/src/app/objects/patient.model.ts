@@ -6,15 +6,15 @@ export class Patient {
     phoneNumber:string;
     dateOfBirth:Date;
     gender:string;
-    maritalStatus:string;
+    maritalStatus?:string;
     externalDoctor?:string;
     nextOfKin?:string;
     privateInsuranceNumber?:number;
     id?:number;
-    roomNumber:number;
-    bedNumber:number;
-    isAdmitted:boolean;
-    createdAt:string;
-    updatedAt:string;
-    divisionId:number;
+    roomNumber?:number;
+    bedNumber?:number;
+    isAdmitted?:boolean;
+    createdAt?:string;
+    updatedAt?:string;
+    divisionId?:number;
 }

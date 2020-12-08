@@ -1,0 +1,30 @@
+.consult{
+    margin-top: 2vw;
+    padding-top:2vw;
+    padding-right: 20vw;
+    padding-left: 20vw;
+    min-width: 250px;
+    zoom:1.2;
+}
+
+.lab{
+    font-size: large;
+    font-weight: 400;
+}
+
+.title{
+    font-size: 30px;
+    margin-left: 20px;
+    margin-top:5px;
+    font-family: sans-serif;
+}
+
+.right-button{
+    margin-left: 5px;;
+}
+
+.elems{
+    padding:5px;
+    width:100%;
+    height:auto;
+}

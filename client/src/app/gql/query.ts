@@ -31,4 +31,17 @@ export const divisioinInfo=gql
       isComplete
 }
 }`;
-  
+
+export const requestList=gql
+`query requestList($id: DivisionIdInput!) {
+    requestList(options: $id) {
+        id
+        insuranceNumber
+        firstName
+        lastName
+        address
+        phoneNumber
+        dateOfBirth
+        gender     
+  }
+  }`;  

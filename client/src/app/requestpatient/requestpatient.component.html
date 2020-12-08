@@ -1,15 +1,21 @@
-<div class="p-inputgroup consult">
+<div class=" consult">
 
-    
-        <span class="p-inputgroup-addon ">Enter an patient ID:</span>
-        <input type="number" [(ngModel)]="patientId" pInputText class="p-inputtext-sm"  placeholder="Patient ID">
-    
+    <div class="p-col-12 p-md-4">
+        <div class="p-inputgroup elems">
+            <span class="p-inputgroup-addon ">Enter a patient id:</span>
+            <input type="number" [(ngModel)]="patientId" pInputText class="p-inputtext-lg"  placeholder="Patient id">
+        </div >
+    </div>
+    <div class="p-col-12 p-md-4">
+        <div class="p-inputgroup elems">
+            <span class="p-inputgroup-addon p-inputtext-lg">Enter a division id:</span>
+            <input type="number" [(ngModel)]="divisionId" pInputText class="p-inputtext-lg"  placeholder="Division id">
+        </div>
+    </div>
+    <div class="elems">
+        <button pButton type="button" pRipple label="Add to division" (click)="addToRequestList()"class="p-button-success button"></button>  
+    </div>      
+</div>
+<div>
 
-    
-        <span class="p-inputgroup-addon ">Enter an  ID:</span>
-        <input type="number" [(ngModel)]="divisionId" pInputText class="p-inputtext-sm"  placeholder="Division ID">
-    
-
-    
-    <button pButton type="button" pRipple label="Add to division" (click)="addToRequestList()"class="p-button-success"></button>         
 </div>
