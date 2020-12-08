@@ -20,9 +20,18 @@
     position: absolute;
     left: 0px;
     height: 100%;
+    font-family: 'Courier New', Courier, monospace;
  }
 
- .information{
-    display: flex;
-    justify-content: center;
+ .elems{
+     zoom:1.5;
+     padding:10px;
+     font-family: 'Courier New', Courier, monospace;
+ }
+
+ .title{
+    zoom:1.5;
+    margin-top: 5vw;
+    margin-left:5px;
 }
+

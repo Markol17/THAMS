@@ -20,7 +20,7 @@ export class PatientlistComponent implements OnInit {
     this.patientserice.getPatients().valueChanges.subscribe({
       next: data => {
         const x = data.data['patients'];
-        let jsonObj: any = JSON.parse(JSON.stringify(x));
+        let jsonObj: any = JSON.parse(JSON.stringify(x['patients']));
         this.patients = <Patient[]>jsonObj;
         this.patientserice.reload();
   

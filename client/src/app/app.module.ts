@@ -32,6 +32,7 @@ import {CardModule} from 'primeng/card';
 import { MessageService } from 'primeng/api';
 import {OrderListModule} from 'primeng/orderlist';
 import { PatientlistComponent } from './patientlist/patientlist.component';
+import {PanelModule} from 'primeng/panel';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +65,9 @@ import { PatientlistComponent } from './patientlist/patientlist.component';
     BrowserAnimationsModule,
     ToastModule,
     CardModule,
-    OrderListModule
+    OrderListModule,
+    PanelModule
+    
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]
