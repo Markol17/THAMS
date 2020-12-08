@@ -5,7 +5,7 @@ import { StaffMemberInput } from './inputTypes/StaffMemberInput';
 import { PatientIdInput } from './inputTypes/PatientInput';
 import { StaffMemberService } from '../services/StaffMemberService';
 import { PatientResponse, StaffMemberResponse } from './inputTypes/Response';
-import { isAuth } from 'src/middleware/isAuth';
+import { isAuth } from '../middleware/isAuth';
 
 @Resolver(StaffMember)
 export class StaffMemberResolver {
