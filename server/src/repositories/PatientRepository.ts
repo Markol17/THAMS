@@ -47,8 +47,7 @@ export class PatientRepository extends Repository<Patient> {
 	}
 
 	async updateAndSavePatient(attributes: UpdatePatientInput): Promise<Patient> {
-		let patient;
-		const result = await getConnection()
+		const patient = await getConnection()
 			.createQueryBuilder()
 			.update(Patient)
 			.set({
@@ -60,8 +59,11 @@ export class PatientRepository extends Repository<Patient> {
 				privateInsuranceNumber: attributes.privateInsuranceNumber,
 			})
 			.where('id = :id', { id: attributes.patientId })
-			.execute();
-		patient = result.raw[0];
+			.returning('*')
+			.execute()
+			.then((response) => {
+				return response.raw[0];
+			});
 
 		return patient;
 	}
@@ -73,8 +75,7 @@ export class PatientRepository extends Repository<Patient> {
 	async dischargePatient(attributes: PatientIdInput): Promise<Patient> {
 		// this.patientRepository.update({id: ids.patientId}, {divisionId: -1, isAdmitted: false});
 		const { patientId } = attributes;
-		let patient;
-		const result = await getConnection()
+		const patient = await getConnection()
 			.createQueryBuilder()
 			.update(Patient)
 			.set({
@@ -82,16 +83,18 @@ export class PatientRepository extends Repository<Patient> {
 				isAdmitted: false,
 			})
 			.where('id = :id', { id: patientId })
-			.execute();
-		patient = result.raw[0];
+			.returning('*')
+			.execute()
+			.then((response) => {
+				return response.raw[0];
+			});
 
 		return patient;
 	}
 
 	async updateAndSaveAdmission(ids: PatientIdDivisionIdInput): Promise<Patient> {
 		const { divisionId, patientId } = ids;
-		let patient;
-		const result = await getConnection()
+		const patient = await getConnection()
 			.createQueryBuilder()
 			.update(Patient)
 			.set({
@@ -99,15 +102,17 @@ export class PatientRepository extends Repository<Patient> {
 				isAdmitted: true,
 			})
 			.where('id = :id', { id: patientId })
-			.execute();
-		patient = result.raw[0];
+			.returning('*')
+			.execute()
+			.then((response) => {
+				return response.raw[0];
+			});
 		return patient;
 	}
 
 	async updateAndSaveAdmissionRequest(ids: PatientIdDivisionIdInput): Promise<Patient> {
 		const { divisionId, patientId } = ids;
-		let patient;
-		const result = await getConnection()
+		const patient = await getConnection()
 			.createQueryBuilder()
 			.update(Patient)
 			.set({
@@ -115,12 +120,16 @@ export class PatientRepository extends Repository<Patient> {
 				isAdmitted: false,
 			})
 			.where('id = :id', { id: patientId })
-			.execute();
-		patient = result.raw[0];
+			.returning('*')
+			.execute()
+			.then((response) => {
+				return response.raw[0];
+			});
 		return patient;
 	}
 
 	async getNumOfAdmittedPatients(divisionId: number): Promise<number> {
-		return await (await this.find({ where: { divisionId: divisionId, isAdmitted: true } })).length;
+		const patients = await this.find({ where: { divisionId: divisionId, isAdmitted: true } });
+		return patients.length;
 	}
 }

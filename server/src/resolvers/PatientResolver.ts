@@ -2,12 +2,12 @@ import { Resolver, Mutation, Arg, Query } from 'type-graphql';
 import { PatientIdInput, PatientInput, UpdatePatientInput } from './inputTypes/PatientInput';
 import { Patient } from '../entities/Patient';
 import { PatientService } from '../services/PatientService';
-import { PatientResponse } from './inputTypes/Response';
+import { PatientResponse, PatientsResponse } from './inputTypes/Response';
 
 @Resolver(Patient)
 export class PatientResolver {
-	@Query(() => PatientResponse, { nullable: true })
-	async patients(): Promise<PatientResponse> {
+	@Query(() => PatientsResponse, { nullable: true })
+	async patients(): Promise<PatientsResponse> {
 		const patientService = new PatientService();
 		return await patientService.getPatients();
 	}

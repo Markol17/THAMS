@@ -4,7 +4,7 @@ import { validatePatientRegister } from '../utils/validatePatientRegister';
 import { UseMiddleware } from 'type-graphql';
 import { getCustomRepository } from 'typeorm';
 import { PatientRepository } from '../repositories/PatientRepository';
-import { PatientResponse } from '../resolvers/inputTypes/Response';
+import { PatientResponse, PatientsResponse } from '../resolvers/inputTypes/Response';
 
 export class PatientService {
 	patientRepository: PatientRepository;
@@ -14,7 +14,7 @@ export class PatientService {
 	}
 
 	@UseMiddleware(isAuth)
-	async getPatients(): Promise<PatientResponse> {
+	async getPatients(): Promise<PatientsResponse> {
 		const patient = await this.patientRepository.getAll();
 		return { patient };
 	}

@@ -4,7 +4,7 @@ import { UseMiddleware } from 'type-graphql';
 import { getCustomRepository } from 'typeorm';
 import { PrescriptionRepository } from '../repositories/PrescriptionRepository';
 import { addPrescriptionInput } from '../resolvers/inputTypes/PrescriptionInput';
-import { PrescriptionResponse } from '../resolvers/inputTypes/Response';
+import { PrescriptionResponse, PrescriptionsResponse } from '../resolvers/inputTypes/Response';
 
 export class PrescriptionService {
 	prescriptionRepository: PrescriptionRepository;
@@ -14,7 +14,7 @@ export class PrescriptionService {
 	}
 
 	@UseMiddleware(isAuth)
-	async getPrescritions(options: PatientIdInput): Promise<PrescriptionResponse> {
+	async getPrescritions(options: PatientIdInput): Promise<PrescriptionsResponse> {
 		const prescription = await this.prescriptionRepository.getAllByPatientId(options.patientId);
 		if (prescription === undefined || prescription === null || prescription.length === 0) {
 			return {

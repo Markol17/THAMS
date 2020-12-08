@@ -2,7 +2,7 @@ import { Resolver, Mutation, Arg, Query, FieldResolver, Root } from 'type-graphq
 import { Division } from '../entities/Division';
 import { DivisionIdInput, DivisionInput } from './inputTypes/DivisionInput';
 import { PatientIdDivisionIdInput } from './inputTypes/PatientInput';
-import { DivisionResponse, PatientResponse } from './inputTypes/Response';
+import { DivisionResponse, PatientResponse, PatientsResponse } from './inputTypes/Response';
 import { DivisionService } from '../services/DivisionService';
 
 @Resolver(Division)
@@ -19,8 +19,8 @@ export class DivisionResolver {
 		return await divisionService.getDivision(options);
 	}
 
-	@Query(() => PatientResponse)
-	async requestList(@Arg('options') options: DivisionIdInput): Promise<PatientResponse> {
+	@Query(() => PatientsResponse)
+	async requestList(@Arg('options') options: DivisionIdInput): Promise<PatientsResponse> {
 		const divisionService = new DivisionService();
 		return await divisionService.getRequestList(options);
 	}

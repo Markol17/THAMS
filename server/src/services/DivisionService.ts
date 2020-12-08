@@ -3,7 +3,7 @@ import { UseMiddleware } from 'type-graphql';
 import { DivisionIdInput, DivisionInput } from '../resolvers/inputTypes/DivisionInput';
 import { getCustomRepository } from 'typeorm';
 import { DivisionRepository } from '../repositories/DivisionRepository';
-import { DivisionResponse, PatientResponse } from '../resolvers/inputTypes/Response';
+import { DivisionResponse, PatientResponse, PatientsResponse } from '../resolvers/inputTypes/Response';
 import { PatientRepository } from '../repositories/PatientRepository';
 import { PatientIdDivisionIdInput } from '../resolvers/inputTypes/PatientInput';
 import { Division } from '../entities/Division';
@@ -45,7 +45,7 @@ export class DivisionService {
 	}
 
 	@UseMiddleware(isAuth)
-	async getRequestList(attributes: DivisionIdInput): Promise<PatientResponse> {
+	async getRequestList(attributes: DivisionIdInput): Promise<PatientsResponse> {
 		const patient = await this.patientRepository.getAllByDivisionId(attributes.divisionId);
 		return { patient };
 	}
@@ -64,6 +64,9 @@ export class DivisionService {
 
 	async getDivisionIsComplete(division: Division): Promise<Boolean> {
 		const numBedsTaken = await this.patientRepository.getNumOfAdmittedPatients(division.id);
-		return division.numBeds === numBedsTaken ? true : false;
+		if (numBedsTaken >= division.numBeds) {
+			return true;
+		}
+		return false;
 	}
 }

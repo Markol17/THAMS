@@ -27,8 +27,17 @@ export class PatientResponse {
 	@Field(() => [FieldError], { nullable: true })
 	errors?: FieldError[];
 
-	@Field(() => Patient || [Patient], { nullable: true })
-	patient?: Patient | Patient[];
+	@Field(() => Patient, { nullable: true })
+	patient?: Patient;
+}
+
+@ObjectType()
+export class PatientsResponse {
+	@Field(() => [FieldError], { nullable: true })
+	errors?: FieldError[];
+
+	@Field(() => [Patient], { nullable: true })
+	patient?: Patient[];
 }
 
 @ObjectType()
@@ -36,8 +45,17 @@ export class PrescriptionResponse {
 	@Field(() => [FieldError], { nullable: true })
 	errors?: FieldError[];
 
-	@Field(() => Prescription || [Prescription], { nullable: true })
-	prescription?: Prescription | Prescription[];
+	@Field(() => Prescription, { nullable: true })
+	prescription?: Prescription;
+}
+
+@ObjectType()
+export class PrescriptionsResponse {
+	@Field(() => [FieldError], { nullable: true })
+	errors?: FieldError[];
+
+	@Field(() => [Prescription], { nullable: true })
+	prescription?: Prescription[];
 }
 
 @ObjectType()
@@ -46,5 +64,14 @@ export class DivisionResponse {
 	errors?: FieldError[];
 
 	@Field(() => Division, { nullable: true })
-	division?: Division | Division[];
+	division?: Division;
+}
+
+@ObjectType()
+export class DivisionsResponse {
+	@Field(() => [FieldError], { nullable: true })
+	errors?: FieldError[];
+
+	@Field(() => [Division], { nullable: true })
+	division?: Division[];
 }
