@@ -65,7 +65,7 @@ export class DivisionService {
 				errors: [
 					{
 						field: 'division',
-						message: 'Division is alrady full',
+						message: 'Division is already full',
 					},
 				],
 			};
