@@ -95,7 +95,7 @@ export class Patient extends BaseEntity {
 	@OneToMany(() => Prescription, (prescription) => prescription.patient)
 	prescriptions: Prescription[];
 
-	@Field()
+	@Field({ nullable: true })
 	@Column({ nullable: true })
 	divisionId: number;
 	@ManyToOne(() => Division, (division) => division.patients)
