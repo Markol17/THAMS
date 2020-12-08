@@ -75,46 +75,35 @@ mutation registerPatient($patient: PatientInput!) {
 
   export const admitPatient=gql`
   mutation admitPatient($patientDivision: PatientIdDivisionIdInput!) {
-    admitPatient(ids: $patientDivision) 
+    admitPatient(options: $patientDivision) {
+      patient{
+        firstName
+        lastName
+        insuranceNumber
+        address
+        phoneNumber
+        dateOfBirth
+        gender
+        id
+      }
+    }
   }`;
 
   export const requestPatientAdmission=gql`
   mutation requestPatientAdmission($patientDivision: PatientIdDivisionIdInput!) {
-    requestPatientAdmission(ids: $patientDivision) 
+    requestPatientAdmission(options: $patientDivision) {
+      patient{
+        firstName
+        lastName
+        insuranceNumber
+        address
+        phoneNumber
+        dateOfBirth
+        gender
+        id
+      }
+    }
   }`;
 
-
-  /*export const updatePatient=gql`
-  mutation registerPatient(
-    $privateInsuranceNumber: Float!
-    $nextOfKin: String!
-    $maritalStatus: String!
-    $gender: String!
-    $phoneNumber: String!
-    $address: String!
-    $patientId: Float!) {
-      registerPatient(
-        privateInsuranceNumber: $privateInsuranceNumber
-        nextOfKin: $nextOfKin
-        maritalStatus: $maritalStatus
-        gender: $gender
-        phoneNumber: $phoneNumber
-        address: $address
-        patientId: $patientId) {
-        patient{
-          firstName
-          lastName
-          insuranceNumber
-          address
-          phoneNumber
-          dateOfBirth
-          gender
-          martialStatus
-          externalDoctor
-          nextOfKin
-          privateInsuranceNumber
-        }
-      }
-    }`;*/
 
  

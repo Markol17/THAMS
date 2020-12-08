@@ -25,10 +25,10 @@ export class RequestpatientComponent implements OnInit {
       console.log(data);
       const x = data.data['divisionInfo'];
       console.log(x);
-      let jsonObj: any = JSON.parse(JSON.stringify(x));
+      let jsonObj: any = JSON.parse(JSON.stringify(x['division']));
       this.division = <Division>jsonObj;
       console.log(this.division);
-      if(/**!this.division.isComplete*/ false){
+      if(!this.division.isComplete){
         this.admission.admitPatient(this.patientId,this.divisionId,this.division);
       }else{
         this.admission.requestPatientAdmission(this.patientId,this.divisionId,this.division);

@@ -25,28 +25,33 @@ export const patientInfo = gql`
 export const divisioinInfo = gql`
   query divisionInfo($div: DivisionIdInput!) {
     divisionInfo(options: $div) {
-      id
-      name
-      description
-      location
-      numBeds
-      phoneNumber
-      isComplete
-}
+        division{
+            id
+            name
+            description
+            location
+            numBeds
+            phoneNumber
+            isComplete
+        }
+    }
 }`;
 
 export const requestList=gql
 `query requestList($id: DivisionIdInput!) {
     requestList(options: $id) {
-        id
-        insuranceNumber
-        firstName
-        lastName
-        address
-        phoneNumber
-        dateOfBirth
-        gender     
-  }
+        patient{
+            id
+            insuranceNumber
+            firstName
+            lastName
+            address
+            phoneNumber
+            dateOfBirth
+            gender 
+
+        }    
+    }
   }`;  
 
 

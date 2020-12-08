@@ -23,7 +23,7 @@ export class AdmitpatientComponent implements OnInit {
   }
 
   getRequestList(){
-    this.patientList = this.admission.requestList(this.divisionId);
+    /*this.patientList =*/ this.admission.requestList(this.divisionId);
     console.log("patientList: "+this.patientList);
   }
 
