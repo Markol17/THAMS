@@ -18,8 +18,8 @@ export class DivisionService {
 	}
 
 	@UseMiddleware(isAuth)
-	async getDivision(attributes: DivisionIdInput): Promise<DivisionResponse> {
-		const division = await this.divisionRepository.getById(attributes.divisionId);
+	async getDivision(divisionId: number): Promise<DivisionResponse> {
+		const division = await this.divisionRepository.getById(divisionId);
 		if (division === undefined || division === null) {
 			return {
 				errors: [
@@ -46,12 +46,35 @@ export class DivisionService {
 
 	@UseMiddleware(isAuth)
 	async getRequestList(attributes: DivisionIdInput): Promise<PatientsResponse> {
-		const patient = await this.patientRepository.getAllByDivisionId(attributes.divisionId);
-		return { patient };
+		const patients = await this.patientRepository.getAllByDivisionId(attributes.divisionId);
+		return { patients };
 	}
 
 	@UseMiddleware(isAuth)
 	async admitPatient(attributes: PatientIdDivisionIdInput): Promise<PatientResponse> {
+		const divisionResponse = await this.getDivision(attributes.divisionId);
+		const division = divisionResponse.division;
+		if (!division) {
+			return {
+				errors: [
+					{
+						field: 'division',
+						message: 'Division does not exists',
+					},
+				],
+			};
+		}
+		const isDivisionFull = this.getDivisionIsComplete(division!);
+		if (isDivisionFull) {
+			return {
+				errors: [
+					{
+						field: 'division',
+						message: 'Division is alrady full',
+					},
+				],
+			};
+		}
 		const patient = await this.patientRepository.updateAndSaveAdmission(attributes);
 		return { patient };
 	}

@@ -37,7 +37,7 @@ export class PatientsResponse {
 	errors?: FieldError[];
 
 	@Field(() => [Patient], { nullable: true })
-	patient?: Patient[];
+	patients?: Patient[];
 }
 
 @ObjectType()
@@ -55,7 +55,7 @@ export class PrescriptionsResponse {
 	errors?: FieldError[];
 
 	@Field(() => [Prescription], { nullable: true })
-	prescription?: Prescription[];
+	prescriptions?: Prescription[];
 }
 
 @ObjectType()
@@ -73,5 +73,5 @@ export class DivisionsResponse {
 	errors?: FieldError[];
 
 	@Field(() => [Division], { nullable: true })
-	division?: Division[];
+	divisions?: Division[];
 }

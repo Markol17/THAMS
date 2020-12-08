@@ -16,7 +16,7 @@ export class DivisionResolver {
 	@Query(() => DivisionResponse)
 	async divisionInfo(@Arg('options') options: DivisionIdInput): Promise<DivisionResponse> {
 		const divisionService = new DivisionService();
-		return await divisionService.getDivision(options);
+		return await divisionService.getDivision(options.divisionId);
 	}
 
 	@Query(() => PatientsResponse)

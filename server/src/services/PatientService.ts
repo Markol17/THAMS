@@ -15,8 +15,8 @@ export class PatientService {
 
 	@UseMiddleware(isAuth)
 	async getPatients(): Promise<PatientsResponse> {
-		const patient = await this.patientRepository.getAll();
-		return { patient };
+		const patients = await this.patientRepository.getAll();
+		return { patients };
 	}
 
 	@UseMiddleware(isAuth)
