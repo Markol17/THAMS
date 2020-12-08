@@ -23,8 +23,30 @@ export class AdmitpatientComponent implements OnInit {
   }
 
   getRequestList(){
-    /*this.patientList =*/ this.admission.requestList(this.divisionId);
-    console.log("patientList: "+this.patientList);
+    this.admission.requestList(this.divisionId).valueChanges.subscribe({
+      next: data => {
+        console.log(data);
+        var temp= data.data['requestList'];
+        var temp2 = temp['patient'];
+        console.log(temp2);
+        this.patientList.splice(0,this.patientList.length);
+        temp2.forEach(element => {
+          let jsonObj: any = JSON.parse(JSON.stringify(element));
+          let currentPatient = <Patient>jsonObj;
+          this.patientList.push(currentPatient);
+        });
+        if(this.patientList && this.patientList.length == 0){
+          this.customMessageService.setError("No patient in the division admit list");
+        }
+        console.log("patientList: "+this.patientList);
+      },
+      error: err => {
+        console.error('Error getting request list: ' + err);
+        this.customMessageService.setError("Could not get the request list beacause of " + err);
+      },
+
+    });;
+    
   }
 
   admit(id :number){
@@ -39,7 +61,7 @@ export class AdmitpatientComponent implements OnInit {
       console.log(this.division);
       if(!this.division.isComplete){
         this.admission.admitPatient(id,this.divisionId,this.division);
-      }else{
+      }else if(this.division.isComplete){
         console.log("No more space in the division")
         this.customMessageService.setError("No more space in the division");
       }
