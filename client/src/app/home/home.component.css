@@ -1,0 +1,28 @@
+.leftHalf {
+    width: 50%;
+    position: absolute;
+    right: 0px;
+    height: 100%;
+    margin-top: -20px;
+ }
+
+ @media (max-width: 800px) 
+{
+    .leftHalf
+    {
+        display: none;
+    }
+}
+
+.rightHalf {
+
+    width: 50%;
+    position: absolute;
+    left: 0px;
+    height: 100%;
+ }
+
+ .information{
+    display: flex;
+    justify-content: center;
+}

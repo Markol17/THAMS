@@ -93,7 +93,30 @@ export class ConsultpatientComponent implements OnInit {
   }
 
   updatePatientInfo(): void{
-    this.patientserice.updatePatient(this.updatePatient);
+
+    if(Object.values(this.updatePatient).every(o => o != "")){
+
+    this.patientserice.updatePatient(this.updatePatient).subscribe({
+      next: data => {
+        
+
+      },
+      error: err => {
+        console.error('Error updating Patient: ' + err);
+        this.customMessageService.setError("There was an error updating this patient");
+      },
+      complete: () => { 
+        this.customMessageService.setSuccess("Patient file updated");
+        this.edit=false;
+      },
+
+
+    });;
+  }
+  else{
+    this.customMessageService.setError("One of the field you editted is empty");
+
+  }
     
   }
 

@@ -19,10 +19,10 @@
         <label class="lab">Insurance number: {{patient.insuranceNumber}}</label>
       </div>
       <div class="p-field" *ngIf="patient.address!=null">
-        <label class="lab">Address {{patient.address}}</label>
+        <label class="lab">Address: {{patient.address}}</label>
       </div>
       <div class="p-field" *ngIf="patient.phoneNumber!=null">
-        <label class="lab">Address {{patient.phoneNumber}}</label>
+        <label class="lab">Phone: {{patient.phoneNumber}}</label>
       </div>
       <div class="p-field" *ngIf="patient.dateOfBirth!=null">
         <label class="lab">Date of Birth: {{patient.dateOfBirth}}</label>
@@ -91,7 +91,8 @@
         <input type="text" pInputText [(ngModel)]="updatePatient.address"/>
       </div>
       <div class="p-field" *ngIf="patient.phoneNumber!=null">
-        <label class="lab">Phone: {{updatePatient.phoneNumber}}</label>
+        <label class="lab">Phone: </label>
+        <p-inputMask mask="(999) 999-9999" [(ngModel)]="updatePatient.phoneNumber" placeholder=patient.phoneNumber required></p-inputMask>
       </div>
       <div class="p-inputgroup" *ngIf="patient.dateOfBirth!=null">
         <label class="lab">Date of Birth: {{patient.dateOfBirth}}  </label>

@@ -31,32 +31,21 @@ export class PatientService {
 
   }
 
-  updatePatient(patient: UpdatePatient) {
-    this.apollo.mutate({
+  updatePatient(patient: UpdatePatient): any {
+    return this.apollo.mutate({
       mutation: updatePatient,
       variables: {
         patient: patient
       }
-    }).subscribe({
-      next: data => {
-        console.log(data);
-
-      },
-      error: err => {
-        console.error('Error updating Patient: ' + err);
-        this.customMessageService.setError("There was an error updating this patient");
-      },
-      complete: () => { },
-
-
-    });
+    })
 
   }
 
   getPatients(): any {
     return this.apollo.watchQuery<any>({
+      fetchPolicy: 'no-cache',
       query: patients,
-      pollInterval: 10000
+      //pollInterval: 10000
     })
 
   }
