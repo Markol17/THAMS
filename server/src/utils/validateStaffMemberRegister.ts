@@ -1,26 +1,28 @@
 import { StaffMemberInput } from '../resolvers/inputTypes/StaffMemberInput';
+var validator = require('validator');
 
-export const validateStaffMemberRegister = (options: StaffMemberInput) => {
+export const validateStaffMemberRegister = (attributes: StaffMemberInput) => {
+	const { email, phoneNumber, password } = attributes;
 	let errors = [];
-	if (!options.email.includes('@')) {
+
+	if (!validator.isEmail(email)) {
 		errors.push({
 			field: 'email',
 			message: 'Invalid email',
 		});
 	}
 
-	//TODO: do the validation
-	if (options.phoneNumber.length == 2) {
+	if (!validator.isMobilePhone(phoneNumber)) {
 		errors.push({
 			field: 'phone',
-			message: 'Length must be greater than 2',
+			message: 'Invalid phone number',
 		});
 	}
 
-	if (options.password.length < 8) {
+	if (password.length < 8) {
 		errors.push({
 			field: 'password',
-			message: 'Length must be at least 8 characters',
+			message: 'Password length must be at least 8 characters',
 		});
 	}
 

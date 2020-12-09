@@ -28,7 +28,6 @@ export class DivisionResolver {
 		return await divisionService.getRequestList(options);
 	}
 
-	@UseMiddleware(isAuth)
 	@Mutation(() => DivisionResponse)
 	async createDivision(@Arg('options') options: DivisionInput): Promise<DivisionResponse> {
 		const divisionService = new DivisionService();

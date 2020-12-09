@@ -5,6 +5,7 @@ import { DivisionResponse, PatientResponse, PatientsResponse } from '../resolver
 import { PatientRepository } from '../repositories/PatientRepository';
 import { PatientIdDivisionIdInput } from '../resolvers/inputTypes/PatientInput';
 import { Division } from '../entities/Division';
+import { validateDivisionCreation } from '../utils/validateDivisionCreation';
 
 export class DivisionService {
 	divisionRepository: DivisionRepository;
@@ -31,13 +32,22 @@ export class DivisionService {
 	}
 
 	async addDivision(attributes: DivisionInput): Promise<DivisionResponse> {
-		// TODO: validation
-		// const errors = validateDivisionRegister(options);
-		// if (errors) {
-		//   return { errors };
-		// }
+		const errors = validateDivisionCreation(attributes);
+		if (errors) {
+			return { errors };
+		}
 
 		const division = await this.divisionRepository.createAndSaveDivision(attributes);
+		if (!division) {
+			return {
+				errors: [
+					{
+						field: 'name',
+						message: 'A division already exists with that name',
+					},
+				],
+			};
+		}
 		return { division };
 	}
 

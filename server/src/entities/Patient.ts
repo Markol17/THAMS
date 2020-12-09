@@ -54,7 +54,7 @@ export class Patient extends BaseEntity {
 	@Column()
 	maritalStatus: string;
 
-	@Field()
+	@Field({ nullable: true })
 	@Column({ nullable: true })
 	externalDoctor: string;
 
@@ -62,19 +62,19 @@ export class Patient extends BaseEntity {
 	@Column()
 	nextOfKin: string;
 
-	@Field()
+	@Field({ nullable: true })
 	@Column({ nullable: true })
 	privateInsuranceNumber: number;
 
-	@Field()
+	@Field({ nullable: true })
 	@Column({ nullable: true })
 	roomNumber: number;
 
-	@Field()
+	@Field({ nullable: true })
 	@Column({ nullable: true })
 	bedNumber: number;
 
-	@Field()
+	@Field({ nullable: true })
 	@Column({ default: false })
 	isAdmitted: boolean;
 
@@ -86,7 +86,6 @@ export class Patient extends BaseEntity {
 	@UpdateDateColumn()
 	updatedAt: Date;
 
-	@Field(() => StaffMember)
 	localDoctor: StaffMember;
 
 	@OneToMany(() => StaffMemberPatient, (smp) => smp.staffMember)

@@ -79,3 +79,26 @@ export const patients = gql`
     }
   }
 `;
+
+export const patientPrescriptions = gql`
+  query patientPrescriptions($id: PatientIdInput!) {
+    patientPrescriptions(options: $id) {
+      prescriptions{
+        id
+        name
+        unitsPerDay
+        numAdministrationsPerDay
+        methodOfAdministration
+        startDate
+        endDate
+        createdAt
+        updatedAt
+        patientId
+      }
+      errors{
+        field
+        message
+      }
+    }
+  }
+`;

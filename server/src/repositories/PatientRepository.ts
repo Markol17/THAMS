@@ -51,12 +51,16 @@ export class PatientRepository extends Repository<Patient> {
 			.createQueryBuilder()
 			.update(Patient)
 			.set({
+				firstName: attributes.firstName,
+				lastName: attributes.lastName,
 				address: attributes.address,
 				phoneNumber: attributes.phoneNumber,
 				gender: attributes.gender,
 				maritalStatus: attributes.maritalStatus,
 				nextOfKin: attributes.nextOfKin,
 				privateInsuranceNumber: attributes.privateInsuranceNumber,
+				insuranceNumber: attributes.insuranceNumber,
+				externalDoctor: attributes.externalDoctor,
 			})
 			.where('id = :id', { id: attributes.patientId })
 			.returning('*')
@@ -73,14 +77,15 @@ export class PatientRepository extends Repository<Patient> {
 	}
 
 	async dischargePatient(attributes: PatientIdInput): Promise<Patient> {
-		// this.patientRepository.update({id: ids.patientId}, {divisionId: -1, isAdmitted: false});
 		const { patientId } = attributes;
 		const patient = await getConnection()
 			.createQueryBuilder()
 			.update(Patient)
 			.set({
-				divisionId: -1,
+				divisionId: undefined,
 				isAdmitted: false,
+				roomNumber: undefined,
+				bedNumber: undefined,
 			})
 			.where('id = :id', { id: patientId })
 			.returning('*')
@@ -100,6 +105,8 @@ export class PatientRepository extends Repository<Patient> {
 			.set({
 				divisionId: divisionId,
 				isAdmitted: true,
+				roomNumber: Math.floor(Math.random() * 10) + 1,
+				bedNumber: Math.floor(Math.random() * 20) + 1,
 			})
 			.where('id = :id', { id: patientId })
 			.returning('*')

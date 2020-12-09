@@ -16,7 +16,7 @@ export class PatientService {
   pId: PatientIdInput;
   viewPatient: boolean;
   reloadPatient: boolean;
-  constructor(private apollo: Apollo, private customMessageService: CustomMessageService) { }
+  constructor(private apollo: Apollo) { }
 
   patientInfo(id: number): any {
     this.pId = new PatientIdInput;

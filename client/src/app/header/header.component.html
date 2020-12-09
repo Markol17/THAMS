@@ -11,7 +11,13 @@
         <li><a class="nav-link" routerLink="app-admitpatient">Admit Patient</a></li>
         <li><a class="nav-link" routerLink="app-division">View Division</a></li>
       </ul>
-      <ul *ngIf="!isChargeNurse()" class="nav navbar-nav">
+      <ul *ngIf="isDoctor()" class="nav navbar-nav">
+        <li class="active"><a routerLink="home">Home</a></li>
+        <li><a class="nav-link" routerLink="app-consultpatient">Consult Patient File</a></li>
+        <li><a class="nav-link" routerLink="app-registerpatient">Register Patient</a></li>
+        <li><a class="nav-link" routerLink="prescription">Prescribe Medications</a></li>
+      </ul>
+      <ul *ngIf="!isChargeNurse() && !isDoctor()" class="nav navbar-nav">
         <li class="active"><a routerLink="home">Home</a></li>
         <li><a class="nav-link" routerLink="app-consultpatient">Consult Patient File</a></li>
         <li><a class="nav-link" routerLink="app-registerpatient">Register Patient</a></li>

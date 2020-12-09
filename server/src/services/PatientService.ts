@@ -3,6 +3,7 @@ import { validatePatientRegister } from '../utils/validatePatientRegister';
 import { getCustomRepository } from 'typeorm';
 import { PatientRepository } from '../repositories/PatientRepository';
 import { PatientResponse, PatientsResponse } from '../resolvers/inputTypes/Response';
+import { validatePatientUpdate } from '../utils/validatePatientUpdate';
 
 export class PatientService {
 	patientRepository: PatientRepository;
@@ -26,11 +27,10 @@ export class PatientService {
 	}
 
 	async updatePatient(attributes: UpdatePatientInput): Promise<PatientResponse> {
-		// TODO: validation
-		// const errors = validatePatientUpdate(attributes);
-		// if (errors) {
-		//   return { errors };
-		// }
+		const errors = validatePatientUpdate(attributes);
+		if (errors) {
+			return { errors };
+		}
 		const patient = await this.patientRepository.updateAndSavePatient(attributes);
 		return { patient };
 	}

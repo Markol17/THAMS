@@ -1,13 +1,20 @@
 import { PatientInput } from '../resolvers/inputTypes/PatientInput';
+var validator = require('validator');
 
-export const validatePatientRegister = (options: PatientInput) => {
+export const validatePatientRegister = (attributes: PatientInput) => {
+	const { phoneNumber, dateOfBirth } = attributes;
 	let errors: string | any[] = [];
 
-	//TODO: do the validation
-	if (options.insuranceNumber.toString.length == 2) {
+	if (!validator.isMobilePhone(phoneNumber)) {
 		errors.push({
-			field: 'insuranceNumber',
-			message: 'Length must be greater than 2',
+			field: 'phoneNumber',
+			message: 'Invalid phone number',
+		});
+	}
+	if (!validator.isDate(dateOfBirth)) {
+		errors.push({
+			field: 'dateOfBirsth',
+			message: 'Invalid date',
 		});
 	}
 

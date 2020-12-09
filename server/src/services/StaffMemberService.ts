@@ -55,6 +55,7 @@ export class StaffMemberService {
 				],
 			};
 		}
+
 		//set a cookie on the user
 		context.req.session.userId = staffMember.id;
 		return { staffMember };
@@ -96,11 +97,6 @@ export class StaffMemberService {
 
 	async dischargePatient(ids: PatientIdInput): Promise<PatientResponse> {
 		const patient = await this.patientRepository.dischargePatient(ids);
-		// TODO: validation
-		// const errors = validatePatientUpdate(attributes);
-		// if (errors) {
-		//   return { errors };
-		// }
 		return { patient };
 	}
 
