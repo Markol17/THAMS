@@ -78,4 +78,10 @@ export class UpdatePatientInput {
 
 	@Field()
 	privateInsuranceNumber: number;
+
+	@Field()
+	insuranceNumber: number;
+
+	@Field()
+	externalDoctor: string;
 }

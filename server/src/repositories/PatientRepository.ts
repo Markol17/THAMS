@@ -59,6 +59,8 @@ export class PatientRepository extends Repository<Patient> {
 				maritalStatus: attributes.maritalStatus,
 				nextOfKin: attributes.nextOfKin,
 				privateInsuranceNumber: attributes.privateInsuranceNumber,
+				insuranceNumber: attributes.insuranceNumber,
+				externalDoctor: attributes.externalDoctor,
 			})
 			.where('id = :id', { id: attributes.patientId })
 			.returning('*')
