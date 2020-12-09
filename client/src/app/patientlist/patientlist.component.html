@@ -1,11 +1,14 @@
 <div class="table">
-    <p-orderList  [value]="patients" header="List of Patients" filterBy="firstName"
+    <div class="elems">
+        <button pButton type="button" pRipple label="Reload" (click)="reload()" class="p-button-info button"></button> 
+    </div>
+    <p-orderList  [value]="patients" header="List of Patients" filterBy="firstName" 
         filterPlaceholder="Filter by name">
         <ng-template let-p pTemplate="item">
             <div class="product-item">
                 <div class="product-list-detail">
                     <h5 class="p-mb-2">{{p.firstName}} {{p.lastName}} </h5>
-                    <h6  class="p-mb-2" *ngIf="p.divsionId!=null && p.isAdmitted!=null">divsion : {{p.divsionId}} Admitted : {{p.isAdmitted}}</h6>
+                    <h6  class="p-mb-2" >[Divsion : {{p.divisionId}}]  [Admitted : {{p.isAdmitted}}]</h6>
                     <i class="pi pi-tag product-category-icon"></i>
                     <span class="product-category">{{p.id}}</span>
                 </div>

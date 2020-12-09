@@ -17,11 +17,17 @@ export class PatientlistComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.getPatients();
+    
+  }
+
+  getPatients(){
     this.patientserice.getPatients().valueChanges.subscribe({
       next: data => {
         const x = data.data['patients'];
         let jsonObj: any = JSON.parse(JSON.stringify(x['patients']));
         this.patients = <Patient[]>jsonObj;
+        console.log(this.patients);
         this.patientserice.reload();
   
       },
@@ -30,10 +36,9 @@ export class PatientlistComponent implements OnInit {
     }
     })
   }
-
-
-
-
-
+  
+  reload(){
+    this.getPatients();
+  }
 
 }
