@@ -18,6 +18,10 @@ export const patientInfo = gql`
         nextOfKin
         privateInsuranceNumber
       }
+      errors {
+        field
+        message
+      }
     }
   }
 `;
@@ -33,6 +37,10 @@ export const divisioinInfo = gql`
         numBeds
         phoneNumber
         isComplete
+      }
+      errors {
+        field
+        message
       }
     }
   }
@@ -50,6 +58,10 @@ export const requestList = gql`
         phoneNumber
         dateOfBirth
         gender
+      }
+      errors {
+        field
+        message
       }
     }
   }
@@ -72,6 +84,10 @@ export const patients = gql`
         nextOfKin
         privateInsuranceNumber
       }
+      errors {
+        field
+        message
+      }
     }
   }
 `;
@@ -79,7 +95,7 @@ export const patients = gql`
 export const patientPrescriptions = gql`
   query patientPrescriptions($id: PatientIdInput!) {
     patientPrescriptions(options: $id) {
-      prescriptions{
+      prescriptions {
         id
         name
         unitsPerDay
@@ -91,7 +107,7 @@ export const patientPrescriptions = gql`
         updatedAt
         patientId
       }
-      errors{
+      errors {
         field
         message
       }

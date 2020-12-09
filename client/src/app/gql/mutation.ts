@@ -29,6 +29,10 @@ export const loginStaff = gql`
         bipperExtension
         type
       }
+      errors {
+        field
+        message
+      }
     }
   }
 `;
@@ -56,6 +60,10 @@ export const registerPatient = gql`
         nextOfKin
         privateInsuranceNumber
       }
+      errors {
+        field
+        message
+      }
     }
   }
 `;
@@ -77,6 +85,10 @@ export const updatePatient = gql`
         nextOfKin
         privateInsuranceNumber
       }
+      errors {
+        field
+        message
+      }
     }
   }
 `;
@@ -93,6 +105,10 @@ export const admitPatient = gql`
         dateOfBirth
         gender
         id
+      }
+      errors {
+        field
+        message
       }
     }
   }
@@ -112,6 +128,10 @@ export const requestPatientAdmission = gql`
         dateOfBirth
         gender
         id
+      }
+      errors {
+        field
+        message
       }
     }
   }
