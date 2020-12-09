@@ -51,6 +51,8 @@ export class PatientRepository extends Repository<Patient> {
 			.createQueryBuilder()
 			.update(Patient)
 			.set({
+				firstName: attributes.firstName,
+				lastName: attributes.lastName,
 				address: attributes.address,
 				phoneNumber: attributes.phoneNumber,
 				gender: attributes.gender,
