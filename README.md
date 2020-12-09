@@ -1,4 +1,4 @@
-# THAMS
+# THAMS -  Group 1
 
 ## Steps
 
