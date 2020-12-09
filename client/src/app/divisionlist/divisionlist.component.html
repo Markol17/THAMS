@@ -1,7 +1,5 @@
 <div class="table">
-    <div class="elems">
-        <button pButton type="button" pRipple label="Reload" (click)="reloadDivisions()" class="p-button-info button"></button> 
-    </div>
+    
     <p-orderList  [value]="divisions" header="List of Divisions" filterBy="name" 
         filterPlaceholder="Filter by name">
         <ng-template let-o pTemplate="item">
@@ -16,3 +14,8 @@
         </ng-template>
     </p-orderList>
 </div>
+
+<div class="consult">
+    <button pButton type="button" pRipple label="Reload" (click)="reloadDivisions()" class="p-button-warning btn"></button> 
+</div>
+
