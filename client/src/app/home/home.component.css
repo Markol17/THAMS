@@ -26,18 +26,19 @@
     position: absolute;
     left: 10%;
     height: 100%;
+
    
  }
 
  .elems{
-     zoom:2;
+   
      padding:10px;
    
  }
 
  .title{
     zoom:1.5;
-    margin-top: 1vw;
+    margin-top: 5vw;
     margin-left:5px;
 }
 .title2{
