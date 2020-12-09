@@ -29,7 +29,7 @@ export class DivisionlistComponent implements OnInit {
       },
       error: (err) => {
         console.error("Divisions list error:" + err);
-        this.customMessageService.setError("Divisions list could not load");
+        //this.customMessageService.setError("Divisions list could not load");
       },
     });
   }

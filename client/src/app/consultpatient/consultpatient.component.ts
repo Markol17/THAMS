@@ -71,6 +71,7 @@ export class ConsultpatientComponent implements OnInit {
   }
 
   findPatient(): void {
+    this.edit=false;
     this.patientserice.patientInfo(this.id).valueChanges.subscribe({
       next: (data) => {
         const x = data.data["patientInfo"];
@@ -134,6 +135,7 @@ export class ConsultpatientComponent implements OnInit {
         complete: () => {
           this.customMessageService.setSuccess("Patient file updated");
           this.edit = false;
+          this.findPatient();
         },
       });
     } else {
