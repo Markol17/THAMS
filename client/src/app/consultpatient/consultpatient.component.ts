@@ -100,6 +100,9 @@ export class ConsultpatientComponent implements OnInit {
               },
               complete: () => {},
             });
+      
+          this.updatePatient.firstName = this.patient.firstName;
+          this.updatePatient.lastName = this.patient.lastName;
           this.updatePatient.patientId = this.patient.id;
           this.updatePatient.address = this.patient.address;
           this.updatePatient.phoneNumber = this.patient.phoneNumber;
@@ -107,6 +110,8 @@ export class ConsultpatientComponent implements OnInit {
           this.updatePatient.gender = this.patient.gender;
           this.updatePatient.nextOfKin = this.patient.nextOfKin;
           this.updatePatient.privateInsuranceNumber = this.patient.privateInsuranceNumber;
+          this.updatePatient.insuranceNumber = this.patient.insuranceNumber;
+          this.updatePatient.externalDoctor = this.patient.externalDoctor;
           this.submitted = true;
         } else {
           this.customMessageService.setError("Coulnd't find this patient");
