@@ -8,6 +8,10 @@ export class DivisionRepository extends Repository<Division> {
 		return await this.findOne(divisionId);
 	}
 
+	async getAll(): Promise<Division[]> {
+		return await this.find();
+	}
+
 	async createAndSaveDivision(attributes: DivisionInput): Promise<Division | void> {
 		const { name, description, chargeNurseId, location, numBeds, phoneNumber } = attributes;
 		const division = new Division();
