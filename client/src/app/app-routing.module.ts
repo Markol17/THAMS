@@ -8,6 +8,7 @@ import { RegisterpatientComponent } from './registerpatient/registerpatient.comp
 import { RequestpatientComponent } from './requestpatient/requestpatient.component';
 import { AuthGuard } from './auth.guard';
 import { HomeComponent } from './home/home.component';
+import { PrescriptionComponent } from './prescription/prescription.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent,canActivate:[AuthGuard]},
@@ -21,6 +22,9 @@ const routes: Routes = [
   }   },
   { path: 'app-division', component: DivisionComponent,canActivate:[AuthGuard],data:{
     role:'ChargeNurse'
+  }  },
+  { path: 'prescription', component: PrescriptionComponent,canActivate:[AuthGuard],data:{
+    role:'Doctor'
   }  },
   {path: '**', redirectTo: 'loginpage'},
   { path: '', redirectTo: 'loginpage', pathMatch: 'full'},

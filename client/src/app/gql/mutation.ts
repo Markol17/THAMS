@@ -104,6 +104,24 @@ mutation registerPatient($patient: PatientInput!) {
       }
     }
   }`;
+export const addPrescription = gql`
+mutation addPrescription($prescription: addPrescriptionInput!){
+    addPrescription(options:$prescription){
+      prescription{
+        name
+        unitsPerDay
+        numAdministrationsPerDay
+        methodOfAdministration
+        startDate
+        endDate
+        patientId
+      }
+      errors{
+        field
+        message
+      }
+    }
+}`;
 
 
  
