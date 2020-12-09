@@ -5,6 +5,7 @@ import { StaffMember } from './StaffMember';
 // This entity represent the join table for Patient and StaffMember so it doesn't show up on any context map.
 // It represent the many to many relationship between Patient and StaffMember.
 // The reason we created an entity for this table is because we might need to add other attributes in the future making it more scalable
+// This table is also not used in the current app. It is there only to show a many to many realtion
 @Entity()
 export class StaffMemberPatient extends BaseEntity {
 	@PrimaryColumn()

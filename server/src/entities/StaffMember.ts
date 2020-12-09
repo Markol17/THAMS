@@ -65,7 +65,6 @@ export class StaffMember extends BaseEntity {
 	@UpdateDateColumn()
 	updatedAt: Date;
 
-	@Field(() => [Patient])
 	patients: Patient[];
 
 	@OneToMany(() => StaffMemberPatient, (smp) => smp.patient)
