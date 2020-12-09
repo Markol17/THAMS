@@ -5,7 +5,7 @@ export const validateDivisionCreation = (attributes: DivisionInput) => {
 	const { phoneNumber } = attributes;
 	let errors: string | any[] = [];
 
-	if (!validator.isMobilePhone(phoneNumber)) {
+	if (!validator.isMobilePhone(phoneNumber.replace(/\D+/g, ''))) {
 		errors.push({
 			field: 'phoneNumber',
 			message: 'Invalid phone number',
