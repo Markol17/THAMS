@@ -56,6 +56,12 @@ export class UpdatePatientInput {
 	patientId: number;
 
 	@Field()
+	firstName: string;
+
+	@Field()
+	lastName: string;
+
+	@Field()
 	address: string;
 
 	@Field()
