@@ -35,7 +35,6 @@ export class StaffMemberResolver {
 		return await staffMemberService.loginStaffMember(context, email, password);
 	}
 
-	@UseMiddleware(isAuth)
 	@Mutation(() => Boolean)
 	logoutStaff(@Ctx() context: Context): Promise<boolean> {
 		const staffMemberService = new StaffMemberService();
