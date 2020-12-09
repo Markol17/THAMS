@@ -1,7 +1,7 @@
-import { DivisionInput } from 'src/resolvers/inputTypes/DivisionInput';
+import { UpdatePatientInput } from '../resolvers/inputTypes/PatientInput';
 var validator = require('validator');
 
-export const validateDivisionCreation = (attributes: DivisionInput) => {
+export const validatePatientUpdate = (attributes: UpdatePatientInput) => {
 	const { phoneNumber } = attributes;
 	let errors: string | any[] = [];
 

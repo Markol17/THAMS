@@ -3,6 +3,7 @@ import { getCustomRepository } from 'typeorm';
 import { PrescriptionRepository } from '../repositories/PrescriptionRepository';
 import { addPrescriptionInput } from '../resolvers/inputTypes/PrescriptionInput';
 import { PrescriptionResponse, PrescriptionsResponse } from '../resolvers/inputTypes/Response';
+import { validatePrescriptionCreation } from '../utils/validatePrescriptionCreation';
 
 export class PrescriptionService {
 	prescriptionRepository: PrescriptionRepository;
@@ -27,11 +28,10 @@ export class PrescriptionService {
 	}
 
 	async addPrescription(attributes: addPrescriptionInput): Promise<PrescriptionResponse> {
-		// TODO: do validation
-		// const errors = validatePatientRegister(attributes);
-		// if (errors) {
-		//   return { errors };
-		// }
+		const errors = validatePrescriptionCreation(attributes);
+		if (errors) {
+			return { errors };
+		}
 		const prescription = await this.prescriptionRepository.createAndSavePrescription(attributes);
 		return { prescription };
 	}

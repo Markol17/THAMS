@@ -55,6 +55,7 @@ export class StaffMemberService {
 				],
 			};
 		}
+
 		//set a cookie on the user
 		context.req.session.userId = staffMember.id;
 		return { staffMember };
