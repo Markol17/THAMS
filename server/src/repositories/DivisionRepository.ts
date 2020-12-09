@@ -8,7 +8,7 @@ export class DivisionRepository extends Repository<Division> {
 		return await this.findOne(divisionId);
 	}
 
-	async createAndSaveDivision(attributes: DivisionInput): Promise<Division> {
+	async createAndSaveDivision(attributes: DivisionInput): Promise<Division | void> {
 		const { name, description, chargeNurseId, location, numBeds, phoneNumber } = attributes;
 		const division = new Division();
 		division.name = name;
@@ -17,6 +17,12 @@ export class DivisionRepository extends Repository<Division> {
 		division.location = location;
 		division.numBeds = numBeds;
 		division.phoneNumber = phoneNumber;
-		return await this.save(division);
+		try {
+			return await this.save(division);
+		} catch (err) {
+			if (err.code === '23505') {
+				return;
+			}
+		}
 	}
 }

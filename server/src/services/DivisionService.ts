@@ -38,6 +38,16 @@ export class DivisionService {
 		}
 
 		const division = await this.divisionRepository.createAndSaveDivision(attributes);
+		if (!division) {
+			return {
+				errors: [
+					{
+						field: 'name',
+						message: 'A division already exists with that name',
+					},
+				],
+			};
+		}
 		return { division };
 	}
 
