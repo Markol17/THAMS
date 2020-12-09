@@ -11,7 +11,7 @@ import { PrescriptionService } from '../services/prescription.service';
 })
 export class PrescriptionComponent implements OnInit {
   prescription;
-  finalPrescription: AddPrescriptionInput;
+  finalPrescription;
   constructor(private fb: FormBuilder, private prescriptionService: PrescriptionService, private customMessageService: CustomMessageService) { }
 
   ngOnInit(): void {
@@ -32,6 +32,7 @@ export class PrescriptionComponent implements OnInit {
       console.log(data);
     },
     error: err => {
+      console.log(err)
       this.customMessageService.setError("Could not add this prescription" + err);
     },
     complete: () => { 

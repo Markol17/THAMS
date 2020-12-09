@@ -20,18 +20,23 @@
     position: absolute;
     left: 0px;
     height: 100%;
-    font-family: 'Courier New', Courier, monospace;
+   
  }
 
  .elems{
      zoom:1.5;
      padding:10px;
-     font-family: 'Courier New', Courier, monospace;
+   
  }
 
  .title{
     zoom:1.5;
     margin-top: 5vw;
+    margin-left:5px;
+}
+.title2{
+    zoom:1.5;
+    margin-top: 2vw;
     margin-left:5px;
 }
 

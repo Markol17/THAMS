@@ -28,7 +28,7 @@ import { FooterComponent } from './footer/footer.component';
 import { MessagesComponent } from './messages/messages.component';
 import {ToastModule} from 'primeng/toast';
 import {CardModule} from 'primeng/card';
-
+import {FieldsetModule} from 'primeng/fieldset';
 import { MessageService } from 'primeng/api';
 import {OrderListModule} from 'primeng/orderlist';
 import { PatientlistComponent } from './patientlist/patientlist.component';
@@ -68,7 +68,8 @@ import { PrescriptionComponent } from './prescription/prescription.component';
     ToastModule,
     CardModule,
     OrderListModule,
-    PanelModule
+    PanelModule,
+    FieldsetModule
     
   ],
   providers: [MessageService],

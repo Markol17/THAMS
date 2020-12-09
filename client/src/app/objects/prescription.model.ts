@@ -1,4 +1,6 @@
 export class Prescription {
+  
+
     id: number;
     name:string;
     unitsPerDay: number;
