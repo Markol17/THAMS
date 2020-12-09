@@ -98,9 +98,9 @@ export class ConsultpatientComponent implements OnInit {
                   "Could not get prescriptions associated with this patient"
                 );
               },
-              complete: () => {},
+              complete: () => { },
             });
-      
+
           this.updatePatient.firstName = this.patient.firstName;
           this.updatePatient.lastName = this.patient.lastName;
           this.updatePatient.patientId = this.patient.id;
@@ -129,7 +129,7 @@ export class ConsultpatientComponent implements OnInit {
   updatePatientInfo(): void {
     if (Object.values(this.updatePatient).every((o) => o != "")) {
       this.patientserice.updatePatient(this.updatePatient).subscribe({
-        next: (data) => {},
+        next: (data) => { },
         error: (err) => {
           console.error("Error updating Patient: " + err);
           this.customMessageService.setError(
@@ -146,5 +146,20 @@ export class ConsultpatientComponent implements OnInit {
         "One of the field you editted is empty"
       );
     }
+  }
+
+  dischargePatient(){
+    this.patientserice.dischagePatient(this.patient.id).subscribe({ 
+    next: (data) => { },
+    error: (err) => {
+      console.error("Error discharging Patient: " + err);
+      this.customMessageService.setError(
+        "There was an error discharging this patient"
+      );
+    },
+    complete: () => {
+      this.customMessageService.setSuccess("Patient discharged");
+      this.patient.isAdmitted=false;
+    },})
   }
 }

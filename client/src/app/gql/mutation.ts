@@ -68,6 +68,31 @@ export const registerPatient = gql`
   }
 `;
 
+export const dischargePatient = gql`
+  mutation dischargePatient($id: PatientIdInput!) {
+    dischargePatient(options: $id) {
+      patient {
+        id
+        firstName
+        lastName
+        insuranceNumber
+        address
+        phoneNumber
+        dateOfBirth
+        gender
+        maritalStatus
+        externalDoctor
+        nextOfKin
+        privateInsuranceNumber
+      }
+      errors {
+        field
+        message
+      }
+    }
+  }
+`;
+
 export const updatePatient = gql`
   mutation updatePatient($patient: UpdatePatientInput!) {
     updatePatient(options: $patient) {

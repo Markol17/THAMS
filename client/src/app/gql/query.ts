@@ -19,6 +19,8 @@ export const patientInfo = gql`
         nextOfKin
         privateInsuranceNumber
         isAdmitted
+        roomNumber
+        bedNumber
       }
       errors {
         field
@@ -87,6 +89,8 @@ export const patients = gql`
         privateInsuranceNumber
         divisionId
         isAdmitted
+        roomNumber
+        bedNumber
       }
       errors {
         field
