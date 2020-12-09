@@ -53,3 +53,22 @@
         vertical-align: middle;
         line-height: 1;
     }
+    .pElems{
+        padding:5px;
+        width:100%;
+        height:auto;
+    
+    }
+
+    .top{
+        margin-top: 10px;
+    }
+
+    .line{
+        position: relative;
+        display: inline-block;
+        margin-left: 5px;
+        margin-right: 5px;
+        width: 100%;
+        border-bottom: 1px solid #7A7A7A;
+    }

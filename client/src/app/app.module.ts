@@ -33,6 +33,7 @@ import { MessageService } from 'primeng/api';
 import {OrderListModule} from 'primeng/orderlist';
 import { PatientlistComponent } from './patientlist/patientlist.component';
 import {PanelModule} from 'primeng/panel';
+import { PrescriptionComponent } from './prescription/prescription.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +48,7 @@ import {PanelModule} from 'primeng/panel';
     FooterComponent,
     MessagesComponent,
     PatientlistComponent,
+    PrescriptionComponent,
   ],
   imports: [
     InputMaskModule,

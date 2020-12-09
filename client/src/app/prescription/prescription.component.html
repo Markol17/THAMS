@@ -1,0 +1,47 @@
+<div class="prescriptionCard">
+    <p-card styleClass="p-card-shadow ">
+        <p-header>
+            <label class="title">Add a Prescription</label>
+        </p-header>
+        <form [formGroup]="prescription" class="pElems" (ngSubmit)="addPrescription()">
+            <div class="p-fluid">
+                <div class="p-field">
+                    <label for="patientId">Patient Id</label>
+                    <input type="number" pInputText formControlName="patientId" required>
+                </div>
+                <div class="p-field">
+                    <label for="name">Name</label>
+                    <input type="text" pInputText formControlName="name" required>
+                </div>
+                <div class="p-field">
+                    <label for="unitsPerDay">Units Per Day</label>
+                    <input type="number" pInputText formControlName="unitsPerDay" required>
+                </div>
+                <div class="p-field">
+                    <label for="numAdministrationsPerDay">Administrations Per Day</label>
+                    <input type="number" pInputText formControlName="numAdministrationsPerDay" required>
+                </div>
+                <div class="p-field">
+                    <label for="methodOfAdministration">Method of Administration</label>
+                    <input type="text" pInputText formControlName="methodOfAdministration" required>
+                </div>
+                <div class="p-field">
+                    <label for="startDate">Start Date</label>
+                    <input type="date" pInputText formControlName="startDate" required>
+                </div>
+                <div class="p-field">
+                    <label for="name">End Date</label>
+                    <input type="date" pInputText formControlName="endDate" required>
+                </div>
+            </div>
+            <div class="pElems">
+                <button pButton label="Submit" class="p-button-info button" type="submit"
+                    [disabled]="!prescription.valid"></button>
+            </div>
+
+        </form>
+
+    </p-card>
+</div>
+
+<patientlist></patientlist>

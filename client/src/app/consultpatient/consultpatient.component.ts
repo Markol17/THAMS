@@ -2,9 +2,20 @@ import { Component, OnInit } from "@angular/core";
 import { PatientService } from "../services/patient.service";
 import { Patient } from "../objects/patient.model";
 import { CustomMessageService } from "../services/message.service";
+import { timeStamp } from "console";
+import { patients } from "../gql/query";
 import { AuthenticationService } from "../services/authentication.service";
 import { SelectItem } from "primeng/api";
 import { UpdatePatient } from "../objects/update-patient.model";
+import { AddPrescriptionInput } from "../objects/add-prescription-input.model";
+import {
+  FormGroup,
+  FormControl,
+  FormBuilder,
+  Validators,
+} from "@angular/forms";
+import { PrescriptionService } from "../services/prescription.service";
+import { Prescription } from "../objects/prescription.model";
 
 @Component({
   selector: "app-consultpatient",
@@ -20,11 +31,13 @@ export class ConsultpatientComponent implements OnInit {
   role: string;
   maritals: SelectItem[];
   genders: SelectItem[];
+  prescriptions: Prescription[];
 
   constructor(
     private patientserice: PatientService,
     private customMessageService: CustomMessageService,
-    private authservice: AuthenticationService
+    private authservice: AuthenticationService,
+    private prescriptionService: PrescriptionService
   ) {
     this.updatePatient = new UpdatePatient();
     this.genders = [
@@ -68,6 +81,25 @@ export class ConsultpatientComponent implements OnInit {
           this.customMessageService.setSuccess(
             "Here is the file of  " + this.patient.firstName
           );
+          this.prescriptionService
+            .getPrescriptions(this.patient.id)
+            .valueChanges.subscribe({
+              next: (data) => {
+                const x = data.data["patientPrescriptions"];
+                let jsonObj: any = JSON.parse(
+                  JSON.stringify(x["prescriptions"])
+                );
+                this.prescriptions = <Prescription[]>jsonObj;
+                console.log(this.prescriptions);
+              },
+              error: (err) => {
+                console.error("Error getting prescriptions: " + err);
+                this.customMessageService.setError(
+                  "Could not get prescriptions associated with this patient"
+                );
+              },
+              complete: () => {},
+            });
           this.updatePatient.patientId = this.patient.id;
           this.updatePatient.address = this.patient.address;
           this.updatePatient.phoneNumber = this.patient.phoneNumber;
