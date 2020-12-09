@@ -1,1 +1,32 @@
-<p>division works!</p>
+<div class="p-inputgroup consult">
+    <span class="p-inputgroup-addon ">Enter a division id:</span>
+    <input type="number" [(ngModel)]="id" pInputText class="p-inputtext-sm" placeholder="Division id">
+    <button pButton type="button" pRipple label="Search" (click)="getDivision()" class="p-button-success"></button>
+</div>
+<div *ngIf="submitted==true" >
+    <div class="consult">
+        <p-card styleClass="p-card-shadow ">
+            <p-header>
+            <label class="title">Division {{division.id}}</label>
+            </p-header>
+            <div class="p-fluid" >
+            <div class="p-field" *ngIf="division.name!=null">
+                <label class="lab">Name: {{division.name}}</label>
+            </div>
+            <div class="p-field" *ngIf="division.description!=null">
+                <label class="lab">Description: {{division.description}}</label>
+            </div>
+            <div class="p-field" *ngIf="division.numBeds!=null">
+                <label class="lab">Number of beds: {{division.numBeds}}</label>
+            </div>
+            <div class="p-field" *ngIf="division.phoneNumber!=null">
+                <label class="lab">Phone Number: {{division.phoneNumber}}</label>
+            </div>
+            <div class="p-field" *ngIf="division.isComplete!=null">
+                <label class="lab">Is full: {{division.isComplete}}</label>
+            </div>
+
+            </div>
+        </p-card>
+    </div>
+</div>

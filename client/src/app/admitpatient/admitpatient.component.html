@@ -1,11 +1,10 @@
 <div class="p-inputgroup consult">
 
-    <span class="p-inputgroup-addon ">Enter a division ID:</span>
-    <input type="number" [(ngModel)]="divisionId" pInputText class="p-inputtext-sm"  placeholder="Division ID">
+    <span class="p-inputgroup-addon ">Enter a division id:</span>
+    <input type="number" [(ngModel)]="divisionId" pInputText class="p-inputtext-sm"  placeholder="Division id">
 
     <button pButton type="button" pRipple label="Get request list" (click)="getRequestList()"class="p-button-success"></button>         
 </div>
-<div>
     <div *ngFor="let patient of patientList" class="consult">
         <p-card styleClass="p-card-shadow ">
           <p-header>
@@ -38,5 +37,4 @@
             <p-button label="Admit Patient" (click)="admit(patient.id)" icon="pi pi-user-edit"></p-button>
           </ng-template>
         </p-card>
-      </div>
 </div>

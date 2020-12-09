@@ -65,7 +65,7 @@ export class AdmissionserviceService {
           this.customMessageService.setSuccess("Patient was admitted to the division");
         }
         else if(patient == null){
-          this.customMessageService.setError("No patient with id " + pId +" found while trying to admit patient");
+          this.customMessageService.setError("There was an error admiting patient with id " + pId);
         }
         else{
           this.customMessageService.setError("Patient could not be added to the division");
@@ -93,6 +93,7 @@ export class AdmissionserviceService {
         const x = data.data['requestPatientAdmission'];
         let jsonObj: any = JSON.parse(JSON.stringify(x['patient']));
         patient = <Patient>jsonObj;
+
       },
       error: err => {
         console.error('Error adding patient to admit list: ' + err);
@@ -107,7 +108,7 @@ export class AdmissionserviceService {
           this.customMessageService.setSuccess("Patient was added to the division admit list");
         }
         else if(patient == null){
-          this.customMessageService.setError("No patient with id " + pId+" found while trying to add patient to admit list");
+          this.customMessageService.setError("The division is full");
         }
         else{
           this.customMessageService.setError("Patient could not be added to the division admit list");

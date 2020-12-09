@@ -178,6 +178,7 @@
             <input type="text" class="form-control" id="nextOfKin"
                     [(ngModel)]="model.nextOfKin" name="nextOfKin"
                     required #nextOfKin="ngModel"
+                    pattern="[a-zA-z -]+"
                     >
                 <div *ngIf="nextOfKin.invalid && (nextOfKin.dirty)"
                     class="alert alert-danger">
@@ -185,7 +186,9 @@
                     <div *ngIf="nextOfKin.errors.required">
                         Next of kin is required.
                     </div>
-                    
+                    <div *ngIf="nextOfKin.errors.pattern">
+                        Name only has letter.
+                    </div>
                 </div>
         </div>
 
