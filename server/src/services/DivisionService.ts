@@ -42,8 +42,8 @@ export class DivisionService {
 			return {
 				errors: [
 					{
-						field: 'name',
-						message: 'A division already exists with that name',
+						field: 'name or chargeNurseId',
+						message: 'A division already exists with that name or that charge nurse is already assigned to a division',
 					},
 				],
 			};

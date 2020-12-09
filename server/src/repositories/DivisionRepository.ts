@@ -23,6 +23,9 @@ export class DivisionRepository extends Repository<Division> {
 			if (err.code === '23505') {
 				return;
 			}
+			if (err.code === '23503') {
+				return;
+			}
 		}
 	}
 }
