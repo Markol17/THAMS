@@ -90,7 +90,7 @@
     <ng-template pTemplate="footer">
       <p-button label="Update File" icon="pi pi-user-edit" (click)="edit=true"></p-button>
       <span *ngIf="isNurseAndAdmitted()">
-        <p-button class="right-button" label="Discharge" icon="pi pi-sign-out" styleClass="p-button-help"></p-button>
+        <p-button class="right-button" label="Discharge" (click)="dischargePatient()" icon="pi pi-sign-out" styleClass="p-button-help"></p-button>
       </span>
     </ng-template>
   </p-card>
