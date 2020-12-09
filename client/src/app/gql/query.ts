@@ -80,6 +80,23 @@ export const patients = gql`
   }
 `;
 
+export const divisions = gql`
+query divisions {
+  divisions {
+    divisions{
+      id
+      name
+      description
+      numBeds
+    }
+    errors{
+      field
+      message
+    }
+  }
+}
+`;
+
 export const patientPrescriptions = gql`
   query patientPrescriptions($id: PatientIdInput!) {
     patientPrescriptions(options: $id) {

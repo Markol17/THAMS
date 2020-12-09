@@ -1,6 +1,6 @@
 <div class="table">
     <div class="elems">
-        <button pButton type="button" pRipple label="Reload" (click)="reload()" class="p-button-info button"></button> 
+        <button pButton type="button" pRipple label="Reload" (click)="reloadPatients()" class="p-button-info button"></button> 
     </div>
     <p-orderList  [value]="patients" header="List of Patients" filterBy="firstName" 
         filterPlaceholder="Filter by name">

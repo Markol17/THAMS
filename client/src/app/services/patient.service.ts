@@ -3,7 +3,7 @@ import { Patient } from "../objects/patient.model";
 import { Apollo } from "apollo-angular";
 import gql from "graphql-tag";
 import { registerPatient, updatePatient } from "../gql/mutation";
-import { patientInfo, patients } from "../gql/query";
+import { divisions, patientInfo, patients } from "../gql/query";
 import { Variable } from '@angular/compiler/src/render3/r3_ast';
 import { PatientIdInput } from '../objects/patient-id-input.model';
 import { CustomMessageService } from './message.service';
@@ -16,6 +16,7 @@ export class PatientService {
   pId: PatientIdInput;
   viewPatient: boolean;
   reloadPatient: boolean;
+  reloadDivision: boolean;
   constructor(private apollo: Apollo) { }
 
   patientInfo(id: number): any {
@@ -50,8 +51,21 @@ export class PatientService {
 
   }
 
-  reload() {
+  reloadPatients() {
     this.reloadPatient = this.reloadPatient!;
+  }
+
+  getDivisions(): any {
+    return this.apollo.watchQuery<any>({
+      fetchPolicy: 'no-cache',
+      query: divisions,
+      //pollInterval: 10000
+    })
+
+  }
+
+  reloadDivisions() {
+    this.reloadDivision = this.reloadDivision!;
   }
 
 }
