@@ -54,7 +54,7 @@ export class AuthenticationService {
         if (this.currentUser) {
           this.customMessageService.setSuccess("Hello "+this.currentUser.firstName);
           this.isLoggedIn = true;
-          this.patientservice.reload();
+          this.patientservice.reloadPatients();
           this.router.navigate(['home']);
         }
         else {

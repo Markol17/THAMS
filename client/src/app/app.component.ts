@@ -12,6 +12,7 @@ export class AppComponent {
 
   header:boolean=false;
   patients: boolean=false;
+  divisions: boolean=false;
   constructor(private router: Router, private auth:AuthenticationService){
       router.events.forEach((event)=>{
         if(event instanceof NavigationStart){
@@ -26,6 +27,12 @@ export class AppComponent {
           }
           else{
             this.patients=false;
+          }
+          if(event['url']=='/app-division' || event['url']=='/app-requestpatient'){
+            this.divisions=true;
+          }
+          else{
+            this.divisions=false;
           }
         }
         
