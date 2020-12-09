@@ -3,7 +3,7 @@
     <input type="number" [(ngModel)]="id" pInputText class="p-inputtext-sm" placeholder="Division id">
     <button pButton type="button" pRipple label="Search" (click)="getDivision()" class="p-button-success"></button>
 </div>
-<div *ngIf="submitted==true" >
+<div *ngIf="division!=null" >
     <div class="consult">
         <p-card styleClass="p-card-shadow ">
             <p-header>

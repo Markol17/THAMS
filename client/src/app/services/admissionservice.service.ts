@@ -1,10 +1,12 @@
 import { Injectable } from "@angular/core";
+import { ServerError } from '@apollo/client/core';
 import { Apollo } from "apollo-angular";
 import gql from "graphql-tag";
 import { admitPatient, requestPatientAdmission } from "../gql/mutation";
 import { divisioinInfo, requestList } from "../gql/query";
 import { Division } from "../objects/division.model";
 import { Patient } from "../objects/patient.model";
+import { BackendError } from '../objects/backend-error.model';
 import { CustomMessageService } from "./message.service";
 
 @Injectable({
@@ -34,6 +36,7 @@ export class AdmissionserviceService {
   //Les messages doit regarder si un patient est retourner
   admitPatient(pId: number, dId: number, division: Division): void {
     var patient;
+    var errors;
     this.apollo
       .mutate({
         mutation: admitPatient,
@@ -46,10 +49,13 @@ export class AdmissionserviceService {
       })
       .subscribe({
         next: (data) => {
+          errors = null;
           patient = null;
           const x = data.data["admitPatient"];
           let jsonObj: any = JSON.parse(JSON.stringify(x["patient"]));
           patient = <Patient>jsonObj;
+          let jsonError: any = JSON.parse(JSON.stringify(x["errors"]));
+          errors = <BackendError[]>jsonError;
         },
         error: (err) => {
           console.error("Error admiting patient: " + err);
@@ -58,19 +64,19 @@ export class AdmissionserviceService {
           );
         },
         complete: () => {
-          if (division == null) {
-            this.customMessageService.setError("The division was not found");
-          } else if (patient) {
+          if(errors != null && errors.length != 0){
+            errors.forEach(element => {
+              this.customMessageService.setError(element.message);
+            });
+          }
+          else if (patient) {
             this.customMessageService.setSuccess(
               "Patient was admitted to the division"
             );
-          } else if (patient == null) {
-            this.customMessageService.setError(
-              "There was an error admiting patient with id " + pId
-            );
-          } else {
-            this.customMessageService.setError(
-              "Patient could not be added to the division"
+          } 
+          else{
+            this.customMessageService.setSuccess(
+              "Patient not found"
             );
           }
         },
@@ -79,6 +85,7 @@ export class AdmissionserviceService {
 
   requestPatientAdmission(pId: number, dId: number, division: Division): void {
     var patient;
+    var errors;
     this.apollo
       .mutate({
         mutation: requestPatientAdmission,
@@ -92,9 +99,13 @@ export class AdmissionserviceService {
       .subscribe({
         next: (data) => {
           patient = null;
+          errors = null;
           const x = data.data["requestPatientAdmission"];
           let jsonObj: any = JSON.parse(JSON.stringify(x["patient"]));
           patient = <Patient>jsonObj;
+      
+          let jsonError: any = JSON.parse(JSON.stringify(x["errors"]));
+          errors = <BackendError[]>jsonError;
         },
         error: (err) => {
           console.error("Error adding patient to admit list: " + err);
@@ -103,17 +114,19 @@ export class AdmissionserviceService {
           );
         },
         complete: () => {
-          if (division == null) {
-            this.customMessageService.setError("The division was not found");
-          } else if (patient) {
+          if(errors != null && errors.length != 0){
+            errors.forEach(element => {
+              this.customMessageService.setError(element.message);
+            });
+          }
+          else if (patient) {
             this.customMessageService.setSuccess(
               "Patient was added to the division admit list"
             );
-          } else if (patient == null) {
-            this.customMessageService.setError("The division is full");
-          } else {
+          }
+          else{
             this.customMessageService.setError(
-              "Patient could not be added to the division admit list"
+              "Patient not found"
             );
           }
         },

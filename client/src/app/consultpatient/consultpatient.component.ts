@@ -77,9 +77,6 @@ export class ConsultpatientComponent implements OnInit {
         let jsonObj: any = JSON.parse(JSON.stringify(x["patient"]));
         this.patient = <Patient>jsonObj;
         if (this.patient != null) {
-          this.customMessageService.setSuccess(
-            "Here is the file of  " + this.patient.firstName
-          );
           this.prescriptionService
             .getPrescriptions(this.patient.id)
             .valueChanges.subscribe({
