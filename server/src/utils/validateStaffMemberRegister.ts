@@ -12,7 +12,7 @@ export const validateStaffMemberRegister = (attributes: StaffMemberInput) => {
 		});
 	}
 
-	if (!validator.isMobilePhone(phoneNumber)) {
+	if (!validator.isMobilePhone(phoneNumber.replace(/\D+/g, ''))) {
 		errors.push({
 			field: 'phone',
 			message: 'Invalid phone number',

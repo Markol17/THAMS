@@ -1,0 +1,18 @@
+<div class="table">
+    <div class="elems">
+        <button pButton type="button" pRipple label="Reload" (click)="reloadDivisions()" class="p-button-info button"></button> 
+    </div>
+    <p-orderList  [value]="divisions" header="List of Divisions" filterBy="name" 
+        filterPlaceholder="Filter by name">
+        <ng-template let-o pTemplate="item">
+            <div class="product-item">
+                <div class="product-list-detail">
+                    <h5 class="p-mb-2">{{o.name}}</h5>
+                    <h6  class="p-mb-2" >[Number of beds : {{o.numBeds}}] </h6>
+                    <i class="pi pi-tag product-category-icon"></i>
+                    <span class="product-category">{{o.id}}</span>
+                </div>
+            </div>
+        </ng-template>
+    </p-orderList>
+</div>

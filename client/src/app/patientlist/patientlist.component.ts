@@ -28,7 +28,7 @@ export class PatientlistComponent implements OnInit {
         let jsonObj: any = JSON.parse(JSON.stringify(x['patients']));
         this.patients = <Patient[]>jsonObj;
         console.log(this.patients);
-        this.patientserice.reload();
+        this.patientserice.reloadPatients();
   
       },
       error: err => { console.error('Patient list error:' + err);
@@ -37,7 +37,7 @@ export class PatientlistComponent implements OnInit {
     })
   }
   
-  reload(){
+  reloadPatients(){
     this.getPatients();
   }
 
