@@ -32,11 +32,8 @@ export class PrescriptionComponent implements OnInit {
   addPrescription() {
     this.finalPrescription = new AddPrescriptionInput(this.prescription.value);
     this.prescriptionService.addPrescription(this.finalPrescription).subscribe({
-      next: (data) => {
-        console.log(data);
-      },
+      next: (data) => {},
       error: (err) => {
-        console.log(err);
         this.customMessageService.setError(
           "Could not add this prescription" + err
         );
