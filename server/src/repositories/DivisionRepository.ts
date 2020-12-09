@@ -8,6 +8,10 @@ export class DivisionRepository extends Repository<Division> {
 		return await this.findOne(divisionId);
 	}
 
+	async getAll(): Promise<Division[]> {
+		return await this.find();
+	}
+
 	async createAndSaveDivision(attributes: DivisionInput): Promise<Division | void> {
 		const { name, description, chargeNurseId, location, numBeds, phoneNumber } = attributes;
 		const division = new Division();
@@ -21,6 +25,9 @@ export class DivisionRepository extends Repository<Division> {
 			return await this.save(division);
 		} catch (err) {
 			if (err.code === '23505') {
+				return;
+			}
+			if (err.code === '23503') {
 				return;
 			}
 		}

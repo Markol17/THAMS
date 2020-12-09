@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Patient } from "../objects/patient.model";
 import { Apollo } from "apollo-angular";
 import gql from "graphql-tag";
-import { registerPatient, updatePatient } from "../gql/mutation";
+import { registerPatient, updatePatient,dischargePatient } from "../gql/mutation";
 import { divisions, patientInfo, patients } from "../gql/query";
 import { Variable } from '@angular/compiler/src/render3/r3_ast';
 import { PatientIdInput } from '../objects/patient-id-input.model';
@@ -14,6 +14,7 @@ import { UpdatePatient } from '../objects/update-patient.model';
 export class PatientService {
   patient: Patient;
   pId: PatientIdInput;
+  dId: PatientIdInput
   viewPatient: boolean;
   reloadPatient: boolean;
   reloadDivision: boolean;
@@ -24,6 +25,7 @@ export class PatientService {
     this.pId.patientId = id;
 
     return this.apollo.watchQuery<any>({
+      fetchPolicy: 'no-cache',
       query: patientInfo,
       variables: {
         patient: this.pId
@@ -40,6 +42,18 @@ export class PatientService {
       }
     })
 
+  }
+
+  dischagePatient(id:number): any {
+    this.dId = new PatientIdInput;
+    this.dId.patientId = id;
+
+    return this.apollo.mutate({
+      mutation: dischargePatient,
+      variables: {
+        id: this.pId
+      }
+    })
   }
 
   getPatients(): any {

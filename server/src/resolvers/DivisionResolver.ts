@@ -2,7 +2,7 @@ import { Resolver, Mutation, Arg, Query, FieldResolver, Root, UseMiddleware } fr
 import { Division } from '../entities/Division';
 import { DivisionIdInput, DivisionInput } from './inputTypes/DivisionInput';
 import { PatientIdDivisionIdInput } from './inputTypes/PatientInput';
-import { DivisionResponse, PatientResponse, PatientsResponse } from './inputTypes/Response';
+import { DivisionResponse, DivisionsResponse, PatientResponse, PatientsResponse } from './inputTypes/Response';
 import { DivisionService } from '../services/DivisionService';
 import { isAuth } from '../middleware/isAuth';
 
@@ -19,6 +19,13 @@ export class DivisionResolver {
 	async divisionInfo(@Arg('options') options: DivisionIdInput): Promise<DivisionResponse> {
 		const divisionService = new DivisionService();
 		return await divisionService.getDivision(options.divisionId);
+	}
+
+	@UseMiddleware(isAuth)
+	@Query(() => DivisionsResponse, { nullable: true })
+	async divisions(): Promise<DivisionsResponse> {
+		const divisionService = new DivisionService();
+		return await divisionService.getDivisions();
 	}
 
 	@UseMiddleware(isAuth)

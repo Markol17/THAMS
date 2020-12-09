@@ -19,8 +19,9 @@ export class DivisionlistComponent implements OnInit {
   getDivisions(){
     this.patientserice.getDivisions().valueChanges.subscribe({
       next: data => {
-        const x = data.data['divisons'];
-        let jsonObj: any = JSON.parse(JSON.stringify(x['divisons']));
+        const x = data.data['divisions'];
+        console.log(x);
+        let jsonObj: any = JSON.parse(JSON.stringify(x['divisions']));
         this.divisions = <Division[]>jsonObj;
         console.log(this.divisions);
         this.patientserice.reloadDivisions();

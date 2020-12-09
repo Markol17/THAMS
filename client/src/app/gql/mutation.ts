@@ -29,6 +29,10 @@ export const loginStaff = gql`
         bipperExtension
         type
       }
+      errors {
+        field
+        message
+      }
     }
   }
 `;
@@ -56,6 +60,35 @@ export const registerPatient = gql`
         nextOfKin
         privateInsuranceNumber
       }
+      errors {
+        field
+        message
+      }
+    }
+  }
+`;
+
+export const dischargePatient = gql`
+  mutation dischargePatient($id: PatientIdInput!) {
+    dischargePatient(options: $id) {
+      patient {
+        id
+        firstName
+        lastName
+        insuranceNumber
+        address
+        phoneNumber
+        dateOfBirth
+        gender
+        maritalStatus
+        externalDoctor
+        nextOfKin
+        privateInsuranceNumber
+      }
+      errors {
+        field
+        message
+      }
     }
   }
 `;
@@ -77,6 +110,10 @@ export const updatePatient = gql`
         nextOfKin
         privateInsuranceNumber
       }
+      errors {
+        field
+        message
+      }
     }
   }
 `;
@@ -93,6 +130,10 @@ export const admitPatient = gql`
         dateOfBirth
         gender
         id
+      }
+      errors {
+        field
+        message
       }
     }
   }
@@ -112,6 +153,10 @@ export const requestPatientAdmission = gql`
         dateOfBirth
         gender
         id
+      }
+      errors {
+        field
+        message
       }
     }
   }
