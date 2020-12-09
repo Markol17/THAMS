@@ -1,7 +1,12 @@
 import { DivisionIdInput, DivisionInput } from '../resolvers/inputTypes/DivisionInput';
 import { getCustomRepository } from 'typeorm';
 import { DivisionRepository } from '../repositories/DivisionRepository';
-import { DivisionResponse, PatientResponse, PatientsResponse } from '../resolvers/inputTypes/Response';
+import {
+	DivisionResponse,
+	DivisionsResponse,
+	PatientResponse,
+	PatientsResponse,
+} from '../resolvers/inputTypes/Response';
 import { PatientRepository } from '../repositories/PatientRepository';
 import { PatientIdDivisionIdInput } from '../resolvers/inputTypes/PatientInput';
 import { Division } from '../entities/Division';
@@ -14,6 +19,11 @@ export class DivisionService {
 	constructor() {
 		this.divisionRepository = getCustomRepository(DivisionRepository);
 		this.patientRepository = getCustomRepository(PatientRepository);
+	}
+
+	async getDivisions(): Promise<DivisionsResponse> {
+		const divisions = await this.divisionRepository.getAll();
+		return { divisions };
 	}
 
 	async getDivision(divisionId: number): Promise<DivisionResponse> {

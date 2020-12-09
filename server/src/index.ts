@@ -10,7 +10,6 @@ import cors from 'cors';
 import { createConnection } from 'typeorm'; //getConnection
 import { Patient } from './entities/Patient';
 import path from 'path';
-import { createPatientLoader } from './dataloaders/createPatientLoader';
 import { Division } from './entities/Division';
 import { Prescription } from './entities/Prescription';
 import { StaffMember } from './entities/StaffMember';
@@ -24,7 +23,7 @@ const main = async () => {
 		type: 'postgres',
 		database: 'THAMS',
 		username: 'postgres',
-		password: '1234',
+		password: 'Markol17',
 		logging: true,
 		synchronize: true,
 		migrations: [path.join(__dirname, './migrations/*')],
@@ -62,7 +61,6 @@ const main = async () => {
 		context: ({ req, res }) => ({
 			req,
 			res,
-			userLoader: createPatientLoader(),
 		}),
 	});
 
