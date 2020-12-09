@@ -1,8 +1,6 @@
 
 <div class="table">
-    <div class="elems">
-        <button pButton type="button" pRipple label="Reload" (click)="reloadPatients()" class="p-button-info button"></button> 
-    </div>
+   
     <p-orderList  [value]="patients" header="List of Patients" filterBy="firstName" 
         filterPlaceholder="Filter by name">
         <ng-template let-p pTemplate="item">
@@ -16,7 +14,12 @@
             </div>
         </ng-template>
     </p-orderList>
-   
+
+  
+</div>
+
+<div class="consult">
+    <button pButton pRipple type="button" label="Refresh List of Patients" class=" p-button-warning btn"  (click)="reloadPatients()"></button>
 </div>
 
 
