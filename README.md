@@ -2,10 +2,11 @@
 
 ## Steps
 
-1. Change DB password in ormconfig.json and index.js
-2. yarn build or npm build
-3. yarn start
-4. server started on localhost:4000
+1.Open terminal
+2. cd to ../client/
+3. npm install
+4. ng serve
+**In some cases the client might complain about typescript version if so run "npm install --save-dev typescript@4.0.3". Then rerun "ng serve" again.
 
 ## GraphQL playground
 
