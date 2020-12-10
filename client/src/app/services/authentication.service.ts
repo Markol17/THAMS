@@ -165,6 +165,7 @@ export class AuthenticationService {
           this.apollo.client.resetStore();
           this.isLoggedIn = false;
           this.role = null;
+          
         },
       });
   }

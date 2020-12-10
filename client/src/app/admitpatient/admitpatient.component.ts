@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { BackendError } from '../objects/backend-error.model';
 import { Division } from "../objects/division.model";
 import { Patient } from "../objects/patient.model";
 import { AdmissionserviceService } from "../services/admissionservice.service";
@@ -26,19 +27,28 @@ export class AdmitpatientComponent implements OnInit {
   getRequestList() {
     this.admission.requestList(this.divisionId).valueChanges.subscribe({
       next: (data) => {
-        var temp = data.data["requestList"];
-        var temp2 = temp["patients"];
+        var errors;
+        var x = data.data["requestList"];
+        var temp2 = x["patients"];
         this.patientList.splice(0, this.patientList.length);
         temp2.forEach((element) => {
           let jsonObj: any = JSON.parse(JSON.stringify(element));
           let currentPatient = <Patient>jsonObj;
           this.patientList.push(currentPatient);
         });
-        if (this.patientList && this.patientList.length == 0) {
+        let jsonError: any = JSON.parse(JSON.stringify(x["errors"]));
+        errors = <BackendError[]>jsonError;
+        if(errors != null && errors.length != 0){
+          errors.forEach(element => {
+            this.customMessageService.setError(element.message);
+          });
+        }
+        else if (this.patientList && this.patientList.length == 0) {
           this.customMessageService.setError(
-            "No patient in the division admit list"
+            "No patient in the division admit list or the divsion does not exist"
           );
         }
+        
       },
       error: (err) => {
         console.error("Error getting request list: " + err);
@@ -52,16 +62,22 @@ export class AdmitpatientComponent implements OnInit {
   admit(id: number) {
     this.admission.divisionInfo(this.divisionId).valueChanges.subscribe({
       next: (data) => {
+        var errors;
         this.division = null;
         const x = data.data["divisionInfo"];
         let jsonObj: any = JSON.parse(JSON.stringify(x));
         this.division = <Division>jsonObj;
-        if (!this.division.isComplete) {
+        let jsonError: any = JSON.parse(JSON.stringify(x["errors"]));
+        errors = <BackendError[]>jsonError;
+        if(errors != null && errors.length != 0){
+          errors.forEach(element => {
+            this.customMessageService.setError(element.message);
+          });
+        }
+        else {
           this.admission.admitPatient(id, this.divisionId, this.division);
           this.getRequestList();
-        } else if (this.division.isComplete) {
-          this.customMessageService.setError("No more space in the division");
-        }
+        } 
       },
       error: (err) => {
         console.error("Error admiting patient: " + err);

@@ -108,6 +108,7 @@ query divisions {
       name
       description
       numBeds
+      isComplete
     }
     errors{
       field

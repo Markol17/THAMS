@@ -71,15 +71,13 @@ export class ConsultpatientComponent implements OnInit {
   }
 
   findPatient(): void {
+    this.edit=false;
     this.patientserice.patientInfo(this.id).valueChanges.subscribe({
       next: (data) => {
         const x = data.data["patientInfo"];
         let jsonObj: any = JSON.parse(JSON.stringify(x["patient"]));
         this.patient = <Patient>jsonObj;
         if (this.patient != null) {
-          this.customMessageService.setSuccess(
-            "Here is the file of  " + this.patient.firstName
-          );
           this.prescriptionService
             .getPrescriptions(this.patient.id)
             .valueChanges.subscribe({
@@ -137,6 +135,7 @@ export class ConsultpatientComponent implements OnInit {
         complete: () => {
           this.customMessageService.setSuccess("Patient file updated");
           this.edit = false;
+          this.findPatient();
         },
       });
     } else {

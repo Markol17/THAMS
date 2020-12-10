@@ -5,6 +5,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { StaffMember } from '../objects/staff-member.model';
 import { AbstractControl } from '@angular/forms';
 import { SelectItem } from 'primeng/api';
+import { CustomMessageService } from '../services/message.service';
 @Component({
   selector: 'loginpage',
   templateUrl: './loginpage.component.html',
@@ -20,7 +21,7 @@ export class LoginpageComponent implements OnInit {
   registeredStaff: StaffMember;
   types: SelectItem[];
 
-  constructor(private authService: AuthenticationService, private fb: FormBuilder) {
+  constructor(private authService: AuthenticationService, private fb: FormBuilder, private messageService: CustomMessageService) {
     this.types = [
       { label: "Staff", value: 2 },
       { label: "Medical Staff", value: 3 },

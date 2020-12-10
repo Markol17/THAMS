@@ -31,7 +31,7 @@ export class PatientlistComponent implements OnInit {
       },
       error: (err) => {
         console.error("Patient list error:" + err);
-        this.customMessageService.setError("Patient list could not load");
+        //this.customMessageService.setError("Patient list could not load");
       },
     });
   }
