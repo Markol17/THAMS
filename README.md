@@ -2,7 +2,7 @@
 
 ## Steps
 
-1.Open terminal
+1. Open terminal
 
 2. cd to ../client/
 
