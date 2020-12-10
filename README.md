@@ -10,7 +10,7 @@
 
 4. ng serve
 
-**In some cases the client might complain about typescript version if so run "npm install --save-dev typescript@4.0.3". Then rerun "ng serve" again.
+**In some cases the client might complain about typescript version. If so, run "npm install --save-dev typescript@4.0.3". Then rerun "ng serve" again.
 
 ## GraphQL playground
 
