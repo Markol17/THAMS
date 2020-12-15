@@ -1,4 +1,4 @@
-# THAMS -  Group 1
+# THAMS -  Hospital management system
 
 ## Steps
 
